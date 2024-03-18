@@ -1,0 +1,143 @@
+/* Base styles for the beat creator */
+.beat-creator {
+  text-align: center;
+  margin-top: 50px;
+  position: relative; /* Ensure relative positioning for the parent container */
+}
+#carouselExample{
+  margin-top: 5rem;
+}
+/* Container for the beat grid */
+.beat-grid-wrapper {
+  overflow-x: hidden;
+  width: 80vw; /* Set to a fixed width or adjust as needed */
+  margin: 0 auto; /* Center the grid */
+}
+
+/* Container for the beat grid */
+.beat-grid {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap; /* Prevents wrapping of beat cells */
+  transition: transform 0.3s ease; /* Smooth sliding transition */
+}
+
+/* Individual beat cell */
+.beat-cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Individual row within the beat grid */
+.beat-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+/* Active beat cell */
+.beat-cell.active {
+  background-color: #007bff; /* Set active beat cell color */
+}
+
+/* Beat cell currently playing */
+.beat-cell.playing {
+  background-color: #00ff00; /* Set color for beat cell currently playing */
+}
+
+/* Controls container */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Button style */
+.controls button {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height:80px;
+  width:200px
+}
+.combined{
+  margin-top: 5rem;
+}
+/* Button hover effect */
+.controls button:hover {
+  background-color: #0056b3;
+}
+.bpm{
+  display: flex;
+}
+
+/* Tempo label */
+.controls label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Tempo input */
+.controls input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Tempo input range */
+.controls input[type="range"] {
+  width: 200px;
+  margin-top: 10px;
+}
+
+/* Tempo value display */
+.tempo-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Center the carousel control buttons horizontally */
+.carousel-controls {
+  width: 100%;
+  height: 80px;
+display: flex;  
+flex-direction: column;
+  transform: translateX(0%); /* Adjust for center alignment */
+}
+
+/* Center the control buttons vertically within their container */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px; /* Adjust width as needed */
+  height: 50px; /* Adjust height as needed */
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Styling for the carousel control buttons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #000;
+  width: 50px; /* Adjust size as needed */
+  height: 50px; /* Adjust size as needed */
+}
+input{
+  width: 100%;
+}

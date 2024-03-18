@@ -1,0 +1,129 @@
+
+.mainContainer{
+  height: 100vh;
+
+}
+h1{
+  margin-top: 
+5rem;
+}
+.selectCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align items horizontally center */
+  justify-content: flex-start;
+  margin-top: 2rem;
+  height: 80%;
+
+}
+.selectCards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Align items horizontally center */
+
+
+}
+.genreAndCategoryTitle{
+  margin-top:2rem
+}
+.selectOptionTitle{
+  display: flex;
+}
+
+button.selected-sound-item{
+  margin:5px;
+  width:100px;
+  height:80px;
+  
+}
+
+.selecter{
+  display:flex;
+  flex-direction: column;
+  
+}
+h1{
+  position: absolut;
+}
+
+input{
+  margin-left: 0px!important;
+  margin-top:10px
+}
+
+.selectBtnContainer{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  ;
+  align-items: center;
+  margin-top: 3rem;
+}
+button{
+  margin:5px;
+  width:100px;
+height:70px;
+font-size: 12px;
+}
+.genre.category{
+  display:flex;
+  flex-direction: column;
+}
+.categoriesAndGenres{
+  margin-bottom:5rem;
+  margin-top: 20px;
+  display:flex;
+
+
+
+
+
+justify-content: space-between;
+  width: 90%;
+}
+.selectedSounds{
+  display:flex;
+  
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none
+}
+ 
+ul{
+  display:flex;
+  width:100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  
+}
+.createBtnContainer{
+  display: flex;
+  flex-direction: column;
+ justify-content: space-around;
+ align-items: center;
+ width: 100%
+  
+;
+}
+input{
+height:50px;
+width: 200px;
+}
+
+#root {
+  
+  overflow: auto;
+  margin-bottom: 20px;
+margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+

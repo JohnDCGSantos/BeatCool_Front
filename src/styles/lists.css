@@ -1,0 +1,57 @@
+.drumKitList{
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align items horizontally center */
+  justify-content: flex-start;
+  margin-top: 1rem;
+  height: 100vh;
+
+}
+.drumKitList ul{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; /* Align items horizontally center */
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.drumKitList li{
+  margin:5px;
+  height: 100px;
+  width: 100px;
+  background-color: tomato;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  
+}
+.drumKitList li a{
+  margin:5px;
+  height: 100px;
+  width: 100px;
+  background-color: tomato;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  
+}
+
+.drumKitListTitle{
+  margin-top: 5rem;
+
+}
+#root {
+  
+  overflow: auto;
+  margin-bottom: 20px;
+margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
