@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import './BeatCreator.css'
-import { useNavigate } from 'react-router-dom'
  
 const BeatCreator = ({ id }) => {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -13,7 +12,6 @@ const BeatCreator = ({ id }) => {
   const nextBeatTimeout = useRef(null) // Variable to store the timeout ID
   const [sounds, setSounds] = useState([])
   const [beatGrid, setBeatGrid] = useState([]) // Initialize beatGrid with an empty array
-const navigate=useNavigate()
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
@@ -109,8 +107,8 @@ const navigate=useNavigate()
   }
 
   const playBeat = () => {
-    const secondsPerBeat = 60 / tempo
-    const loopDuration = secondsPerBeat * 8
+    //const secondsPerBeat = 60 / tempo
+    //const loopDuration = secondsPerBeat * 8
     const millisecondsPerBeat = 60000 / tempo
     const millisecondsPerSubBeat = millisecondsPerBeat / 4 // 16 sub-beats per beat
     const totalBeats = beatGrid[0].length

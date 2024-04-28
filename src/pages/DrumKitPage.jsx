@@ -3,12 +3,12 @@ import axios from 'axios'
 //import RecordedSequences from '../components/RecordedSequences'
 import DrumKitSounds from '../components/DrumKitSounds'
 import '../styles/drumKitPage.css'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 const DrumKitPage = ({ id }) => {
   const [drumKit, setDrumKit] = useState(null)
   const [drumSounds, setDrumSounds] = useState([])
   const [selectedSounds, setSelectedSounds] = useState([])
-  const navigate=useNavigate()
+  //const navigate=useNavigate()
   const audioRefs = useRef({})
   //const [recording, setRecording] = useState(false)
   //const [recordedSequence, setRecordedSequence] = useState([])

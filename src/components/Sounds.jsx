@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react'
 import '../styles/create.css'
 
 function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds }) {
-  const [selectedOption, setSelectedOption] = useState('')
+  //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('Basico')
   const [selectedCategory, setSelectedCategory] = useState('Basic')
   
-  const handleOptionChange = option => {
+  /*const handleOptionChange = option => {
     setSelectedOption(option)
     setSelectedGenre('')
     setSelectedCategory('')
-  }
+  }*/
 
   const handleGenreChange = event => {
     setSelectedGenre(event.target.value)

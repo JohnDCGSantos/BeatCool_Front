@@ -4,7 +4,7 @@ import axios from 'axios'
 import '../styles/lists.css'
 import { useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
-const BeatCreatorsList = ({ showCheckboxes, onSelect, id }) => {
+const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
   const [beatCreators, setBeatCreators] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const nav = useNavigate()
