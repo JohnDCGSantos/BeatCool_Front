@@ -3,7 +3,7 @@ import axios from 'axios'
 import BeatCreator from './BeatCreator'
 import DrumKitPage from '../pages/DrumKitPage' // Import the DrumKitPage component
 import { useParams } from 'react-router-dom'
-import './BeatCreator.css'
+import '../styles/combined.css'
 
 const CombinedPage = () => {
   const { id } = useParams()
@@ -42,29 +42,28 @@ const CombinedPage = () => {
 
     fetchBeatMakerAndDrumKit()
   }, [id])
-
+  
   return (
-    <div className='combined'>
+    <div className='combined'>  
       <h2>Combined Page</h2>
       {beatMakerAndDrumKit && (
-        <div>
-          <h3>Beat Maker and Drum Kit Details</h3>
+       <>
+          
           <p>Name: {beatMakerAndDrumKit.name}</p>
-          {beatMaker && (
+          
+         {beatMaker && (
+          
             <div className='beatMaker'>
-              <h4>Beat Maker</h4>
               <BeatCreator id={beatMakerId} />
             </div>
-          )}
-          {drumKit && (
-            <div>
-              <h4>Drum Kit</h4>
-              {/* Pass the id as a prop to DrumKitPage */}
+          )} 
+          
+        {drumKit && (
+            <div className='drumMaker'>
               <DrumKitPage id={drumKitId} />
             </div>
           )}
-        </div>
-      )}
+      </>)}
     </div>
   )
 }

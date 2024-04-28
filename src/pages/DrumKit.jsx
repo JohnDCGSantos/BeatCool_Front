@@ -4,9 +4,9 @@ const DrumKit = () => {
   const { id } = useParams()
 
   return (
-    <div className='drum'>
+    
       <DrumKitPage id={id} />
-    </div>
+   
   )
 }
 

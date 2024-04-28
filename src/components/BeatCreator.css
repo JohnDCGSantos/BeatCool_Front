@@ -1,11 +1,33 @@
-/* Base styles for the beat creator */
 .beat-creator {
   text-align: center;
   margin-top: 50px;
+  overflow: hidden;
   position: relative; /* Ensure relative positioning for the parent container */
 }
-#carouselExample{
-  margin-top: 5rem;
+.bmC{background-color: green;
+
+  position: fixed;
+    width: 90vw;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+    height: 80vh; /* Full viewport height */
+    top: 70vh;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#carouselExample{        
+  min-height: 80vh;
+  height: auto;
+   /* Full viewport height */
+position: relative;  width: 100vw;
+ top: 0%; 
+ 
+
+
 }
 /* Container for the beat grid */
 .beat-grid-wrapper {
@@ -23,12 +45,19 @@
   align-items: center;
   flex-wrap: nowrap; /* Prevents wrapping of beat cells */
   transition: transform 0.3s ease; /* Smooth sliding transition */
+  margin-top: 20vh;
+  padding: 1vh;
+  height: auto;
+  width: 100vw;
+  z-index: 9999;
 }
+.carousel-inner {
 
+}
 /* Individual beat cell */
 .beat-cell {
-  width: 40px;
-  height: 40px;
+  width: min(5vw, 5vh);
+    height: min(5vh, 5vw);
   border: 1px solid #000;
   background-color: #fff;
   cursor: pointer;
@@ -38,8 +67,13 @@
 /* Individual row within the beat grid */
 .beat-row {
   display: flex;
-  align-items: flex-end;
-  margin-bottom: 10px;
+
+  text-overflow: ellipsis;
+
+
+
+  align-items: center ;
+   margin-bottom: 2px;
 }
 
 /* Active beat cell */
@@ -54,56 +88,85 @@
 
 /* Controls container */
 .controls {
-  display: flex;
-  flex-direction: column;
+  overflow-x: hidden;
   align-items: center;
+ justify-content: center;
+ height: auto;
+ width: 90%;
+display: flex;
+    padding-bottom: 10px;
+    overflow-y: auto;
+    padding-top: 3vh;
+padding-bottom: 3vh;
+margin-left: 5%;
+margin-top: 15vh;
+}
+
+.noteNames {
+  position: relative;
+  left: -2%;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide any overflow */
+  text-overflow: ellipsis; /* Display ellipsis for overflowed text */
+width: 100px;
+
+background-color: #00ff00;
 }
 
 /* Button style */
 .controls button {
-  padding: 10px 20px;
+  padding: 1px 5px ;
   margin-bottom: 10px;
-  font-size: 16px;
+  font-size: 15px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #353f49;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  height:80px;
-  width:200px
+width: 90px;
+height: 50px;
+position: relative;
+top: 0vh;
 }
+
 .combined{
   margin-top: 5rem;
 }
 /* Button hover effect */
 .controls button:hover {
-  background-color: #0056b3;
+  background-color: #0fb300;
 }
 .bpm{
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 /* Tempo label */
 .controls label {
   font-size: 16px;
-  margin-bottom: 5px;
+  width:50px
+  
 }
 
 /* Tempo input */
 .controls input[type="number"] {
-  width: 60px;
+  width: 50px;
+  height: 40px;
   padding: 5px;
-  font-size: 16px;
+  font-size: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: center;
 }
 
+
+
 /* Tempo input range */
 .controls input[type="range"] {
-  width: 200px;
-  margin-top: 10px;
+  width: 140px;
 }
 
 /* Tempo value display */
@@ -114,30 +177,52 @@
 }
 
 /* Center the carousel control buttons horizontally */
-.carousel-controls {
-  width: 100%;
-  height: 80px;
-display: flex;  
-flex-direction: column;
-  transform: translateX(0%); /* Adjust for center alignment */
+.carousel-item.active {
+  height:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+
+
 }
+
 
 /* Center the control buttons vertically within their container */
 .carousel-control-prev,
-.carousel-control-next {
-  width: 50px; /* Adjust width as needed */
-  height: 50px; /* Adjust height as needed */
-  display: flex;
-  align-items: flex-end;
+.carousel-control-next { 
+  height: auto;
+  margin-top: 20vh;
+ z-index: 9999;
+ 
+
 }
+span.carousel-control-prev-icon,
+span.carousel-control-next-icon { 
+
+}
+.carousel-control-next { 
+  
+}
+
+
+
 
 /* Styling for the carousel control buttons */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-color: #000;
-  width: 50px; /* Adjust size as needed */
-  height: 50px; /* Adjust size as needed */
+  width: 30px; /* Adjust size as needed */
+  height: 100%; /* Adjust size as needed */
+ 
 }
 input{
   width: 100%;
 }
+#root{
+  overflow-x: hidden;
+  height: 100vh;
+  padding: 10;
+  width: 100vw;
+}
+

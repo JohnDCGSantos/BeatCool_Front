@@ -2,10 +2,12 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import '../styles/create.css'
-
+import { AuthContext } from '../context/Auth.context'
+import { useContext } from 'react'
 const BeatMakerSounds = ({ selectedSounds }) => {
   const [beatMakerName, setbeatMakerName] = useState('')
   const nav = useNavigate()
+  const { user}=useContext(AuthContext)
 
   const createBeatMaker = async () => {
     try {
@@ -16,7 +18,10 @@ const BeatMakerSounds = ({ selectedSounds }) => {
       const response = await axios.post('http://localhost:5005/beatMaker', {
         name: beatMakerName,
         drumPads: filteredSounds.map(sound => sound._id), // Assuming each sound has an _id property
+        user,
       })
+      console.log('xxxxxxx',user)
+
       nav(`/beatCreator`)
       console.log('New drum kit created:', response.data)
     } catch (error) {

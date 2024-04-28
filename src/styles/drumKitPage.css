@@ -1,72 +1,127 @@
-.drum{
-  width: 100%;
-  height: 100vh;
-  margin-top: 5rem;
-  margin-bottom: 5rem;
-
-  display: flex;
-
-
+.drumKitTitle {
+  width: 85%; 
+  position: relative;
+  top:-1vh
 }
+
 .drum-kit-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #34495E; /* Dark Blue Gray */
+  padding: 20px;
+  padding-bottom: 70px;
+  border-radius: 15px;
+  height: auto; /* Full viewport height */
   width: 100%;
-  height: 100%;  
-
+  overflow-y: hidden;
+  position: relative;
+  top: 50% ;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 10px;
 }
 
 .drum-kit-sounds {
-  width: 100%;
-  height: 100%;
-  
-  
-}
-.drumKitTitle{
-  width:100%;
- margin-bottom: 2rem;
-}
-
-.drum-kit-sound {
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-wrap: wrap;
-border: 10px solid goldenrod;
-background-color: tomato;
-border-radius: 5px;
-  justify-content: center;
-    align-items: center;
-  cursor: pointer;
-  align-content: center;
-  margin-bottom: 5px;
-  
-}
-.drum-kit-sounds2 {
-  width: 90%;
-  height: 90%;
-  margin: 10px;
-  background-color: goldenrod;
-  display: flex;
+  gap: 5px;
   justify-content: center;
   align-items: center;
   align-content: center;
-
-  cursor: pointer;
-  border-radius: 50%;
-  border: 2px solid silver;
-  font-weight: bold;
-  font-size: 20px;
+  width: 100%;
+  height: auto;
+  overflow-y: auto;
+  background-color: #2C3E50; /* Midnight Blue */
+  padding: 5px;
   flex-wrap: wrap;
+  margin-top: 0;
+  border-radius: 15px;
 
-  
-}
-button{
-background-color: silver;
-height: 50px;
-width: 20px;
 }
 
 
 
+.drum-sound-btn {
+  position: relative;
+  display: inline-block;
+  background-color: #7F8C8D; /* Grayish Blue */
+  white-space: nowrap;
+  width: min(12vw, 12vh);
+  height: min(12vh, 12vw);
+  padding: 5px;
+  overflow: hidden;
+  text-overflow:auto;
+}
 
+.drum-sound-btn button {
+  background-color: blue; /* Light Gray */
+  color: black;
+  border: none;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 80%;
+  height: 80%; /* Change to 100% */
+  white-space: nowrap; /* Prevent text from wrapping */
+  margin: 0px ;
+  position: absolute; /* Change position to absolute */
+  top: 10%;
+  left: 10%;
+  right: 10%;
+text-align: center;
+}
+
+.drum-sound-btn button .span2 {
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  position: absolute; /* Change position to absolute */
+  top: 60%;
+  left: 0;
+  right: 0;
+  text-overflow: ellipsis; /* Add ellipsis */
+  width: 100%;
+  height: 100%; /* Change to 100% */
+  font-size: 10px;
+}
+.drum-sound-btn button span {
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  position: absolute; /* Change position to absolute */
+  top: 30%;
+  left: 0;
+  right: 0;
+  text-overflow: ellipsis; /* Add ellipsis */
+  width: 100%;
+  height: 100%; /* Change to 100% */
+  font-size: 10px;
+}
+
+.drum-sound-btn button:hover span {
+  animation-play-state: running;
+  animation: marquee 5s linear infinite;
+  overflow: visible; /* Show full text on hover */
+  white-space: normal; /* Allow text wrapping on hover */
+}
+.drum-sound-btn button:hover {
+  overflow: visible;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.pressed{
+  background-color: goldenrod;
+}
+button.pressed {
+  background-color: #bef098;
+}

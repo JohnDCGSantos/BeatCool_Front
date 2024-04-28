@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import './BeatCreator.css'
-
+import { useNavigate } from 'react-router-dom'
+ 
 const BeatCreator = ({ id }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [tempo, setTempo] = useState(120) // Beats per minute (BPM)
@@ -12,7 +13,7 @@ const BeatCreator = ({ id }) => {
   const nextBeatTimeout = useRef(null) // Variable to store the timeout ID
   const [sounds, setSounds] = useState([])
   const [beatGrid, setBeatGrid] = useState([]) // Initialize beatGrid with an empty array
-
+const navigate=useNavigate()
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
@@ -31,7 +32,9 @@ const BeatCreator = ({ id }) => {
 
     fetchDrumKit()
   }, [id])
+  
 
+  
   useEffect(() => {
     // Create Audio objects for each sound when sounds array is updated
     for (const sound in sounds) {
@@ -144,20 +147,50 @@ const BeatCreator = ({ id }) => {
 
     playNextBeat()
   }
+  
+useEffect(() => {
+    console.log("Adding scroll event listener...");
 
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const controls = document.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+
+      controls.forEach(control => {
+        if (scrollY > windowHeight / 2) {
+          control.style.top = `${scrollY}px`;
+        } else {
+          control.style.top = '50%';
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      console.log("Removing scroll event listener...");
+
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return sounds.length > 0 ? (
     <>
+    <div className='bmC'>   
+    
       <div id='carouselExample' className='carousel slide'>
+
         <div className='carousel-inner'>
           {[...Array(4).keys()].map((slide, slideIndex) => (
             <div key={slideIndex} className={`carousel-item ${slideIndex === 0 ? 'active' : ''}`}>
               <div className='beat-grid'>
                 {/* Beat Grid Content */}
                 {Object.keys(sounds).map((sound, soundIndex) => (
-                  <div key={sound}>
+                  <div key={sound}className='beat-row'>
+                    <div className='noteNames'>
+                    {sounds[sound].name}
+                    </div>
                     {/* Assign unique key to the parent div */}
-                    <span className='noteNames'>{sounds[sound].name}</span>
-                    <div className='beat-row'>
+                    
                       {[...Array(8).keys()].map(time => (
                         <div
                           key={time}
@@ -172,14 +205,12 @@ const BeatCreator = ({ id }) => {
                           onClick={() => toggleBeat(soundIndex, time + slideIndex * 8)}
                         ></div>
                       ))}
-                    </div>
                   </div>
                 ))}
                 {/* End Beat Grid Content */}
                 slideIndex:{slideIndex + 1}/4
               </div>
-              <div className='carousel-controls'>
-                <button
+              <button
                   className='carousel-control-prev'
                   type='button'
                   data-bs-target='#carouselExample'
@@ -195,17 +226,19 @@ const BeatCreator = ({ id }) => {
                 >
                   <span className='carousel-control-next-icon' aria-hidden='true'></span>
                 </button>
+               
               </div>
-            </div>
+           
           ))}
-        </div>
-      </div>
+       </div>
+      
       <div className='controls'>
         <button onClick={() => setIsPlaying(!isPlaying)}>
           {isPlaying ? 'Stop' : 'Start'} Beat
         </button>{' '}
-        <label>Tempo (BPM):</label>
-        <div className='bpm'>
+        
+        <div className='bpm'> <label>Tempo (BPM)</label>
+       
           <input
             type='range'
             value={tempo}
@@ -213,8 +246,7 @@ const BeatCreator = ({ id }) => {
             min='30'
             max='300'
             step='1'
-          />{' '}
-          <input
+          /> <input
             type='number'
             value={tempo}
             onChange={e => setTempo(parseInt(e.target.value))}
@@ -222,9 +254,11 @@ const BeatCreator = ({ id }) => {
             max='300'
             inputMode='numeric'
             style={{ marginRight: '10px' }}
-          />
-        </div>
-      </div>
+          />{' '}
+         
+         
+      </div></div></div></div>
+
     </>
   ) : null
 }

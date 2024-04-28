@@ -5,7 +5,7 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
   const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('Basico')
   const [selectedCategory, setSelectedCategory] = useState('Basic')
-
+  
   const handleOptionChange = option => {
     setSelectedOption(option)
     setSelectedGenre('')
@@ -99,6 +99,8 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
                   <li key={sound.soundUrl} className='selected-sound-item'>
                     <button
                       className='selected-sound-item'
+                      type="button" 
+
                       onClick={() => handlePlayButtonClick(sound.soundUrl)}
                     >
                       {sound.name}
@@ -135,6 +137,8 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
                   <li key={sound.soundUrl}>
                     <button
                       className='selected-sound-item'
+                      type="button" 
+
                       onClick={() => handlePlayButtonClick(sound.soundUrl)}
                     >
                       {sound.name}
@@ -150,5 +154,4 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
     </div>
   )
 }
-
 export default Sounds

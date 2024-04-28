@@ -1,0 +1,71 @@
+.dkBm{
+    position: fixed;
+    width: 90vw;
+display: flex;
+flex-direction: column;
+    height: 80vh; /* Full viewport height */
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
+#name{
+  height:auto;
+  width:90%
+}
+.dk {
+    width: 100%;
+    height: auto; /* Change height to auto */
+    display: flex;
+    flex-wrap: wrap; /* Add this line to allow wrapping */
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+    margin-top: 2vh;
+  }
+  
+  .dkSL {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: min(20vw, 20vh);
+    height: min(20vh, 20vw);
+    margin-bottom: 2vh; /* Increase margin to provide space between items */
+    margin-top: 2vh; /* Increase margin to provide space between items */
+
+  }
+  
+  .dkS {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #7f8c8d;
+    width: min(15vw, 15vh);
+    height: min(15vh, 15vw);
+  }
+  
+  .dkS input {
+    background-color: #bdc3c7;
+    color: black;
+    border: none;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: min(5vw, 5vh);
+    height: min(5vh, 5vw);
+    margin-bottom: 1.25vh;
+  }
+  
+.bm {
+    display: flex;
+    flex-wrap: wrap; /* Add this line to wrap the items */
+    flex-direction: column;
+  }
+  .details{
+    margin-bottom: 2vh;
+  }
+  

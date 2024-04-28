@@ -1,15 +1,13 @@
 import { useState, useRef, useEffect, useContext } from 'react'
 import Sounds from '../components/Sounds'
-import DrumKitCreator from '../components/DrumKitCreator'
-import BeatMakerSounds from '../components/BeatMakerSounds'
+
 import '../styles/create.css'
 import { AuthContext  } from '../context/Auth.context'
-const DrumPads = () => {
+const DrumPadsTest = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [sounds, setSounds] = useState([])
   const [selectedSounds, setSelectedSounds] = useState([])
   const audioRefs = useRef({})
-  const [selectedOption, setSelectedOption] = useState('')
   const {authenticateUser, user}=useContext(AuthContext)
 
   useEffect(() => {
@@ -67,12 +65,9 @@ authenticateUser()
 
   const handleSoundClick = soundUrl => {
     playSound(soundUrl)
-    
   }
 
-  const handleOptionSelect = option => {
-    setSelectedOption(option)
-  }
+  
 
   return (
     <>
@@ -85,42 +80,20 @@ authenticateUser()
         <>
           <h1>Create something, {user ? user.username: null}!!</h1>
           <div>
-            {selectedOption.length > 0 && (
+          
               <h4 className='genreAndCategoryTitle'>Select Genre and category </h4>
-            )}
+       
           </div>
           <div className='selectCard'>
-            {selectedOption === '' ? (
-              <div className='selecter'>
-                <h2 className='selectOptionTitle'>Select an Option</h2>
-                <div className='optionSelect'>
-                  <div className='selectBtnContainer'>
-                    <button onClick={() => handleOptionSelect('beatMaker')}>Beat Maker</button>
-                    <button onClick={() => handleOptionSelect('drumKit')}>Drum Kit</button>
-                  </div>
-                </div>
-              </div>
-            ) : selectedOption === 'beatMaker' ? (
-              <>
+            
                 <Sounds
                   sounds={sounds}
                   handleSoundClick={handleSoundClick}
                   handleSoundSelect={handleSoundSelect}
                   selectedSounds={selectedSounds}
                 />
-                <BeatMakerSounds selectedSounds={selectedSounds} />
-              </>
-            ) : (
-              <>
-                <Sounds
-                  sounds={sounds}
-                  handleSoundClick={handleSoundClick}
-                  handleSoundSelect={handleSoundSelect}
-                  selectedSounds={selectedSounds}
-                />
-                <DrumKitCreator selectedSounds={selectedSounds} />
-              </>
-            )}
+               
+        
           </div>
         </>
       )}
@@ -128,4 +101,4 @@ authenticateUser()
  </> )
 }
 
-export default DrumPads
+export default DrumPadsTest

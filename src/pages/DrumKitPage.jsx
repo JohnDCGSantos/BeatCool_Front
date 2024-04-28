@@ -1,18 +1,19 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import RecordedSequences from '../components/RecordedSequences'
+//import RecordedSequences from '../components/RecordedSequences'
 import DrumKitSounds from '../components/DrumKitSounds'
 import '../styles/drumKitPage.css'
-
+import { useNavigate } from 'react-router-dom'
 const DrumKitPage = ({ id }) => {
   const [drumKit, setDrumKit] = useState(null)
   const [drumSounds, setDrumSounds] = useState([])
-  const [recording, setRecording] = useState(false)
-  const [recordedSequence, setRecordedSequence] = useState([])
-  const [isPlayingSequence, setIsPlayingSequence] = useState(false)
   const [selectedSounds, setSelectedSounds] = useState([])
+  const navigate=useNavigate()
   const audioRefs = useRef({})
-  const timeoutIdsRef = useRef({})
+  //const [recording, setRecording] = useState(false)
+  //const [recordedSequence, setRecordedSequence] = useState([])
+ // const [isPlayingSequence, setIsPlayingSequence] = useState(false)
+ // const timeoutIdsRef = useRef({})
 
   useEffect(() => {
     const fetchDrumKit = async () => {
@@ -49,11 +50,12 @@ const DrumKitPage = ({ id }) => {
   }
 
   const handleSoundClick = soundUrl => {
-    if (recording) {
+    /*if (recording) {
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
-    }
+    }*/
     playSound(soundUrl)
+    
   }
 
   const playSound = soundUrl => {
@@ -66,12 +68,13 @@ const DrumKitPage = ({ id }) => {
   if (!drumKit) {
     return <div>Loading...</div>
   }
-  const addTimeoutIdForSound = (key, timeoutId) => {
+  /*const addTimeoutIdForSound = (key, timeoutId) => {
     timeoutIdsRef.current[key] = timeoutIdsRef.current[key] || []
     timeoutIdsRef.current[key].push(timeoutId)
-  }
+  }*/
+  
 
-  const startRecording = () => {
+  /*const startRecording = () => {
     setRecording(true)
     setIsPlayingSequence(false)
     setRecordedSequence([])
@@ -102,28 +105,30 @@ const DrumKitPage = ({ id }) => {
     } catch (error) {
       console.error('Error saving recorded sequence:', error)
     }
-  }
-
+  }*/
+  
   return (
-    <div className='drum-kit-container'>
+    <>
+
+      <div className='drum-kit-container'>               
+
       <div className='drumKitTitle'>
-        <h2>{drumKit.name}</h2>
-      </div>
-      <div className='drum-kit-sound'>
+        <h2>DrumKit: {drumKit.name}</h2></div>
+     
         <DrumKitSounds
           drumSounds={drumSounds}
           handleSoundClick={handleSoundClick}
           handleSoundSelect={handleSoundSelect}
           selectedSounds={selectedSounds}
         />
-      </div>
+
       {/*<RecordedSequences />
       <button onClick={startRecording}>Start Recording</button>
       <button onClick={stopRecording}>Stop Recording</button>
       <button onClick={playRecordedSounds}>Play Recorded Sequence</button>
       <button onClick={saveRecordedSequence}>Save Recorded Sequence</button>*/}
     </div>
-  )
+  </>)
 }
 
 export default DrumKitPage
