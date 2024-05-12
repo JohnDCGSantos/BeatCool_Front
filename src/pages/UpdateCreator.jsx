@@ -1,7 +1,7 @@
 // UpdateDrum.js
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import DrumKitForm from './DrumKitForm'
+import UpdateCreatorForm from '../components/UpdateCreatorForm'
 
 const UpdateCreator = () => {
   const { id } = useParams()
@@ -64,12 +64,14 @@ const UpdateCreator = () => {
   }
 
   return (
-    <>
-      <h3>Edit Drum Kit</h3>
+    <div className='imageCreate'>
+    <div className= 'shadows'>
+    <div className='create'>
+      <h3>Edit Beat Maker</h3>
       {!isLoading && beatMaker && sounds && (
-        <DrumKitForm onSubmit={handleSubmit} defaultValues={beatMaker} sounds={sounds} />
+        <UpdateCreatorForm onSubmit={handleSubmit} defaultValues={beatMaker} sounds={sounds} />
       )}
-    </>
+    </div> </div></div>
   )
 }
 

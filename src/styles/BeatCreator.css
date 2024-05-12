@@ -1,0 +1,331 @@
+.beat-creator {
+  text-align: center;
+  margin-top: 50px;
+  overflow: hidden;
+  position: relative; /* Ensure relative positioning for the parent container */    
+
+}
+.bmC{
+
+  position: fixed;
+    width: 90vw;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+    height: 80vh; /* Full viewport height */
+    top: 70vh;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#carouselExample{          
+  background-color: rgba(0, 0, 0, 0.718);
+  box-shadow: inset 18px 18px 18px rgba(0, 128, 0, 0.273), inset -18px -18px 18px rgba(0, 128, 0, 0.273);
+
+  width: 90vw;
+  margin: 130px 0 0 0rem;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+ overflow-y:auto ;
+  justify-content: space-evenly
+  ;
+  border-radius: 10px;
+  height: 80vh;
+ left:5%;
+ padding: 30px;
+
+
+}
+/* Container for the beat grid */
+.beat-grid-wrapper {
+  overflow-x: hidden;
+  width: 80vw; /* Set to a fixed width or adjust as needed */
+  margin: 0 auto; /* Center the grid */
+}
+
+/* Container for the beat grid */
+.beat-grid {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap; /* Prevents wrapping of beat cells */
+  transition: transform 0.3s ease; /* Smooth sliding transition */
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+
+  width: 100%;
+  background-color: rgba(145, 143, 143, 0.475);
+  border-radius: 20px;
+
+}
+.carousel-inner {
+  overflow-y: auto;
+  height: auto;
+}
+/* Individual beat cell */
+.beat-cell {
+  width: min(5vw, 5vh);
+    height: min(5vh, 5vw);
+  border: 1px solid #000;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Individual row within the beat grid */
+.beat-row {
+  display: flex;
+  justify-content: center;
+  text-overflow: ellipsis;
+width: 70%;
+padding: 5px;
+margin-bottom: 2px;
+border-radius: 10px;
+  align-items: center ;
+ 
+}
+
+/* Active beat cell */
+.beat-cell.active {
+  background-color: #007bff; /* Set active beat cell color */
+}
+
+/* Beat cell currently playing */
+.beat-cell.playing {
+  background-color: #00ff00; /* Set color for beat cell currently playing */
+}
+
+/* Controls container */
+.controls {
+  overflow-x: hidden;
+  align-items: center;
+ justify-content: space-evenly;
+ height: 120px;
+ width: 100%;
+display: flex;
+    padding-bottom: 0px;
+    overflow-y: hidden;
+    padding: 20px;
+margin-top: 17px;
+background-color: rgba(145, 143, 143, 0.475);
+border-radius: 10px;
+box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+
+}
+
+.noteNames {
+  position: relative;
+  left: -5%;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide any overflow */
+  text-overflow: ellipsis; /* Display ellipsis for overflowed text */
+width: 60px;
+text-align: center;
+background-color: rgba(0, 0, 0, 0.271);
+border-radius: 10px;
+padding: 5px;
+}
+
+/* Button style */
+.controls button {
+  padding: 1px 5px ;
+  margin-bottom: 8px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(0, 128, 0, 0.498);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+width: 90px;
+height:35px;
+position: relative;
+box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+
+}
+
+.combined{
+  margin-top: 5rem;
+}
+/* Button hover effect */
+.controls button:hover {
+  background-color: #0fb300;
+}
+.bpm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0fb30046;
+height: 40px;
+border-radius: 7px;
+box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+padding-right: 5px;
+}
+
+
+/* Tempo label */
+.controls label {
+  font-size: 12px;
+  width:50px;
+  height: 30px;
+
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* Tempo input */
+.controls input[type="number"] { 
+   background-color: #0fb30058;
+  width: 50px;
+  height: 20px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 0px;
+  margin-left: 20px;
+}
+
+
+
+/* Tempo input range */
+.controls input[type="range"] {
+  width: 140px;
+  margin-right: 5px;
+  margin-top: 0px;
+height: 10px;
+}
+
+/* Tempo value display */
+.tempo-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Center the carousel control buttons horizontally */
+.carousel-item.active {
+  height:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+
+}
+
+
+/* Center the control buttons vertically within their container */
+.carousel-control-prev,
+.carousel-control-next { 
+  height: 100%; /* Adjust size as needed */
+  margin-top: 2vh;
+ z-index: 9999;
+color: #00000063;
+}
+span.carousel-control-prev-icon,
+span.carousel-control-next-icon { 
+  background-color: #0fb30088;
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+
+}
+span.carousel-control-prev-icon{
+
+}
+
+.carousel-control-next { 
+  width: 7vw;
+  left:85%
+
+}
+.carousel-control-prev { 
+  width: 7vw;
+    margin-left:3vw;
+}
+
+
+
+/* Styling for the carousel control buttons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  
+  height: 90%; /* Adjust size as needed */
+ 
+}
+input{
+  width: 100%;
+}
+
+@media (max-height: 700px) {
+  #carouselExample{          
+    
+    margin: 90px 0 0 0rem;
+    
+    height: 80vh;
+   left:5%;
+   
+  
+  
+  }
+
+}
+@media (max-height: 498px) {
+  #carouselExample{          
+    
+    margin: 82px 0 0 0rem;
+    
+    height: 75vh;
+   left:5%;
+  padding-bottom: 5px;
+  
+  }
+  .controls {
+    
+   height: 60px;
+   margin-top: 10px;
+   margin-bottom: 0px;
+
+  }
+}
+@media (max-width: 500px) {
+  
+  .controls input[type="range"] {
+    width: 70px;
+    margin-right: 5px;
+    margin-top: 0px;
+  height: 10px;
+  }
+  .controls button {
+    padding: 1px 5px ;
+    margin-bottom: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 128, 0, 0.498);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  width: 90px;
+  height:55px;
+  position: relative;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+  margin-left: 0px;
+  margin-top: 15px;
+  }
+  .controls{
+    flex-direction: column-reverse;
+    justify-content: center;
+    height: 180px;
+    padding: 50px;
+  }
+  
+}
+

@@ -5,7 +5,8 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
   //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('Basico')
   const [selectedCategory, setSelectedCategory] = useState('Basic')
-  
+  const [maxSoundsReached, setMaxSoundsReached] = useState(false);
+
   /*const handleOptionChange = option => {
     setSelectedOption(option)
     setSelectedGenre('')
@@ -29,10 +30,16 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
   }
 
   const handleCheckboxChange = (event, sound) => {
-    event.stopPropagation() // Prevent event bubbling to parent elements
-    handleSoundSelect(sound)
+    event.stopPropagation(); // Prevent event bubbling to parent elements
+    
+    if (selectedSounds.length >= 24 && !selectedSounds.some(selectedSound => selectedSound.soundUrl === sound.soundUrl)) {
+      setMaxSoundsReached(true);
+      return;
+    }
+    
+    setMaxSoundsReached(false); // Reset the state if the limit is not reached
+    handleSoundSelect(sound);
   }
-
   const handleSelectedSoundClick = (event, soundUrl) => {
     event.stopPropagation() // Prevent event bubbling to parent elements
     playSound(soundUrl)
@@ -64,6 +71,8 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
     <div>
       <div className='selectCards'>
         <div className='categoriesAndGenres'>
+        <h4 >Select Genre and category </h4>
+
           <div className='category'>
             Categories
             <select value={selectedGenre} onChange={handleGenreChange}>
@@ -103,7 +112,8 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
 
                       onClick={() => handlePlayButtonClick(sound.soundUrl)}
                     >
-                      {sound.name}
+                      <span>{sound.name}</span>
+                      
                     </button>
                     <span onClick={event => handleSoundNameClick(event, sound.soundUrl)}></span>
                     <div className='form-check form-switch'>
@@ -127,12 +137,16 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
             </>
           )}
         </div>
+        {maxSoundsReached && (
+  <p style={{ color: 'red' }}>You can only select a maximum of 27 sounds.</p>
+)}
         {selectedSounds.length > 0 && (
           <>
-            <h4>Selected Sounds:</h4>
-
+            
+ <div className='selectedSounds'>
+  <h3>Selected Sounds:</h3>
             <ul>
-              <div className='selectedSounds'>
+             
                 {selectedSounds.map(sound => (
                   <li key={sound.soundUrl}>
                     <button
@@ -141,13 +155,13 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
 
                       onClick={() => handlePlayButtonClick(sound.soundUrl)}
                     >
-                      {sound.name}
+                     <span> {sound.name}</span>
                     </button>
                     <span onClick={event => handleSelectedSoundClick(event, sound.soundUrl)}></span>
                   </li>
                 ))}
-              </div>
-            </ul>
+              
+            </ul></div>
           </>
         )}
       </div>

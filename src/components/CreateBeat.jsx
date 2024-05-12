@@ -4,13 +4,18 @@ import { useNavigate } from 'react-router-dom'
 import '../styles/create.css'
 import { AuthContext } from '../context/Auth.context'
 import { useContext } from 'react'
-const BeatMakerSounds = ({ selectedSounds }) => {
+const CreateBeat = ({ selectedSounds }) => {
   const [beatMakerName, setbeatMakerName] = useState('')
   const nav = useNavigate()
   const { user}=useContext(AuthContext)
 
   const createBeatMaker = async () => {
     try {
+      if (!user) {
+        // If user is not logged in, navigate to the signup page
+        nav('/signup');
+        return;
+      }
       // Filter out null values from selectedSounds array
       const filteredSounds = selectedSounds.filter(sound => sound !== null)
 
@@ -40,7 +45,7 @@ const BeatMakerSounds = ({ selectedSounds }) => {
               value={beatMakerName}
               onChange={e => setbeatMakerName(e.target.value)}
             />
-            <button onClick={createBeatMaker}>Create BeatMaker</button>
+            <button className='submitUpdate'onClick={createBeatMaker}>Create BeatMaker</button>
           </div>
         </>
       )}
@@ -48,4 +53,4 @@ const BeatMakerSounds = ({ selectedSounds }) => {
   )
 }
 
-export default BeatMakerSounds
+export default CreateBeat

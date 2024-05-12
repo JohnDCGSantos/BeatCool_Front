@@ -81,9 +81,12 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
     }
   };
   return (
-    <>
+    
+    <div className= 'imageKits'>
+<div className= 'shadows'>
+    <div className= 'creater'>
       <div className='drumKitListTitle'>
-        <h2>Drum Kits</h2>
+        <h2> Your Drum Kits,  &nbsp;{user.username} :</h2>
       </div>
       
       <div className='drumKitList'>
@@ -92,7 +95,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
       ) : (
         <ul>
           {drumKits.map(drumKit => (
-            <div key={drumKit._id}>                <button onClick={() => nav(`/drumKits/${drumKit._id}/update`)}>Update</button>
+            <div className='di' key={drumKit._id}>                <button className='selected-sound-item' onClick={() => nav(`/drumKits/${drumKit._id}/update`)}>Update</button>
 
               <li onClick={() => handleDrumKitClick(drumKit._id)}>{drumKit.name}</li>
               {showCheckboxes && (
@@ -106,7 +109,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
                   <label htmlFor={drumKit._id}></label>
 
                 </li>
-                )}                     <button onClick={()=>handleDelete(drumKit._id)}>Delete</button>
+                )}      <button className='selected-sound-item' onClick={()=>handleDelete(drumKit._id)}>Delete</button>
 
             </div>
           ))}
@@ -114,7 +117,10 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
       )}
         {showCheckboxes && <button onClick={handleConfirmSelection}>Confirm Selection</button>}
       </div>
-    </>
+    </div>
+    </div>
+    </div>
+
   )
 }
 

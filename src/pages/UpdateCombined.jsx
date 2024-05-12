@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useContext} from 'react';
 import { AuthContext } from '../context/Auth.context'
 
-const CombinedUpdate = () => {
+const UpdateCombined = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -91,18 +91,38 @@ navigate(`/combined/${response.data._id}`)
       console.error('Error updating BeatMakerAndDrumKit:', error);
     }
   };
+  const handleDrumKitClick = async drumKitId => {
+    try {
+      // Navigate to the DrumKitPage with the selected drum kit ID
+      navigate(`/drumkits/${drumKitId}`) // Pass the drumKitId as a parameter in the URL
+    } catch (error) {
+      console.error('Error navigating to drum kit:', error)
+    }
+  }
+  const handleBeatMakerClick = async beatMakerId => {
+    try {
+      // Navigate to the DrumKitPage with the selected drum kit ID
+      navigate(`/beatCreator/${beatMakerId}`) // Pass the drumKitId as a parameter in the URL
+    } catch (error) {
+      console.error('Error navigating to drum kit:', error)
+    }
+  }
 
   // Your handleDrumKitToggle, handleBeatMakerToggle, handleDrumKitClick, handleBeatMakerClick functions remain the same
 
   return (
+    <div className='imageCreate'>
+    <div className= 'shadows'>
+    <div className='create'>
     <div className='dkBm'> 
       <h2>Update BeatMakerAndDrumKit</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+      <div className='name'>
           <label htmlFor='name'>Name:</label>
-          <input type='text' id='name' value={name} onChange={(e) => setName(e.target.value)} required />
+          <input style={{backgroundColor:'rgba(0,0,0,0.2)'}}type='text' id='name' value={name} onChange={(e) => setName(e.target.value)} required />
         </div>
         <div className='wrap'>
+          
           <label>Select Drum Kit:</label>
           <div className='dk'>
             {drumKits.map((drumKit) => (
@@ -118,12 +138,15 @@ navigate(`/combined/${response.data._id}`)
                   />
                 </div>
                 <label htmlFor={`drumKit-${drumKit._id}`}>{drumKit.name}</label>
-              </div>
+             
+                          <button className='details' onClick={()=>handleDrumKitClick((drumKit._id))}>Details</button>
+ </div>
             ))}
           </div>
         </div>
         <div>
-          <label>Select Beat Maker:</label>
+          <div className='centerBtn'>
+          <label>Select Beat Maker:</label></div>
           <div className='dk'>
             {beatMakers.map((beatMaker) => (
               <div className='dkSL' key={beatMaker._id}>
@@ -138,14 +161,17 @@ navigate(`/combined/${response.data._id}`)
                   />
                 </div>
                 <label htmlFor={`beatMaker-${beatMaker._id}`}>{beatMaker.name}</label>
+                <button className='details' onClick={()=>handleBeatMakerClick((beatMaker._id))}>Details</button>
+
               </div>
             ))}
           </div>
         </div>
-        <button type='submit'>Update</button>
+        <div className='centerBtn'><button className='submitUpdate' type='submit'>Update</button></div>
+        
       </form>
-    </div>
-  );
+    </div></div></div>
+  </div>);
 };
 
-export default CombinedUpdate;
+export default UpdateCombined;

@@ -1,7 +1,72 @@
 
+.create{
+  width: 100vw;
+  margin: 6rem 0 0 0rem;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+ 
+  justify-content: space-evenly
+  ;
+  height: 80vh;
+}
+
+.intro{
+  width: 100vw;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+  ;
+  height: 80vh;
+}
+
+.create h3{
+  text-align: center;
+  
+  
+}
+
 .mainContainer{
   height: 100vh;
+width: 80%;
+position: relative;
+left:-10%
+}
+.category{
+  height: 80px;
+  width: 300px;
+  border-radius: 10px;
+  padding: 12px;
+  
 
+}
+.genre{
+  width: 300px;
+  border-radius: 10px;
+  padding: 12px;
+}
+ .genre select{
+  margin-left:30px
+}
+.category select{
+  margin-left:5px
+}
+.create h1{
+  border-radius: 10px;
+  padding: 12px;
+  text-shadow: -2px -2px 0 black,  
+                1px -1px 0 black,
+               -1px 1px 0 black,
+                1px 1px 0 black;
+                background-color: rgba(0, 0, 0, 0.352);
+}
+.create h4{
+  border-radius: 10px;
+  padding: 12px;
+  
 }
 h1{
   margin-top: 
@@ -14,14 +79,17 @@ h1{
   justify-content: flex-start;
   margin-top: 2rem;
   height: 80%;
-
 }
+.wrap label {
+  text-align: center;
+  width: 100vw;
+}
+
 .selectCards {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; /* Align items horizontally center */
-
 
 }
 .genreAndCategoryTitle{
@@ -29,6 +97,14 @@ h1{
 }
 .selectOptionTitle{
   display: flex;
+  justify-content: center;
+  text-shadow: -2px -2px 0 black,  
+                1px -1px 0 black,
+               -1px 1px 0 black,
+                1px 1px 0 black;
+                background-color: rgba(0, 0, 0, 0.352);
+                border-radius: 10px;
+                padding: 5px;
 }
 
 button.selected-sound-item{
@@ -46,10 +122,31 @@ button.selected-sound-item{
 h1{
   position: absolut;
 }
+.createBtnContainer button{
+  color: black;
+  font-weight: 80px;
+  background-color: rgba(59, 188, 128, 0.643);
+  width: 300px;
+  font-size: 20px;
+  border: 10px solid rgba(0, 0, 0, 0.621) ;
+  text-shadow: -2px -2px 0 white,  
+                1px -1px 0 white,
+               -1px 1px 0 white,
+                1px 1px 0 white;
+                box-shadow: inset 6px 6px 3px #cbced1, inset -6px -6px 3px #fff;
 
+}
+.sub
+.createBtnContainer input{
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.751);
+ ;
+}
 input{
   margin-left: 0px!important;
-  margin-top:10px
+  margin-top:10px;
+  color:whitesmoke !important;
+
 }
 
 .selectBtnContainer{
@@ -66,29 +163,38 @@ button{
 height:70px;
 font-size: 12px;
 }
-.genre.category{
-  display:flex;
-  flex-direction: column;
-}
+
 .categoriesAndGenres{
   margin-bottom:5rem;
   margin-top: 20px;
   display:flex;
+  flex-direction: column;
+  align-items: center;
+width: 80%;
+background-color: rgba(0, 0, 0, 0.431);
+border-radius: 10px;
 
-
-
-
-
-justify-content: space-between;
-  width: 90%;
 }
 .selectedSounds{
   display:flex;
-  
+  width: 80%;
   flex-wrap: wrap;
   justify-content: center;
-  list-style: none
+  list-style: none;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.334);
+  border-radius: 10px;
+
 }
+.availableSounds {
+  width: 80%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.334);
+  border-radius: 10px;
+
+}
+
+
  
 ul{
   display:flex;
@@ -109,21 +215,26 @@ ul{
   
 ;
 }
-input{
+.createBtnContainer input{
 height:50px;
 width: 200px;
+text-align: center;
+background-color: rgba(0, 0, 0, 0.673);
+}
+.createBtnContainer input::placeholder {
+  color:whitesmoke; /* Change the color to your desired color */
 }
 
-#root {
-  
-  overflow: auto;
-  margin-bottom: 20px;
-margin: 0 auto;
-  padding: 1rem;
+
+.availableSounds h3{
+  width: 50%;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
 }
 
+@media(max-width: 380px) {
+  .categoriesAndGenres {
+     flex-direction: column;
+    gap:10px;
+    align-items: center
+  }
+}

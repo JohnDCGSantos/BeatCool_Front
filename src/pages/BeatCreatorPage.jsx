@@ -5,9 +5,10 @@ const BeatCreatorPage = () => {
   const { id } = useParams()
 
   return (
-    <>
+    <div className='imageKitsPlay' >
+    <div className= 'shadows'>
       <BeatCreator id={id} />
-    </>
+     </div></div>
   )
 }
 

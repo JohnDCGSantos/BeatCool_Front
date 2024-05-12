@@ -4,7 +4,7 @@ import '../styles/createCombined.css'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
-const BeatMakerAndDrumKitForm = () => {
+const CombinedMaker = () => {
   const [name, setName] = useState('')
   const [drumKits, setDrumKits] = useState([])
   const [beatMakers, setBeatMakers] = useState([])
@@ -97,16 +97,21 @@ const BeatMakerAndDrumKitForm = () => {
   }
 
   return (
-    <div className='dkBm'>
-  <h2>Create New BeatMakerAndDrumKit</h2>
+<div className='imageCreate'>
+    <div className= 'shadows'>
+    <div className='create'>  <h2>Create New BeatMakerAndDrumKit</h2>
   <form onSubmit={handleSubmit}>
-    <div>
+    <div className='name'>
       <label htmlFor='name'>Name:</label>
       <input type='text' id='name' value={name} onChange={(e) => setName(e.target.value)} required />
     </div>
+    
     <div className='wrap'>
       <label>Select Drum Kit:</label>
-      <div className='dk'>
+      
+      {
+      drumKits.length>0?(
+ <div className='dk'>
         {drumKits.map((drumKit) => (
           <div  key={drumKit._id}>
           <div className='dkSL' key={drumKit._id}>   
@@ -126,9 +131,19 @@ const BeatMakerAndDrumKitForm = () => {
 
         </div></div>))}
       </div>
+      ):(
+        <>
+<p style={{color:'red', textAlign:'center'}}>No drumKits available, please create one first!</p> 
+<button className='submitUpdate' onClick={()=>{nav('/')}}>Create drumKit</button>
+      </>)
+}
+     
 
-    </div><label>Select Beat Maker:</label>
-    <div className='dk'>
+    </div>
+    <div className='wrap'>
+
+    <label>Select Beat Maker:</label>
+    {beatMakers.length>0?(<div className='dk'>
       
       {beatMakers.map((beatMaker) => (
          <div  key={beatMaker._id}>
@@ -147,14 +162,21 @@ const BeatMakerAndDrumKitForm = () => {
 
         </div>
       </div>))}
-    </div>
-        
-
-    <button type='submit'>Create</button>
+    </div> ):(<>
+<p style={{color:'red', textAlign:'center'}}>No beatMakers available, please create one first!</p> 
+<button className='submitUpdate'onClick={()=>{nav('/')}}>Create beatMaker</button>
+      </>)}
+     </div>
+   {beatMakers.length&&drumKits.length>0?(   
+<div className='btnComboSubmit'>
+    <button className='submitUpdate'type='submit'>Create</button>
+    </div>):null}
   </form>
+</div></div>
 </div>
+
 
   );
 };
 
-export default BeatMakerAndDrumKitForm
+export default CombinedMaker

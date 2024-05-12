@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/Auth.context'
 import { useContext } from 'react'
-const DrumKitCreator = ({ selectedSounds }) => {
+const CreateDrumKit = ({ selectedSounds }) => {
   const [drumKitName, setDrumKitName] = useState('')
   const nav = useNavigate()
   const { user}=useContext(AuthContext)
@@ -45,11 +45,11 @@ const DrumKitCreator = ({ selectedSounds }) => {
             value={drumKitName}
             onChange={e => setDrumKitName(e.target.value)}
           />
-          <button onClick={createDrumKit}>Create Drum Kit</button>
+          <button className='submitUpdate'onClick={createDrumKit}>Create Drum Kit</button>
         </div>
       )}
     </div>
   )
 }
 
-export default DrumKitCreator
+export default CreateDrumKit

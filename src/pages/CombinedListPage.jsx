@@ -56,30 +56,35 @@ const navigate=useNavigate()
   
 
   return (
-    <>
+    <div className= 'imageKits'>
+    <div className= 'shadows'>
+    <div className='creater'>
       <div className='drumKitListTitle'>
-        <h2>All BeatMakerAndDrumKit Entities</h2>
+      <h2> Your Combined List,  &nbsp;{user.username} :</h2>
       </div>
       <div className='drumKitList'>
-        <ul>
+        
           {
              beatMakerAndDrumKits.length === 0 ? (
               <p>No combos available.</p>
               ) : (
-        beatMakerAndDrumKits.map(beatMakerAndDrumKit => (
-            <div key={beatMakerAndDrumKit._id}>             <button onClick={() => navigate(`/combined/${beatMakerAndDrumKit._id}/update`)}>Update</button>
+              <ul>
+        {beatMakerAndDrumKits.map(beatMakerAndDrumKit => (
+            <div className='di' key={beatMakerAndDrumKit._id}>             <button className='selected-sound-item' onClick={() => navigate(`/combined/${beatMakerAndDrumKit._id}/update`)}>Update</button>
 
-            <li >           
-
-              <Link to={`/combined/${beatMakerAndDrumKit._id}`}>{beatMakerAndDrumKit.name}</Link>
+            <li onClick={()=>{navigate(`/combined/${beatMakerAndDrumKit._id}`)}}>           
+              {beatMakerAndDrumKit.name}
             </li>
-            <button onClick={()=>handleDelete(beatMakerAndDrumKit._id)}>Delete</button>
+            <button className='selected-sound-item'  onClick={()=>handleDelete(beatMakerAndDrumKit._id)}>Delete</button>
             </div>
-          )))}
-        </ul>
+          ))}</ul>)}
+        
         </div>
      
-    </>
+    </div>
+    </div>
+     
+     </div>
   )
 }
 

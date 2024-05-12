@@ -1,4 +1,4 @@
-:root {
+/*:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -64,4 +64,316 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+*{
+  box-sizing: border-box !important;
+  margin:0;
+  padding: 0;
+  font-family: 'Outfit', sans-serif;
+  color:aliceblue ;
 }
+
+body{
+  background-color: black !important;
+  height: 100vh;
+}
+#root{
+  overflow-x: hidden;
+
+  height: 100%;
+  padding: 10;
+  width: 100vw;
+}
+
+button.selected-sound-item{
+  color: whitesmoke;
+  font-weight: 80px;
+  background-color: rgba(28, 30, 28, 0.643);
+  border: 10px solid rgba(169, 173, 182, 0.383) ;
+  font-size: 20px;
+  box-shadow: 12px 10px 12px 1px #a8c9eb, -12px -10px 12px 1px #adbfd5;
+border-radius: 5px;
+
+text-overflow: ellipsis;
+overflow: hidden;
+}
+button.selected-sound-item span{
+  width: 100%;
+  white-space: normal;
+  display: inline-block;
+text-overflow: ellipsis;
+overflow: hidden;
+}
+
+button.selected-sound-items{
+  
+  font-weight: 80px;
+  background-color: rgba(28, 30, 28, 0.643);
+  font-size: 25px;
+  width: 300px;
+  border: 10px solid rgba(169, 173, 182, 0.383) ;
+  box-shadow: 12px 10px 12px 1px #a8c9eb, -12px -10px 12px 1px #adbfd5;
+border-radius: 5px;
+}
+button.selected-sound-item:hover span{
+   animation-play-state: running;
+  animation: marquee 3s linear infinite;
+  overflow: visible; /* Show full text on hover */
+  white-space: normal; /* Allow text wrapping on hover */
+  width: auto;
+}
+select{
+  color: black !important;
+}
+
+button.submitUpdate{
+  color: black;
+  font-weight: 80px;
+  background-color: rgba(59, 188, 128, 0.643);
+  width: 300px;
+  font-size: 20px;
+  border: 10px solid rgba(0, 0, 0, 0.621) ;
+  text-shadow: -2px -2px 0 white,  
+                1px -1px 0 white,
+               -1px 1px 0 white,
+                1px 1px 0 white;
+                box-shadow: inset 6px 6px 3px #cbced1, inset -6px -6px 3px #fff;
+
+}
+.centerBtn{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nameBDUpdate{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.logOutBtn{
+  color:whitesmoke;
+  text-shadow: -1px -1px 0 black,  
+  0.3px -0.5px 0 red,
+ -0.5px 0.5px 0 red,
+  0.5px 0.5px 0 red;
+  background-color: rgba(0, 0, 0, 0.352);  width: 100px;
+  height:40px;
+  border:2px solid rgba(255, 0, 0, 0.319);
+  text-decoration: none;
+  position: fixed;
+  left: 88%;
+  margin-right: 10px;
+  top:18px;
+  font-size: 18px;
+}
+
+
+#loginBtn{
+    background-color: green;
+    height: auto;
+}
+#signUpBtn{
+background-color:black;
+height: auto;
+font-size: 10px;
+width: 75%;
+}
+.a{
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+
+#pwd, #email, #userName{
+  color:black!important
+}
+
+.wrapper {
+  position: relative;
+  top: -30px;
+  min-width: 300px;
+  min-height: 560px;
+  margin: 30px auto;
+  padding: 40px 30px 30px 30px;
+  background-color: rgb(237, 240, 242,0.8);
+  border-radius: 15px;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+
+.logo {
+  width: 80px;
+  margin: auto;
+}
+.form-field{
+  height:40px
+}
+.logo img {
+
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0px 0px 3px #5f5f5f,
+      0px 0px 0px 5px #ecf0f3,
+      8px 8px 15px #a7aaa7,
+      -8px -8px 15px #fff;
+}
+
+.wrapper .name {
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 1.3px;
+  padding-left: 10px;
+  color: #555;
+  height: 10px;
+}
+
+.wrapper .form-field input {
+  width: 100%;
+  display: block;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1rem;
+  color: #666;
+  padding: 10px 10px 10px 10px;
+  /* border: 1px solid red; */
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active 
+{
+transition: background-color 5000s ease-in-out 0s;
+}
+
+
+.wrapper .form-field {
+  padding-left: 10px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+
+.wrapper .form-field .fas {
+  color: #555;
+}
+
+.wrapper .btn {
+  box-shadow: none;
+  width: 100%;
+  height: 40px;
+  background-color: #03A9F4;
+  color: #fff;
+  border-radius: 25px;
+  box-shadow: 3px 3px 3px #b1b1b1,
+      -3px -3px 3px #fff;
+  letter-spacing: 1.3px;
+}
+
+.wrapper .btn:hover {
+  background-color: #039BE5;
+}
+
+.wrapper a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  color: #03A9F4;
+}
+
+.wrapper a:hover {
+  color: #039BE5;
+}
+.p-3.mt-3{
+  height: auto;
+position: relative
+
+}
+
+.image{
+  position: fixed;
+  overflow-y:auto ;
+
+  width: 100%;
+  height: 100%;
+  background-size:cover;
+  background-position: center ;
+  background-repeat: no-repeat;
+  padding-top: 10px;
+  background-image: url('../src/images/introImage.jpeg');}
+.imageCreate{
+  position: fixed;
+  overflow-y:auto ;
+  width: 100%;
+  height: 100%;
+  background-size:cover;
+  background-position: center ;
+  background-repeat: no-repeat;
+  padding-top: 10px;
+  background-image: url('../src/images/creatorImage.jpeg')
+
+}
+
+.imageKits{
+  position: fixed;
+  overflow-y:auto ;
+  width: 100%;
+  height: 100%;
+  background-size:cover;
+  background-position: center ;
+  background-repeat: no-repeat;
+  padding-top: 10px;
+  background-image: url('../src/images/lim.jpeg')!important;
+}
+.imageKitsPlay{
+  position: fixed;
+  overflow-y:auto ;
+  width: 100%;
+  height: 100%;
+  background-size:cover;
+  background-position: center ;
+  background-repeat: no-repeat;
+  padding-top: 10px;
+  background-image: url('../src/images/drumPage.jpeg')!important;
+}
+.shadows{
+  background-color: rgba(20, 91, 138, 0.23);
+top:0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow-y:auto ;
+  padding-top: 0px;
+
+}
+.creater{
+  width: 100vw;
+  margin: 6rem 0 0 0rem;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+ margin-bottom: 10px;
+  justify-content: space-evenly
+  ;
+  height: auto;
+}
+
+
+@media(max-width: 380px) {
+  .wrapper {
+      margin: 30px 20px;
+      padding: 20px 15px 15px 15px;
+  }
+}
+

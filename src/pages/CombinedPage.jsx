@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import BeatCreator from './BeatCreator'
-import DrumKitPage from '../pages/DrumKitPage' // Import the DrumKitPage component
+import BeatCreator from '../components/BeatCreator'
+import DrumKit from '../components/DrumKit' // Import the DrumKitPage component
 import { useParams } from 'react-router-dom'
 import '../styles/combined.css'
 
@@ -44,10 +44,11 @@ const CombinedPage = () => {
   }, [id])
   
   return (
-    <div className='combined'>  
+    <div className='imageKitsPlay' >
+    <div className= 'shadows'>
       <h2>Combined Page</h2>
       {beatMakerAndDrumKit && (
-       <>
+       <div className='combined'>
           
           <p>Name: {beatMakerAndDrumKit.name}</p>
           
@@ -60,11 +61,12 @@ const CombinedPage = () => {
           
         {drumKit && (
             <div className='drumMaker'>
-              <DrumKitPage id={drumKitId} />
+              <DrumKit id={drumKitId} />
             </div>
           )}
-      </>)}
-    </div>
+      </div>)}
+    </div>    </div>
+
   )
 }
 

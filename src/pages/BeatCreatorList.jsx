@@ -82,25 +82,23 @@ const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
 
 
   return (
-    <>
+    <div className= 'imageKits'>
+    <div className= 'shadows'>
+    <div className='creater'>
       <div className='drumKitListTitle'>
-        <h2>Beat Creators</h2>
+      <h2> Your Beat Creators,  &nbsp;{user.username} :</h2>
       </div>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : 
       
-      
-      (
         <div className='drumKitList'>
-          <ul>
+         
             { 
             beatCreators.length === 0 ? (
               <p>No beats available.</p>
-              ) : (
-            beatCreators.map(beatCreator => (
+              ) : ( 
+              <ul>
+            {beatCreators.map(beatCreator => (
              
-              <div key={beatCreator._id}><button onClick={() => nav(`/beatCreator/${beatCreator._id}/update`)}>Update</button>
+              <div className='di' key={beatCreator._id}>    <button className='selected-sound-item'  onClick={() => nav(`/beatCreator/${beatCreator._id}/update`)}>Update</button>
                 <li onClick={() => handleBeatCreatorClick(beatCreator._id)}>{beatCreator.name} </li>
                 {showCheckboxes && (
                   <li>
@@ -113,17 +111,19 @@ const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
                     <label htmlFor={beatCreator._id}></label>
                   </li>   
 
-                )}                     <button onClick={()=>handleDelete(beatCreator._id)}>Delete</button>
+                )}                     <button className='selected-sound-item'  onClick={()=>handleDelete(beatCreator._id)}>Delete</button>
 
               </div>
-            )))}
-          </ul>
-        </div>
-      )
-      }
+            ))} 
+            </ul>
+          )}
+          
+     
       {showCheckboxes && <button onClick={handleConfirmSelection}>Confirm Selection</button>}
 
-    </>
+    </div>
+    </div> </div>        </div>
+
   )
 }
 

@@ -1,21 +1,26 @@
-import './App.css'
 import './index.css'
-import Navbar from './components/NavBar'
+import './App.css'
+
 import { Routes, Route } from 'react-router-dom'
-import DrumKitList from './pages/DrumKitList'
-import DrumKit from './pages/DrumKit'
+
+import Navbar from './components/NavBar'
 import DrumPads from './pages/DrumPads'
-import BeatCreatorPage from './pages/BeatCreatorPage'
+import CombinedMaker from './pages/CombinedMaker'
 import BeatCreatorsList from './pages/BeatCreatorList'
-import CombinedPlayback from './components/CombinedPlayback'
-import Go from './components/CombinedPage'
-import BeatAndDrum from './pages/BeatMakerAndDrumKitMaker'
+import BeatCreatorPage from './pages/BeatCreatorPage'
+import DrumKitList from './pages/DrumKitList'
+import DrumKitPage from './pages/DrumKitPage'
+import CombinedList from './pages/CombinedListPage'
+import CombinedPage from './pages/CombinedPage'
+import UpdateDrum from './pages/UpdateDrum'
+import UpdateCreator from './pages/UpdateCreator'
+import CombinedUpdate from './pages/UpdateCombined'
+
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import IsPrivate from './context/IsPrivate'
-import UpdateDrum from './pages/UpdateDrum'
-import UpdateCreator from './pages/UpdateCreator'
-import CombinedUpdate from './pages/CombinedUpdate'
+import Home from './pages/Home'
+
 
 function App() {
   
@@ -25,23 +30,25 @@ function App() {
       <Navbar />
 
       <Routes>
+      <Route path='/home' element={<Home />} />
+
         <Route path='/' element={<DrumPads />} />
-        <Route path='/drumkits/:id/update' element={<UpdateDrum />} />
-        <Route path='/beatCreator/:id/update' element={<UpdateCreator />} />
-        <Route path='/combined/:id/update' element={<CombinedUpdate />} />
+        <Route path='/drumkits/:id/update' element={<IsPrivate><UpdateDrum /></IsPrivate>} />
+        <Route path='/beatCreator/:id/update' element={<IsPrivate><UpdateCreator /></IsPrivate>} />
+        <Route path='/combined/:id/update' element={<IsPrivate><CombinedUpdate /></IsPrivate>} />
 
         <Route path='/drumkits' element={<IsPrivate><DrumKitList /></IsPrivate>} />
         
-        <Route path='/drumkits/:id' element={<DrumKit />} />
+        <Route path='/drumkits/:id' element={<IsPrivate><DrumKitPage /></IsPrivate>} />
         
         <Route path='/beatCreator' element={<IsPrivate><BeatCreatorsList /></IsPrivate>} />
-        <Route path='/beatCreator/:id' element={<BeatCreatorPage />} />
+        <Route path='/beatCreator/:id' element={<IsPrivate><BeatCreatorPage /></IsPrivate>} />
 
-        <Route path='/combined/:id' element={<CombinedPlayback />} />
-        <Route path='/combined' element={<IsPrivate><Go /></IsPrivate>} />
+        <Route path='/combined/:id' element={<IsPrivate><CombinedPage /></IsPrivate>} />
+        <Route path='/combined' element={<IsPrivate><CombinedList /></IsPrivate>} />
         <Route path='/login' element={<Login />} />
 
-        <Route path='/combinedCreator' element={<IsPrivate><BeatAndDrum /></IsPrivate>} />
+        <Route path='/combinedCreator' element={<IsPrivate><CombinedMaker /></IsPrivate>} />
 <Route path='/signUp' element={<SignUp/>}/>
       </Routes>
     </>

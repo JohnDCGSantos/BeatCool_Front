@@ -2,48 +2,70 @@
 .beatMaker{
   position: fixed;
   transform: translate(-50%, -8vh);
-  top: 7vh;
-  left: 50vw;
+  top: 9vh;
+  left: 46vw;
   height: 100%;
+  
 
 }
 .drumMaker{
-  position: absolute;
-  top: 94%;
-  left: 50%;
-  transform: translate(-50%, -7%);
-  width: 90%;
-  height: 100%;
+
+  height: 100% ;
+  width: 100%;
+  overflow-y: auto;
+position: fixed;
+top: 20vh;
+left: 50vw;
+transform: translate(-50%, 65vh);
+margin-bottom: 10vh;
 
 }
+.name{
+  display: flex;
+flex-direction: column;
+align-items: center;
+margin-bottom: 2rem;
+}
+.name label{
+  text-align: center;
+  width: 100%;
+}
+.btnComboSubmit{
+  width: 100%;
+  display: flex;
+  justify-content: center
+}
+input#name{
+  text-align: center;
+  width: 80%;
+}
 .combined{
-  height: 100vh; /* Full viewport height */
-  width: 100vw;
-  overflow:auto;
+  height: 100%; /* Full viewport height */
+  width: 100%;
+  overflow-y:auto;
   display: flex;
   flex-direction: column;
   position: fixed;
 left: 0%;
-top:13.5vh;
+top:1.5vh;
 transform: translate(0%, -5vh);
 margin-top: 10px;
-background-color: brown;
+background-color: rgba(0, 0, 0, 0);
 padding: 20px;
 overflow-y: auto;
 }
-@media screen and (orientation: landscape) {
-  .beatMaker{
+
+
+@media only screen and (orientation: landscape) {
+  .drumMaker{
     position: fixed;
-    transform: translate(-50%, -10vh);
     top: 20vh;
     left: 50vw;
-    height: 100%;
-  
+    transform: translate(-50%, 65vh);
+    margin-bottom: 10vh;
+
   }
-  .drumMaker{
-   
-    height: 100vw;
-  
-  }
-  
+
+
 }
+

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
-import './BeatCreator.css'
+import '../styles/BeatCreator.css'
  
 const BeatCreator = ({ id }) => {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -172,15 +172,17 @@ useEffect(() => {
     };
   }, []);
   return sounds.length > 0 ? (
-    <>
-    <div className='bmC'>   
+    
+     
     
       <div id='carouselExample' className='carousel slide'>
 
         <div className='carousel-inner'>
           {[...Array(4).keys()].map((slide, slideIndex) => (
+            
             <div key={slideIndex} className={`carousel-item ${slideIndex === 0 ? 'active' : ''}`}>
-              <div className='beat-grid'>
+              <div className='beat-grid'>        slideIndex:{slideIndex + 1}/4
+
                 {/* Beat Grid Content */}
                 {Object.keys(sounds).map((sound, soundIndex) => (
                   <div key={sound}className='beat-row'>
@@ -235,7 +237,7 @@ useEffect(() => {
           {isPlaying ? 'Stop' : 'Start'} Beat
         </button>{' '}
         
-        <div className='bpm'> <label>Tempo (BPM)</label>
+        <div className='bpm'> <label>BPM</label>
        
           <input
             type='range'
@@ -255,9 +257,9 @@ useEffect(() => {
           />{' '}
          
          
-      </div></div></div></div>
+      </div></div></div>
 
-    </>
+   
   ) : null
 }
 

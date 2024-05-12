@@ -1,8 +1,7 @@
 // UpdateDrum.js
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import DrumKitForm from './DrumKitForm'
-
+import UpdateDrumKitForm from '../components/UpdateDrumKitForm'
 const UpdateDrum = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -30,15 +29,16 @@ const UpdateDrum = () => {
         } else {
           console.error('Failed to fetch sounds:', soundsResponse.status)
         }
+       setIsLoading(false)
 
-        setIsLoading(false)
       } catch (error) {
         console.error('Error fetching data:', error)
         setIsLoading(false)
       }
     }
 
-    fetchData()
+    fetchData()     
+
   }, [id]) // Include id in the dependency array to refetch data when id changes
 
   const handleUpdateDrum = async (updatedDrumKit) => {
@@ -63,13 +63,21 @@ const UpdateDrum = () => {
     }
   }
 
-  return (
-    <>
+  return isLoading?(<p>Loading...</p>):(
+    
+    <div className='imageCreate' 
+    
+    >
+    <div className= 'shadows'>
+    <div className='create'>
       <h3>Edit Drum Kit</h3>
       {!isLoading && drumKit && sounds && (
-        <DrumKitForm onSubmit={handleUpdateDrum} defaultValues={drumKit} sounds={sounds} />
+        <UpdateDrumKitForm onSubmit={handleUpdateDrum} defaultValues={drumKit} sounds={sounds} />
       )}
-    </>
+</div>
+    </div>
+    </div>    
+   
   )
 }
 

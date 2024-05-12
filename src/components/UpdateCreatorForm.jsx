@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import Sounds from '../components/Sounds'
+import Sounds from './Sounds'
 import '../styles/create.css'
-const CreatorForm = ({ onSubmit, defaultValues, sounds }) => {
+const UpdateCreatorForm = ({ onSubmit, defaultValues, sounds }) => {
   const [name, setName] = useState(defaultValues.name || '')
   const [drumPads, setDrumPads] = useState(defaultValues.drumPads || [])
 
@@ -33,10 +33,11 @@ const CreatorForm = ({ onSubmit, defaultValues, sounds }) => {
   }
   return (
     <form onSubmit={handleSubmit}>
+      <div className='name'>
       <label>
         Name:
-        <input value={name} onChange={event => setName(event.target.value)} />
-      </label>
+        <input value={name} id='name'  onChange={event => setName(event.target.value)} />
+      </label></div>
       {/* Additional fields for updating drum kit properties */}
       {sounds && (
         <Sounds
@@ -46,9 +47,10 @@ const CreatorForm = ({ onSubmit, defaultValues, sounds }) => {
           handleSoundSelect={handleSoundSelect}
         />
       )}
-      <button type='submit'>Update BeatCreator</button>
+      <div className='centerBtn'>
+      <button className='submitUpdate' type='submit'>Update BeatCreator</button></div>
     </form>
   )
 }
 
-export default CreatorForm
+export default UpdateCreatorForm
