@@ -1,5 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
 function LoginBtn({onClick}) {
 const { isLoggedIn, }=useContext(AuthContext)

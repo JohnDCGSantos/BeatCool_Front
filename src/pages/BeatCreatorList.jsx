@@ -4,6 +4,7 @@ import axios from 'axios'
 import '../styles/lists.css'
 import { useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
+import { apiBaseUrl } from '../config'
 const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
   const [beatCreators, setBeatCreators] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -14,12 +15,14 @@ const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
     // This effect runs only once when the component mounts
     authenticateUser(); // Ensure user is authenticated
   }, []);
-  useEffect(() => {
+  useEffect(() => {         
+     console.log('apiBaseUrl is', apiBaseUrl)
+
     const fetchBeatCreators = async () => {
       try {
         if(user){
           
-        const response = await axios.get('http://localhost:5005/beatMaker')
+          const response = await axios.get(`${apiBaseUrl}/beatMaker`);
         const userBeatMakers = response.data.filter(beatMaker => beatMaker.user === user._id);
 
         setBeatCreators(userBeatMakers)
@@ -63,7 +66,7 @@ const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
     if (isConfirmed) {
       try {
         // Proceed with the deletion if confirmed
-        const response = await fetch(`http://localhost:5005/beatMaker/${beatCreatorId}`, {
+        const response = await fetch(`${apiBaseUrl}/beatMaker/${beatCreatorId}`, {
           method: 'DELETE',
         });
   
@@ -81,7 +84,7 @@ const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
   };
 
 
-  return (
+  return isLoading?<p>Loading...</p> :(
     <div className= 'imageKits'>
     <div className= 'shadows'>
     <div className='creater'>

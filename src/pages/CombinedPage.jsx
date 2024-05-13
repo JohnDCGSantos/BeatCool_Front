@@ -4,6 +4,7 @@ import BeatCreator from '../components/BeatCreator'
 import DrumKit from '../components/DrumKit' // Import the DrumKitPage component
 import { useParams } from 'react-router-dom'
 import '../styles/combined.css'
+import { apiBaseUrl } from '../config'
 
 const CombinedPage = () => {
   const { id } = useParams()
@@ -16,14 +17,14 @@ const CombinedPage = () => {
   useEffect(() => {
     const fetchBeatMakerAndDrumKit = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/beatMakerAndDrumkit/${id}`)
+        const response = await axios.get(`${apiBaseUrl}/beatMakerAndDrumkit/${id}`)
         setBeatMakerAndDrumKit(response.data)
 
         if (response.data.beatMakers.length > 0) {
           const firstBeatMakerId = response.data.beatMakers[0]
           setBeatMakerId(firstBeatMakerId)
           const beatMakerResponse = await axios.get(
-            `http://localhost:5005/beatMaker/${firstBeatMakerId}`
+            `${apiBaseUrl}/beatMaker/${firstBeatMakerId}`
           )
           setBeatMaker(beatMakerResponse.data)
         }
@@ -31,7 +32,7 @@ const CombinedPage = () => {
           const firstDrumKitId = response.data.drumKits[0]
           setDrumKitId(firstDrumKitId)
           const drumKitResponse = await axios.get(
-            `http://localhost:5005/drumKits/${firstDrumKitId}`
+            `${apiBaseUrl}/drumKits/${firstDrumKitId}`
           )
           setDrumKit(drumKitResponse.data)
         }

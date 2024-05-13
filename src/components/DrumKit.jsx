@@ -4,6 +4,7 @@ import axios from 'axios'
 import DrumKitSounds from './DrumKitSounds'
 import '../styles/drumKitPage.css'
 import '../styles/create.css'
+import { apiBaseUrl } from '../config'
 
 //import { useNavigate } from 'react-router-dom'
 const DrumKit = ({ id }) => {
@@ -20,7 +21,7 @@ const DrumKit = ({ id }) => {
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/drumkits/${id}`)
+        const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`)
         setDrumKit(response.data)
         preloadSounds(response.data.drumPads)
         setDrumSounds(response.data.drumPads)

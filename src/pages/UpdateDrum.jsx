@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import UpdateDrumKitForm from '../components/UpdateDrumKitForm'
+import { apiBaseUrl } from '../config'
+
 const UpdateDrum = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -13,7 +15,7 @@ const UpdateDrum = () => {
     const fetchData = async () => {
       try {
         // Fetch drum kit data
-        const drumKitResponse = await fetch(`http://localhost:5005/drumkits/${id}`)
+        const drumKitResponse = await fetch(`${apiBaseUrl}/drumkits/${id}`)
         if (drumKitResponse.ok) {
           const drumKitData = await drumKitResponse.json()
           setDrumKit(drumKitData)
@@ -22,7 +24,7 @@ const UpdateDrum = () => {
         }
 
         // Fetch sounds data
-        const soundsResponse = await fetch('http://localhost:5005/pads')
+        const soundsResponse = await fetch(`${apiBaseUrl}/pads`)
         if (soundsResponse.ok) {
           const soundsData = await soundsResponse.json()
           setSounds(soundsData)
@@ -43,7 +45,7 @@ const UpdateDrum = () => {
 
   const handleUpdateDrum = async (updatedDrumKit) => {
     try {
-      const response = await fetch(`http://localhost:5005/drumkits/${id}`, {
+      const response = await fetch(`${apiBaseUrl}/drumkits/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

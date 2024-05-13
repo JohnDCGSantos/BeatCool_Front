@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/Auth.context'
 import { useContext } from 'react'
+import { apiBaseUrl } from '../config'
+
 const CreateDrumKit = ({ selectedSounds }) => {
   const [drumKitName, setDrumKitName] = useState('')
   const nav = useNavigate()
@@ -21,7 +23,7 @@ const CreateDrumKit = ({ selectedSounds }) => {
       const filteredSounds = selectedSounds.filter(sound => sound !== null)
 
       // Send filtered selected sounds to create a new drum kit
-      const response = await axios.post('http://localhost:5005/drumkits', {
+      const response = await axios.post(`${apiBaseUrl}/drumkits`, {
         name: drumKitName,
         drumPads: filteredSounds.map(sound => sound._id),
          // Assuming each sound has an _id property

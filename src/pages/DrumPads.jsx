@@ -5,6 +5,7 @@ import CreateBeat from '../components/CreateBeat'
 import '../styles/create.css'
 import { AuthContext  } from '../context/Auth.context'
 import { useNavigate } from 'react-router-dom'
+import { apiBaseUrl } from '../config'
 
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -17,7 +18,7 @@ const nav =useNavigate()
   useEffect(() => {
     const fetchSounds = async () => {
       try {
-        const response = await fetch('http://localhost:5005/pads')
+        const response = await fetch(`${apiBaseUrl}/pads`)
         if (response.ok) {
           const parsed = await response.json()
           console.log(parsed)

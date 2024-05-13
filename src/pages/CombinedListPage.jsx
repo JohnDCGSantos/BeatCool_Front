@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
 import { useNavigate } from 'react-router-dom'
+import { apiBaseUrl } from '../config'
+
 const CombinedListPage = () => {
   const [beatMakerAndDrumKits, setBeatMakerAndDrumKits] = useState([])
   const {authenticateUser, user}=useContext(AuthContext)
@@ -19,7 +20,7 @@ const navigate=useNavigate()
       try {
         if(user){
         
-        const response = await axios.get('http://localhost:5005/beatMakerAndDrumkit')
+        const response = await axios.get(`${apiBaseUrl}/beatMakerAndDrumkit`)
         const userCombo = response.data.filter(beatMakerAndDrumKit => beatMakerAndDrumKit.user === user._id);
         setBeatMakerAndDrumKits(userCombo)
         }
@@ -36,7 +37,7 @@ const navigate=useNavigate()
     if (isConfirmed) {
       try {
         // Proceed with the deletion if confirmed
-        const response = await fetch(`http://localhost:5005/beatMakerAndDrumKit/${beatMakerAndDrumKitId}`, {
+        const response = await fetch(`${apiBaseUrl}/beatMakerAndDrumKit/${beatMakerAndDrumKitId}`, {
           method: 'DELETE',
         });
   
@@ -60,7 +61,7 @@ const navigate=useNavigate()
     <div className= 'shadows'>
     <div className='creater'>
       <div className='drumKitListTitle'>
-      <h2> Your Combined List,  &nbsp;{user.username} :</h2>
+      <h2> Your Combined List,  &nbsp;{user? user.username :null}</h2>
       </div>
       <div className='drumKitList'>
         

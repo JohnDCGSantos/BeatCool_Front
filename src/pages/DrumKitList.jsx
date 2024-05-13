@@ -4,6 +4,8 @@ import axios from 'axios'
 import '../styles/lists.css'
 import { useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
+import { apiBaseUrl } from '../config'
+
 const DrumKitList = ({ showCheckboxes, onSelect }) => {
   const [drumKits, setDrumKits] = useState([])
   const nav = useNavigate()
@@ -20,7 +22,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
       
  if(user){
          
-        const response = await axios.get('http://localhost:5005/drumkits', {user})
+        const response = await axios.get(`${apiBaseUrl}/drumkits`, {user})
         console.log(user)
         const userDrumKits = response.data.filter(drumKit => drumKit.user === user._id);
        
@@ -64,7 +66,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
     if (isConfirmed) {
       try {
         // Proceed with the deletion if confirmed
-        const response = await fetch(`http://localhost:5005/drumKits/${drumKitId}`, {
+        const response = await fetch(`${apiBaseUrl}/drumKits/${drumKitId}`, {
           method: 'DELETE',
         });
   
@@ -86,7 +88,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
 <div className= 'shadows'>
     <div className= 'creater'>
       <div className='drumKitListTitle'>
-        <h2> Your Drum Kits,  &nbsp;{user.username} :</h2>
+        <h2> Your Drum Kits,  &nbsp;{user?user.username : null}</h2>
       </div>
       
       <div className='drumKitList'>

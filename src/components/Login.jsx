@@ -2,6 +2,7 @@ import { useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import image from '../images/download.png'
+import { apiBaseUrl } from '../config'
 
 //import { AuthContext } from '../context/Auth.context';
 const Login = () => {
@@ -25,7 +26,7 @@ const nav=useNavigate()
     const handleLogin = async (e) => {
       e.preventDefault();
       try {
-        const response= await axios.post('http://localhost:5005/auth/login', {
+        const response= await axios.post(`${apiBaseUrl}/auth/login`, {
             email, 
             password,
         })

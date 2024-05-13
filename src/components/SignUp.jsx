@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import image from '../images/download.png'
+import { apiBaseUrl } from '../config'
+
 function SignUp() {
     /*const [formData, setFormData] = useState({
         username: '',
@@ -25,7 +27,7 @@ const nav=useNavigate()
         event.preventDefault();
         // Handle form submission
         try {
-            const response= await axios.post('http://localhost:5005/auth/signup',{email, password, userName})
+            const response= await axios.post(`${apiBaseUrl}/auth/signup`,{email, password, userName})
 console.log('here is your signup response',response)
         } catch (error) {
             console.log(error)

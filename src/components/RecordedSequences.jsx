@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+import { apiBaseUrl } from '../config'
 
 const RecordedSequences = () => {
   const [recordedSequences, setRecordedSequences] = useState([])
@@ -8,7 +9,7 @@ const RecordedSequences = () => {
   useEffect(() => {
     const fetchRecordedSequences = async () => {
       try {
-        const response = await axios.get('http://localhost:5005/recorded/recordedSequences')
+        const response = await axios.get(`${apiBaseUrl}/recorded/recordedSequences`)
         setRecordedSequences(response.data)
         preloadRecordedSounds(response.data)
       } catch (error) {

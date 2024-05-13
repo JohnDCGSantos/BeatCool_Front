@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext} from 'react';
 import { AuthContext } from '../context/Auth.context'
+import { apiBaseUrl } from '../config'
 
 const UpdateCombined = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ const UpdateCombined = () => {
         try {
             
         
-        const response = await axios.get('http://localhost:5005/drumkits')
+        const response = await axios.get(`${apiBaseUrl}/drumkits`)
         const userDrumKits = response.data.filter(drumKit => drumKit.user === user._id);
 
         setDrumKits(userDrumKits);
@@ -42,7 +43,7 @@ const UpdateCombined = () => {
     // Fetch beat makers
     const fetchBeatMakers = async () => {
       try {
-        const response = await axios.get('http://localhost:5005/beatmaker')
+        const response = await axios.get(`${apiBaseUrl}/beatmaker`)
         const userBeatMakers = response.data.filter(beatMaker => beatMaker.user === user._id);
 
         setBeatMakers(userBeatMakers)
@@ -60,7 +61,7 @@ const UpdateCombined = () => {
     if (user && id) {
     const fetchDataSelected = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/beatMakerAndDrumKit/${id}`);
+        const response = await axios.get(`${apiBaseUrl}/beatMakerAndDrumKit/${id}`);
         const data = response.data;
 
         setName(data.name);
@@ -79,7 +80,7 @@ const UpdateCombined = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.put(`http://localhost:5005/beatMakerAndDrumKit/${id}`, {
+      const response = await axios.put(`${apiBaseUrl}/beatMakerAndDrumKit/${id}`, {
         name,
         drumKits: selectedDrumKits,
         beatMakers: selectedBeatMakers,

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import UpdateCreatorForm from '../components/UpdateCreatorForm'
+import { apiBaseUrl } from '../config'
 
 const UpdateCreator = () => {
   const { id } = useParams()
@@ -14,7 +15,7 @@ const UpdateCreator = () => {
     const fetchData = async () => {
       try {
         // Fetch drum kit data
-        const creatorResponse = await fetch(`http://localhost:5005/beatMaker/${id}`)
+        const creatorResponse = await fetch(`${apiBaseUrl}/beatMaker/${id}`)
         if (creatorResponse.ok) {
           const creatorData = await creatorResponse.json()
           setBeatMaker(creatorData)
@@ -23,7 +24,7 @@ const UpdateCreator = () => {
         }
 
         // Fetch sounds data
-        const soundsResponse = await fetch('http://localhost:5005/pads')
+        const soundsResponse = await fetch(`${apiBaseUrl}/pads`)
         if (soundsResponse.ok) {
           const soundsData = await soundsResponse.json()
           setSounds(soundsData)
@@ -43,7 +44,7 @@ const UpdateCreator = () => {
 
   const handleSubmit = async (updatedCreator) => {
     try {
-      const response = await fetch(`http://localhost:5005/beatMaker/${id}`, {
+      const response = await fetch(`${apiBaseUrl}/beatMaker/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

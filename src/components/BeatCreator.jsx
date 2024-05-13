@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import '../styles/BeatCreator.css'
- 
+import { apiBaseUrl } from '../config'
+
 const BeatCreator = ({ id }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [tempo, setTempo] = useState(120) // Beats per minute (BPM)
@@ -15,7 +16,7 @@ const BeatCreator = ({ id }) => {
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/beatMaker/${id}`)
+        const response = await axios.get(`${apiBaseUrl}/beatMaker/${id}`)
         setSounds(response.data.drumPads)
         // Set beatGrid only after sounds have been fetched
         setBeatGrid(

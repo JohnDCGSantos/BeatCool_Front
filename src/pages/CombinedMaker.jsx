@@ -4,6 +4,8 @@ import '../styles/createCombined.css'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
+import { apiBaseUrl } from '../config'
+
 const CombinedMaker = () => {
   const [name, setName] = useState('')
   const [drumKits, setDrumKits] = useState([])
@@ -26,7 +28,7 @@ const CombinedMaker = () => {
           
           
           
-          const response = await axios.get('http://localhost:5005/drumkits')
+          const response = await axios.get(`${apiBaseUrl}/drumkits`)
           const userDrumKits = response.data.filter(drumKit => drumKit.user === user._id);
           setDrumKits(userDrumKits);}
         } catch (error) {
@@ -38,7 +40,7 @@ const CombinedMaker = () => {
       const fetchBeatMakers = async () => {
         try {
           if (user){
-          const response = await axios.get('http://localhost:5005/beatmaker')
+          const response = await axios.get(`${apiBaseUrl}/beatmaker`)
           const userBeatMakers = response.data.filter(beatMaker => beatMaker.user === user._id);
           setBeatMakers(userBeatMakers)
           }
@@ -62,7 +64,7 @@ const CombinedMaker = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:5005/beatMakerAndDrumKit', {
+      const response = await axios.post(`${apiBaseUrl}/beatMakerAndDrumKit`, {
         name,
         drumKits: selectedDrumKits,
         beatMakers: selectedBeatMakers,
