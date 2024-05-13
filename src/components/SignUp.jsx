@@ -24,9 +24,10 @@ const nav=useNavigate()
        
       }
       const handleSignUp = async (event) => {
-        event.preventDefault();
+        event.preventDefault(); console.log(apiBaseUrl)
         // Handle form submission
-        try {
+        try {       
+
             const response= await axios.post(`${apiBaseUrl}/auth/signup`,{email, password, userName})
 console.log('here is your signup response',response)
         } catch (error) {

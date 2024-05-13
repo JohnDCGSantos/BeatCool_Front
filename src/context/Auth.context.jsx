@@ -1,5 +1,7 @@
 import { createContext, useState,useEffect } from "react";
 import axios from "axios";
+import { apiBaseUrl } from '../config'
+
 const AuthContext= createContext()
 
 const AuthContextWrapper=({children})=> {
@@ -12,7 +14,7 @@ const AuthContextWrapper=({children})=> {
         console.log('here is your token from local storage', tokenInStorage)
         if(tokenInStorage){
             try {
-            const {data}= await axios.get('http://localhost:5005/auth/verify',{
+            const {data}= await axios.get(`${apiBaseUrl}/auth/verify`,{
                 headers:{authorization:`Bearer ${tokenInStorage}`}
             })
             console.log('here is the data from the token in storage', data)
