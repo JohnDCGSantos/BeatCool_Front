@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from 'react'
+import { useState,  useEffect, useContext } from 'react'
 import Sounds from '../components/Sounds'
 import CreateDrumKit from '../components/CreateDrumKit'
 import CreateBeat from '../components/CreateBeat'
@@ -11,18 +11,18 @@ const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [sounds, setSounds] = useState([])
   const [selectedSounds, setSelectedSounds] = useState([])
-  const audioRefs = useRef({})
+  //const audioRefs = useRef({})
   const [selectedOption, setSelectedOption] = useState('')
   const {authenticateUser, user}=useContext(AuthContext)
 const nav =useNavigate()
 
-const preloadSounds = sounds => {
+/*const preloadSounds = sounds => {
   sounds.forEach(sound => {
     const audio = new Audio(sound.soundUrl)
     audio.preload = 'auto'
     audioRefs.current[sound.soundUrl] = audio
   })
-}
+}*/
   useEffect(() => {
     const fetchSounds = async () => {
       try {
@@ -31,7 +31,6 @@ const preloadSounds = sounds => {
           const parsed = await response.json()
           console.log(parsed)
           setSounds(parsed)
-          preloadSounds(parsed)
           setIsLoading(false) // Set loading state to false once sounds are loaded
         } else {
           console.error('Error fetching sounds:', response.status)

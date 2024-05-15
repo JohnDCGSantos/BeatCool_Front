@@ -1,18 +1,44 @@
 import { useEffect, useState } from 'react'
 import '../styles/create.css'
-
+import { useRef } from 'react'
 function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('Basico')
   const [selectedCategory, setSelectedCategory] = useState('Basic')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
+  const audioRefs = useRef({})
 
   /*const handleOptionChange = option => {
     setSelectedOption(option)
     setSelectedGenre('')
     setSelectedCategory('')
   }*/
+  useEffect(() => {
+    const preloadSounds = () => {
+      const soundsToPreload = sounds
+        .filter((sound) => sound.genre === selectedGenre && sound.category === selectedCategory)
+        .map((sound) => sound.soundUrl);
 
+      soundsToPreload.forEach((soundUrl) => {
+        const audio = new Audio(soundUrl);
+        audio.preload = 'auto';
+        audioRefs.current[soundUrl] = audio;
+      });
+    };
+
+    preloadSounds();
+  }, [sounds, selectedGenre, selectedCategory]);
+
+  // Preload selected sounds
+  useEffect(() => {
+    selectedSounds.forEach((sound) => {
+      if (!audioRefs.current[sound.soundUrl]) {
+        const audio = new Audio(sound.soundUrl);
+        audio.preload = 'auto';
+        audioRefs.current[sound.soundUrl] = audio;
+      }
+    });
+  }, [selectedSounds]);
   const handleGenreChange = event => {
     setSelectedGenre(event.target.value)
     setSelectedCategory('') // Reset selected category when genre changes
