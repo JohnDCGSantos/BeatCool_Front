@@ -46,13 +46,12 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [keyAssignments, drumSounds, handleSoundClick])
+
+  
   const handleClick = (soundUrl) => {
     handleSoundClick(soundUrl);
-    setPressedKey(soundUrl); // Set clicked sound state
-    setTimeout(() => setPressedKey(null), 0);
 
   }
-
   return (
     <div className="drum-kit-sounds" id="drumKitSounds">
       {drumSounds &&
