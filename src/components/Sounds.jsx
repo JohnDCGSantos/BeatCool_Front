@@ -205,6 +205,7 @@ function Sounds({ sounds, handleSoundSelect, selectedSounds }) {
   const [selectedGenre, setSelectedGenre] = useState('Basico');
   const [selectedCategory, setSelectedCategory] = useState('Basic');
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
+  const [playingSound, setPlayingSound] = useState(null); // Reference to the currently playing sound
   const audioRefs = useRef({});
 
   useEffect(() => {
@@ -235,9 +236,7 @@ function Sounds({ sounds, handleSoundSelect, selectedSounds }) {
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
-  const handleTouchStart = (soundUrl) => {
-    playSound(soundUrl);
-};
+
   const handleCheckboxChange = (event, sound) => {
     event.stopPropagation(); // Prevent event bubbling to parent elements
     
@@ -254,10 +253,23 @@ function Sounds({ sounds, handleSoundSelect, selectedSounds }) {
     const audio = new Audio(soundUrl);
     audio.currentTime = 0;
     audio.play().catch(error => console.error(`Failed to play sound: ${error}`));
+    return audio; // Return the audio element for reference
   };
 
   const handlePlayButtonClick = (soundUrl) => {
-    playSound(soundUrl);
+    if (playingSound) {
+      playingSound.pause(); // Pause the currently playing sound, if any
+    }
+    const newSound = playSound(soundUrl);
+    setPlayingSound(newSound); // Set the new sound as the currently playing sound
+  };
+
+  const handleTouchStart = (soundUrl) => {
+    if (playingSound) {
+      playingSound.pause(); // Pause the currently playing sound, if any
+    }
+    const newSound = playSound(soundUrl);
+    setPlayingSound(newSound); // Set the new sound as the currently playing sound
   };
 
   const groupedSounds = {};
@@ -313,7 +325,6 @@ function Sounds({ sounds, handleSoundSelect, selectedSounds }) {
                       className='selected-sound-item'
                       type="button" 
                       onTouchStart={() => handleTouchStart(sound.soundUrl)}
-
                     >
                       <span>{sound.name}</span>
                     </button>
@@ -352,7 +363,6 @@ function Sounds({ sounds, handleSoundSelect, selectedSounds }) {
                     type="button" 
                     onClick={() => handlePlayButtonClick(sound.soundUrl)}
                     onTouchStart={() => handleTouchStart(sound.soundUrl)}
-
                   >
                     <span>{sound.name}</span>
                   </button>
@@ -367,4 +377,3 @@ function Sounds({ sounds, handleSoundSelect, selectedSounds }) {
 }
 
 export default Sounds;
-
