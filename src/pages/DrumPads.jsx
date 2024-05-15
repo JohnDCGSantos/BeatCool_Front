@@ -15,6 +15,14 @@ const DrumPads = () => {
   const [selectedOption, setSelectedOption] = useState('')
   const {authenticateUser, user}=useContext(AuthContext)
 const nav =useNavigate()
+
+const preloadSounds = sounds => {
+  sounds.forEach(sound => {
+    const audio = new Audio(sound.soundUrl)
+    audio.preload = 'auto'
+    audioRefs.current[sound.soundUrl] = audio
+  })
+}
   useEffect(() => {
     const fetchSounds = async () => {
       try {
@@ -36,9 +44,13 @@ const nav =useNavigate()
     }
     fetchSounds()
   }, [])
+
+
 useEffect(()=>{
 authenticateUser()
 },[])
+
+
   const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {
       const isSelected = prevSelected.some(prevSound => prevSound.soundUrl === sound.soundUrl)
@@ -52,13 +64,7 @@ authenticateUser()
     })
   }
 
-  const preloadSounds = sounds => {
-    sounds.forEach(sound => {
-      const audio = new Audio(sound.soundUrl)
-      audio.preload = 'auto'
-      audioRefs.current[sound.soundUrl] = audio
-    })
-  }
+  
 
 
   const handleCombo = () => {
@@ -66,33 +72,28 @@ authenticateUser()
   }
 
 
-  const playSound = soundUrl => {
+  /*const playSound = soundUrl => {
     const audio = audioRefs.current[soundUrl]
     if (audio) {
       audio.currentTime = 0
       audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
     }
-  }
+  }*/
 
-  const handleSoundClick = soundUrl => {
+  /*const handleSoundClick = soundUrl => {
     playSound(soundUrl)
     
-  }
+  }*/
 
   const handleOptionSelect = option => {
     setSelectedOption(option)
   }
 
   return (
-   
-    
-
     <div className='imageCreate' >
- <div className= 'shadows'>
-    <div className='create'>
-    
-   
-    <div className='mainContainer'>
+     <div className= 'shadows'>
+      <div className='create'>
+       <div className='mainContainer'>
       {isLoading ? (
         <p>Loading sounds...</p>
       ) : (
@@ -115,7 +116,6 @@ authenticateUser()
               <>
                 <Sounds
                   sounds={sounds}
-                  handleSoundClick={handleSoundClick}
                   handleSoundSelect={handleSoundSelect}
                   selectedSounds={selectedSounds}
                 />
@@ -125,7 +125,6 @@ authenticateUser()
               <>
                 <Sounds
                   sounds={sounds}
-                  handleSoundClick={handleSoundClick}
                   handleSoundSelect={handleSoundSelect}
                   selectedSounds={selectedSounds}
                 />
@@ -135,8 +134,10 @@ authenticateUser()
           </div>
         </div>
       )}
-    </div>
- </div>  </div>  </div> )
+       </div>
+      </div> 
+     </div>
+    </div> )
 }
 
 export default DrumPads

@@ -17,7 +17,13 @@ const DrumKit = ({ id }) => {
   //const [recordedSequence, setRecordedSequence] = useState([])
  // const [isPlayingSequence, setIsPlayingSequence] = useState(false)
  // const timeoutIdsRef = useRef({})
-
+const preloadSounds = drumSounds => {
+    drumSounds.forEach(drumSound => {
+      const audio = new Audio(drumSound.soundUrl)
+      audio.preload = 'auto'
+      audioRefs.current[drumSound.soundUrl] = audio
+    })
+  }
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
@@ -33,13 +39,7 @@ const DrumKit = ({ id }) => {
     fetchDrumKit()
   }, [id])
 
-  const preloadSounds = drumSounds => {
-    drumSounds.forEach(drumSound => {
-      const audio = new Audio(drumSound.soundUrl)
-      audio.preload = 'auto'
-      audioRefs.current[drumSound.soundUrl] = audio
-    })
-  }
+  
 
   const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {

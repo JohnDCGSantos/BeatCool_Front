@@ -49,7 +49,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
   const handleClick = (soundUrl) => {
     handleSoundClick(soundUrl);
     setPressedKey(soundUrl); // Set clicked sound state
-    setTimeout(() => setPressedKey(null), 200);
+    setTimeout(() => setPressedKey(null), 0);
 
   }
 

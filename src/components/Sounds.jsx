@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../styles/create.css'
 
-function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds }) {
+function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('Basico')
   const [selectedCategory, setSelectedCategory] = useState('Basic')
@@ -20,14 +20,15 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
   useEffect(() => {
     handleGenreChange
   }, [sounds])
+  
   const handleCategoryChange = event => {
     setSelectedCategory(event.target.value)
   }
 
-  const handleSoundNameClick = (event, soundUrl) => {
+  /*const handleSoundNameClick = (event, soundUrl) => {
     event.stopPropagation() // Prevent event bubbling to parent elements
     handleSoundClick(soundUrl)
-  }
+  }*/
 
   const handleCheckboxChange = (event, sound) => {
     event.stopPropagation(); // Prevent event bubbling to parent elements
@@ -40,10 +41,10 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
     setMaxSoundsReached(false); // Reset the state if the limit is not reached
     handleSoundSelect(sound);
   }
-  const handleSelectedSoundClick = (event, soundUrl) => {
+  /*const handleSelectedSoundClick = (event, soundUrl) => {
     event.stopPropagation() // Prevent event bubbling to parent elements
     playSound(soundUrl)
-  }
+  }*/
 
   const playSound = soundUrl => {
     const audio = new Audio(soundUrl)
@@ -115,7 +116,10 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
                       <span>{sound.name}</span>
                       
                     </button>
-                    <span onClick={event => handleSoundNameClick(event, sound.soundUrl)}></span>
+
+
+                    
+                  {/*  <span onClick={event => handleSoundNameClick(event, sound.soundUrl)}></span>*/}
                     <div className='form-check form-switch'>
                       <input
                         className='form-check-input'
@@ -157,7 +161,7 @@ function Sounds({ sounds, handleSoundClick, handleSoundSelect, selectedSounds })
                     >
                      <span> {sound.name}</span>
                     </button>
-                    <span onClick={event => handleSelectedSoundClick(event, sound.soundUrl)}></span>
+                     {/*<span onClick={event => handleSelectedSoundClick(event, sound.soundUrl)}></span>*/}
                   </li>
                 ))}
               
