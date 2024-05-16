@@ -2,42 +2,17 @@ import { useEffect, useState, useRef } from 'react'
 import '../styles/create.css'
 function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
-  const [selectedGenre, setSelectedGenre] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedGenre, setSelectedGenre] = useState('Basico')
+  const [selectedCategory, setSelectedCategory] = useState('Basic')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
   const audioRefs = useRef({})
-  const [soundsLoaded, setSoundsLoaded] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
 
   /*const handleOptionChange = option => {
     setSelectedOption(option)
     setSelectedGenre('')
     setSelectedCategory('')
   }*/
-  useEffect(() => {
-    // Preload sounds only when both genre and category are selected
-    if (selectedGenre && selectedCategory) {
-      preloadSounds(sounds.filter(sound => sound.genre === selectedGenre && sound.category === selectedCategory));
-    }
-  }, [selectedGenre, selectedCategory]); 
-
-  const preloadSounds = async (selectedSounds) => {
-    const audioPromises = selectedSounds.map((sound) => {
-      return new Promise((resolve) => {
-        const audio = new Audio(sound.soundUrl);
-        audio.addEventListener('loadeddata', () => {
-          audioRefs.current[sound.soundUrl] = audio;
-
-          resolve();
-        });
-      });
-    });
-
-    await Promise.all(audioPromises)
-   
-    setSoundsLoaded(true)
-    setIsLoading(false);
-  };
+  
   const handleGenreChange = event => {
     setSelectedGenre(event.target.value)
     setSelectedCategory('') // Reset selected category when genre changes
@@ -54,7 +29,13 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     event.stopPropagation() // Prevent event bubbling to parent elements
     handleSoundClick(soundUrl)
   }*/
-
+  const preloadSounds = sounds => {
+    sounds.forEach(sound => {
+      const audio = new Audio(sound.soundUrl)
+      audio.preload = 'auto'
+      audioRefs.current[sound.soundUrl] = audio
+    })
+  }
   const handleCheckboxChange = (event, sound) => {
     event.stopPropagation(); // Prevent event bubbling to parent elements
     
@@ -72,11 +53,14 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   }*/
 
   const playSound = soundUrl => {
-    const audio = audioRefs.current[soundUrl];
+    const audio = new Audio(soundUrl)
     audio.currentTime = 0
     audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
   }
-
+  
+  useEffect(()=>{
+   preloadSounds(selectedSounds)
+    },[handleSoundSelect])
   const handlePlayButtonClick = soundUrl => {
     playSound(soundUrl)
   }
@@ -92,7 +76,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     }
     groupedSounds[sound.genre][sound.category].push(sound)
   })
-  
+
   return (
     <div>
       <div className='selectCards'>
@@ -124,7 +108,8 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
             </div>
           )}
         </div>
-{isLoading?('LOADING'):(        <div className='availableSounds'>
+
+        <div className='availableSounds'>
           {selectedGenre && selectedCategory && (
             <>
               <h3>Select Sounds:</h3>
@@ -165,7 +150,6 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
             </>
           )}
         </div>
-)}
         {maxSoundsReached && (
   <p style={{ color: 'red' }}>You can only select a maximum of 27 sounds.</p>
 )}
