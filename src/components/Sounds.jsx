@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import '../styles/create.css'
 function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
@@ -6,6 +6,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   const [selectedCategory, setSelectedCategory] = useState('Basic')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
   const audioRefs = useRef({})
+  const [preloadedSounds, setPreloadedSounds] = useState({});
 
   /*const handleOptionChange = option => {
     setSelectedOption(option)
@@ -29,13 +30,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     event.stopPropagation() // Prevent event bubbling to parent elements
     handleSoundClick(soundUrl)
   }*/
-  const preloadSounds = sounds => {
-    sounds.forEach(sound => {
-      const audio = new Audio(sound.soundUrl)
-      audio.preload = 'auto'
-      audioRefs.current[sound.soundUrl] = audio
-    })
-  }
+ 
   const handleCheckboxChange = (event, sound) => {
     event.stopPropagation(); // Prevent event bubbling to parent elements
     
@@ -58,9 +53,30 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
   }
   
-  useEffect(()=>{
-   preloadSounds(selectedSounds)
-    },[handleSoundSelect])
+  const preloadSounds = useCallback((genre, category, soundsToPreload) => {
+    soundsToPreload
+      .filter(sound => sound.genre === genre && sound.category === category)
+      .forEach(sound => {
+        if (!preloadedSounds[sound.soundUrl]) {
+          const audio = new Audio(sound.soundUrl);
+          audio.preload = 'auto';
+          audio.load(); // Trigger preload
+          setPreloadedSounds(prevPreloadedSounds => ({
+            ...prevPreloadedSounds,
+            [sound.soundUrl]: true,
+          }));
+        }
+      });
+  }, [preloadedSounds]);
+  
+  // Call preloadSounds when genre or category changes
+  useEffect(() => {
+    if (selectedGenre && selectedCategory) {
+      preloadSounds(selectedGenre, selectedCategory, sounds);
+    }
+  }, [selectedGenre, selectedCategory, sounds, preloadSounds]);
+  
+
   const handlePlayButtonClick = soundUrl => {
     playSound(soundUrl)
   }

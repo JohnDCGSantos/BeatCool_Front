@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from 'react'
+import { useState, useRef, useEffect, useContext,useCallback } from 'react'
 import Sounds from '../components/Sounds'
 import CreateDrumKit from '../components/CreateDrumKit'
 import CreateBeat from '../components/CreateBeat'
@@ -10,6 +10,7 @@ import { apiBaseUrl } from '../config'
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
  const [soundsLoaded, setSoundsLoaded] = useState(false);
+ const [preloadedSounds, setPreloadedSounds] = useState({});
 
   const [sounds, setSounds] = useState([])
   const [selectedSounds, setSelectedSounds] = useState([])
@@ -27,6 +28,7 @@ const nav =useNavigate()
           const parsed = await response.json()
           console.log(parsed)
           setSounds(parsed)
+          //preloadSounds(parsed)
          setIsLoading(false)
         } else {
           console.error('Error fetching sounds:', response.status)
@@ -40,8 +42,19 @@ const nav =useNavigate()
     fetchSounds()
   }, [])
 
-  
-  
+  /*const preloadSounds = useCallback((soundsToPreload) => {
+    soundsToPreload.forEach((sound) => {
+      if (!preloadedSounds[sound.soundUrl]) {
+        const audio = new Audio(sound.soundUrl);
+        audio.preload = 'auto';
+        audio.load(); // Trigger preload
+        setPreloadedSounds((prevPreloadedSounds) => ({
+          ...prevPreloadedSounds,
+          [sound.soundUrl]: true,
+        }));
+      }
+    });
+  }, [preloadedSounds]);*/
 useEffect(()=>{
 authenticateUser()
 },[])
@@ -84,7 +97,9 @@ authenticateUser()
   const handleOptionSelect = option => {
     setSelectedOption(option)
   }
-  
+  /*if (!soundsLoaded) {
+    return <div>Loading sounds...</div>;
+  }*/
   return (
     <div className='imageCreate' >
      <div className= 'shadows'>
