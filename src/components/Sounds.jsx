@@ -2,8 +2,8 @@ import { useEffect, useState, useRef } from 'react'
 import '../styles/create.css'
 function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
-  const [selectedGenre, setSelectedGenre] = useState('Basico')
-  const [selectedCategory, setSelectedCategory] = useState('Basic')
+  const [selectedGenre, setSelectedGenre] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
   const audioRefs = useRef({})
   const [soundsLoaded, setSoundsLoaded] = useState(false);
@@ -15,11 +15,11 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     setSelectedCategory('')
   }*/
   useEffect(() => {
-    // Preload sounds when both genre and category are selected
+    // Preload sounds only when both genre and category are selected
     if (selectedGenre && selectedCategory) {
       preloadSounds(sounds.filter(sound => sound.genre === selectedGenre && sound.category === selectedCategory));
     }
-  }, [selectedGenre, selectedCategory]);
+  }, [selectedGenre, selectedCategory, sounds]); 
 
   const preloadSounds = async (selectedSounds) => {
     const audioPromises = selectedSounds.map((sound) => {
@@ -35,6 +35,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     });
 
     await Promise.all(audioPromises)
+   
     setSoundsLoaded(true)
     setIsLoading(false);
   };
@@ -92,9 +93,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     }
     groupedSounds[sound.genre][sound.category].push(sound)
   })
-  if (!soundsLoaded) {
-    return <div>Loading sounds...</div>;
-  }
+  
   return (
     <div>
       <div className='selectCards'>
