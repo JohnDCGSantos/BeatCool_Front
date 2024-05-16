@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from 'react'
+import { useState, /*useRef,*/ useEffect, useContext } from 'react'
 import Sounds from '../components/Sounds'
 import CreateDrumKit from '../components/CreateDrumKit'
 import CreateBeat from '../components/CreateBeat'
@@ -9,11 +9,11 @@ import { apiBaseUrl } from '../config'
 
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
-  const [soundsLoaded, setSoundsLoaded] = useState(false);
+ // const [soundsLoaded, setSoundsLoaded] = useState(false);
 
   const [sounds, setSounds] = useState([])
   const [selectedSounds, setSelectedSounds] = useState([])
-  const audioRefs = useRef({})
+  //const audioRefs = useRef({})
   const [selectedOption, setSelectedOption] = useState('')
   const {authenticateUser, user}=useContext(AuthContext)
 const nav =useNavigate()
@@ -27,8 +27,8 @@ const nav =useNavigate()
           const parsed = await response.json()
           console.log(parsed)
           setSounds(parsed)
-          preloadSounds(parsed)
-
+         // preloadSounds(parsed)
+         setIsLoading(false)
         } else {
           console.error('Error fetching sounds:', response.status)
           setIsLoading(false) // Set loading state to false if there's an error
@@ -41,7 +41,7 @@ const nav =useNavigate()
     fetchSounds()
   }, [])
 
-  const preloadSounds = async (sounds) => {
+  /*const preloadSounds = async (sounds) => {
     const audioPromises = sounds.map((sound) => {
       return new Promise((resolve) => {
         const audio = new Audio(sound.soundUrl);
@@ -56,7 +56,7 @@ const nav =useNavigate()
     await Promise.all(audioPromises);
     setSoundsLoaded(true)
     setIsLoading(false);
-  };
+  };*/
 useEffect(()=>{
 authenticateUser()
 },[])
@@ -99,9 +99,9 @@ authenticateUser()
   const handleOptionSelect = option => {
     setSelectedOption(option)
   }
-  if (!soundsLoaded) {
+  /*if (!soundsLoaded) {
     return <div>Loading sounds...</div>;
-  }
+  }*/
   return (
     <div className='imageCreate' >
      <div className= 'shadows'>

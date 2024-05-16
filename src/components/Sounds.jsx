@@ -1,17 +1,43 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import '../styles/create.css'
 function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('Basico')
   const [selectedCategory, setSelectedCategory] = useState('Basic')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
+  const audioRefs = useRef({})
+  const [soundsLoaded, setSoundsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
 
   /*const handleOptionChange = option => {
     setSelectedOption(option)
     setSelectedGenre('')
     setSelectedCategory('')
   }*/
-  
+  useEffect(() => {
+    // Preload sounds when both genre and category are selected
+    if (selectedGenre && selectedCategory) {
+      preloadSounds(sounds.filter(sound => sound.genre === selectedGenre && sound.category === selectedCategory));
+    }
+  }, [selectedGenre, selectedCategory]);
+
+  const preloadSounds = async (selectedSounds) => {
+    const audioPromises = selectedSounds.map((sound) => {
+      return new Promise((resolve) => {
+        const audio = new Audio(sound.soundUrl);
+        audio.preload = 'auto';
+        audio.addEventListener('loadeddata', () => {
+          audioRefs.current[sound.soundUrl] = audio;
+
+          resolve();
+        });
+      });
+    });
+
+    await Promise.all(audioPromises)
+    setSoundsLoaded(true)
+    setIsLoading(false);
+  };
   const handleGenreChange = event => {
     setSelectedGenre(event.target.value)
     setSelectedCategory('') // Reset selected category when genre changes
@@ -66,7 +92,9 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     }
     groupedSounds[sound.genre][sound.category].push(sound)
   })
-
+  if (!soundsLoaded) {
+    return <div>Loading sounds...</div>;
+  }
   return (
     <div>
       <div className='selectCards'>
@@ -98,8 +126,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
             </div>
           )}
         </div>
-
-        <div className='availableSounds'>
+{isLoading?('LOADING'):(        <div className='availableSounds'>
           {selectedGenre && selectedCategory && (
             <>
               <h3>Select Sounds:</h3>
@@ -140,6 +167,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
             </>
           )}
         </div>
+)}
         {maxSoundsReached && (
   <p style={{ color: 'red' }}>You can only select a maximum of 27 sounds.</p>
 )}
