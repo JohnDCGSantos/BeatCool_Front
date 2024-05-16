@@ -19,13 +19,13 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     if (selectedGenre && selectedCategory) {
       preloadSounds(sounds.filter(sound => sound.genre === selectedGenre && sound.category === selectedCategory));
     }
-  }, [selectedGenre, selectedCategory, sounds]); 
+  }, [selectedGenre, selectedCategory]); 
 
   const preloadSounds = async (selectedSounds) => {
     const audioPromises = selectedSounds.map((sound) => {
       return new Promise((resolve) => {
         const audio = new Audio(sound.soundUrl);
-        audio.preload = 'auto';
+        audio.preload = 'metadata';
         audio.addEventListener('loadeddata', () => {
           audioRefs.current[sound.soundUrl] = audio;
 
@@ -73,7 +73,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   }*/
 
   const playSound = soundUrl => {
-    const audio = new Audio(soundUrl)
+    const audio = audioRefs.current[soundUrl];
     audio.currentTime = 0
     audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
   }
