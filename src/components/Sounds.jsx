@@ -25,7 +25,6 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     const audioPromises = selectedSounds.map((sound) => {
       return new Promise((resolve) => {
         const audio = new Audio(sound.soundUrl);
-        audio.preload = 'metadata';
         audio.addEventListener('loadeddata', () => {
           audioRefs.current[sound.soundUrl] = audio;
 
