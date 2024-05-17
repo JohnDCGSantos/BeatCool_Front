@@ -125,7 +125,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
     const handleTouchStart = (event, soundUrl) => {
       const audio = new Audio(soundUrl)
       if (audio) {
-        audio.currentTime = 0
+        
         audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
       }
 
