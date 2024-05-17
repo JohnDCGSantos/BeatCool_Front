@@ -123,7 +123,6 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
 
   useEffect(() => {
     const handleTouchStart = (event, soundUrl) => {
-      event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
       handleSoundClick(soundUrl);
 
     };
