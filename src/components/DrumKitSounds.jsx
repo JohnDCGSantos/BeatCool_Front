@@ -123,7 +123,11 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
 
   useEffect(() => {
     const handleTouchStart = (event, soundUrl) => {
-      handleSoundClick(soundUrl);
+      const audio = new Audio(soundUrl)
+      if (audio) {
+        audio.currentTime = 0
+        audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
+      }
 
     };
 
