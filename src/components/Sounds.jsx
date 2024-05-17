@@ -5,8 +5,6 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   const [selectedGenre, setSelectedGenre] = useState('Basico')
   const [selectedCategory, setSelectedCategory] = useState('Basic')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
-  const audioRefs = useRef({})
-  const [preloadedSounds, setPreloadedSounds] = useState({});
 
   /*const handleOptionChange = option => {
     setSelectedOption(option)
@@ -53,30 +51,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
   }
   
-  const preloadSounds = useCallback((genre, category, soundsToPreload) => {
-    soundsToPreload
-      .filter(sound => sound.genre === genre && sound.category === category)
-      .forEach(sound => {
-        if (!preloadedSounds[sound.soundUrl]) {
-          const audio = new Audio(sound.soundUrl);
-          audio.preload = 'auto';
-          audio.load(); // Trigger preload
-          setPreloadedSounds(prevPreloadedSounds => ({
-            ...prevPreloadedSounds,
-            [sound.soundUrl]: true,
-          }));
-        }
-      });
-  }, [preloadedSounds]);
   
-  // Call preloadSounds when genre or category changes
-  useEffect(() => {
-    if (selectedGenre && selectedCategory) {
-      preloadSounds(selectedGenre, selectedCategory, sounds);
-    }
-  }, [selectedGenre, selectedCategory, sounds, preloadSounds]);
-  
-
   const handlePlayButtonClick = soundUrl => {
     playSound(soundUrl)
   }
