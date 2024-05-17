@@ -124,8 +124,9 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
   useEffect(() => {
     const handleTouchStart = (event, soundUrl) => {
       const audio = new Audio(soundUrl)
+      audio.preload = 'auto';
+
       if (audio) {
-        
         audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
       }
 
