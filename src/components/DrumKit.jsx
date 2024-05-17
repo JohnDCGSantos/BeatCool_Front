@@ -10,27 +10,22 @@ import { apiBaseUrl } from '../config'
 const DrumKit = ({ id }) => {
   const [drumKit, setDrumKit] = useState(null)
   const [drumSounds, setDrumSounds] = useState([])
-  const [selectedSounds, setSelectedSounds] = useState([])
+ // const [selectedSounds, setSelectedSounds] = useState([])
   //const navigate=useNavigate()
   const audioRefs = useRef({})
   //const [recording, setRecording] = useState(false)
   //const [recordedSequence, setRecordedSequence] = useState([])
  // const [isPlayingSequence, setIsPlayingSequence] = useState(false)
  // const timeoutIdsRef = useRef({})
-const preloadSounds = drumSounds => {
-    drumSounds.forEach(drumSound => {
-      const audio = new Audio(drumSound.soundUrl)
-      audio.preload = 'auto'
-      audioRefs.current[drumSound.soundUrl] = audio
-    })
-  }
+const[isLoading, setIsLoading]=useState(true)
+
+ 
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
         const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`)
         setDrumKit(response.data)
-        preloadSounds(response.data.drumPads)
-        setDrumSounds(response.data.drumPads)
+        setDrumSounds(response.data.drumPads)  
       } catch (error) {
         console.error('Error fetching drum kit:', error)
       }
@@ -39,9 +34,21 @@ const preloadSounds = drumSounds => {
     fetchDrumKit()
   }, [id])
 
-  
+  const preloadSounds = async drumSounds => {
+  await  drumSounds.forEach(drumSound => {
+      const audio = new Audio(drumSound.soundUrl)
+      audio.preload = 'auto'
+      audioRefs.current[drumSound.soundUrl] = audio 
+      setIsLoading(false)
 
-  const handleSoundSelect = sound => {
+    })
+  }
+useEffect(()=>{
+              preloadSounds(drumSounds)
+
+},[drumSounds])
+
+  /*const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {
       const isSelected = prevSelected.some(prevSound => prevSound.soundUrl === sound.soundUrl)
       if (isSelected) {
@@ -51,7 +58,7 @@ const preloadSounds = drumSounds => {
       }
     })
   }
-
+*/
   const handleSoundClick = soundUrl => {
     /*if (recording) {
       const timestamp = Date.now()
@@ -59,6 +66,15 @@ const preloadSounds = drumSounds => {
     }*/
     playSound(soundUrl)
     
+  }
+  
+  const handleSoundPreLoadClik = () => {
+    /*if (recording) {
+      const timestamp = Date.now()
+      setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
+    }*/
+   preloadSounds(drumSounds)
+    console.log('cliked', drumSounds)
   }
 
   const playSound = soundUrl => {
@@ -110,18 +126,19 @@ const preloadSounds = drumSounds => {
     }
   }*/
   
-  return (
+  return isLoading?('loading'):(
     
     <div className='playDr'>
                  
+      <button style={{marginTop:'80px'}}onClick={handleSoundPreLoadClik}>hhh</button>
 
       
      
         <DrumKitSounds
           drumSounds={drumSounds}
           handleSoundClick={handleSoundClick}
-          handleSoundSelect={handleSoundSelect}
-          selectedSounds={selectedSounds}
+         // handleSoundSelect={handleSoundSelect}
+         // selectedSounds={selectedSounds}
         />
 
       {/*<RecordedSequences />
