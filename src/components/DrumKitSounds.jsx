@@ -122,29 +122,21 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
   }, [keyAssignments, drumSounds, handleSoundClick]);
 
   useEffect(() => {
-    const handleTouchStart = event => {
+    const handleTouchStart = (event, soundUrl) => {
       event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
-      const soundUrl = Object.keys(keyAssignments).find(
-        url => keyAssignments[url] === event.target.textContent.toLowerCase()
-      );
-      if (soundUrl && drumSounds.find(sound => sound?.soundUrl === soundUrl)) {
-        handleSoundInteraction(soundUrl);
-      }
+      handleSoundClick(soundUrl);
+
     };
 
-    const handleTouchEnd = () => {
-      setPressedKey(null);
-    };
+   
 
     document.querySelectorAll('.drum-sound-btn button').forEach(btn => {
       btn.addEventListener('touchstart', handleTouchStart);
-      btn.addEventListener('touchend', handleTouchEnd);
     });
 
     return () => {
       document.querySelectorAll('.drum-sound-btn button').forEach(btn => {
         btn.removeEventListener('touchstart', handleTouchStart);
-        btn.removeEventListener('touchend', handleTouchEnd);
       });
     };
   }, [keyAssignments, drumSounds, handleSoundClick]);
@@ -154,9 +146,10 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
     setPressedKey(soundUrl);
   };
 
-  const handleClick = soundUrl => {
-    handleSoundInteraction(soundUrl);
-  };
+  const handleClick = (soundUrl) => {
+    handleSoundClick(soundUrl);
+
+  }
 
   return (
     <div className="drum-kit-sounds" id="drumKitSounds">
