@@ -19,34 +19,35 @@ const DrumKit = ({ id }) => {
  // const timeoutIdsRef = useRef({})
 const[isLoading, setIsLoading]=useState(true)
 
- 
+ const preloadSounds = drumSounds => {
+
+    drumSounds.forEach(drumSound => {
+      const audio = new Audio(drumSound.soundUrl)
+     audio.preload = 'auto'
+      audioRefs.current[drumSound.soundUrl] = audio 
+     
+    })      
+
+  }
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
         const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`)
         setDrumKit(response.data)
-        setDrumSounds(response.data.drumPads)  
+        setDrumSounds(response.data.drumPads) 
+        preloadSounds(response.data.drumPads) 
+        setIsLoading(false)
+
       } catch (error) {
         console.error('Error fetching drum kit:', error)
       }
     }
 
     fetchDrumKit()
-  }, [id])
 
-  const preloadSounds = async drumSounds => {
-  await  drumSounds.forEach(drumSound => {
-      const audio = new Audio(drumSound.soundUrl)
-      audio.preload = 'auto'
-      audioRefs.current[drumSound.soundUrl] = audio 
-      setIsLoading(false)
+  }, [])
+  
 
-    })
-  }
-useEffect(()=>{
-              preloadSounds(drumSounds)
-
-},[drumSounds])
 
   /*const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {
@@ -59,12 +60,12 @@ useEffect(()=>{
     })
   }
 */
-  const handleSoundClick = soundUrl => {
+  const handleSoundClick = (drumpad) => {
     /*if (recording) {
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
     }*/
-    playSound(soundUrl)
+    playSound(drumpad)
     
   }
   
@@ -78,8 +79,9 @@ useEffect(()=>{
   }
 
   const playSound = soundUrl => {
-    const audio = audioRefs.current[soundUrl]
+    const audio = new Audio(soundUrl)
     if (audio) {
+      console.log(audio)
       audio.currentTime = 0
       audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
     }

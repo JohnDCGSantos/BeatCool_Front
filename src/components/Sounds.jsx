@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import '../styles/create.css'
 function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
