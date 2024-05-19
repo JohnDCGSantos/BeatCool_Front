@@ -19,24 +19,35 @@ const DrumKit = ({ id }) => {
  // const timeoutIdsRef = useRef({})
 const[isLoading, setIsLoading]=useState(true)
 
- const preloadSounds = drumSounds => {
+const preloadSounds = drumSounds => {
+  // Clear existing preloaded sounds
+  
 
-    drumSounds.forEach(drumSound => {
-      const audio = new Audio(drumSound.soundUrl)
-     audio.preload = 'auto'
-      audioRefs.current[drumSound.soundUrl] = audio 
-     
-    })      
+  let loadedCount = 0;
 
+  drumSounds.forEach(drumSound => {
+    const audio = new Audio(drumSound.soundUrl);
+    audio.preload = 'auto';
+    audio.addEventListener('loadedmetadata', () => {
+      loadedCount++;
+      if (loadedCount === drumSounds.length) {
+        setIsLoading(false); // Set isLoading to false when all sounds are loaded
+      }
+    });
+    audioRefs.current[drumSound.soundUrl] = audio;
+  });
+
+  // If drumSounds array is empty, setIsLoading(false) immediately
+  if (drumSounds.length === 0) {
+    setIsLoading(false);
   }
+};
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
         const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`)
         setDrumKit(response.data)
         setDrumSounds(response.data.drumPads) 
-        preloadSounds(response.data.drumPads) 
-        setIsLoading(false)
 
       } catch (error) {
         console.error('Error fetching drum kit:', error)
@@ -44,11 +55,12 @@ const[isLoading, setIsLoading]=useState(true)
     }
 
     fetchDrumKit()
+             
 
   }, [])
   
 
-
+  
   /*const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {
       const isSelected = prevSelected.some(prevSound => prevSound.soundUrl === sound.soundUrl)
@@ -60,12 +72,12 @@ const[isLoading, setIsLoading]=useState(true)
     })
   }
 */
-  const handleSoundClick = (drumpad) => {
+  const handleSoundClick = (drumSound) => {
     /*if (recording) {
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
     }*/
-    playSound(drumpad)
+    playSound(drumSound)
     
   }
   
@@ -74,18 +86,23 @@ const[isLoading, setIsLoading]=useState(true)
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
     }*/
-   preloadSounds(drumSounds)
+    setIsLoading(true); // Set isLoading to true when preload button is clicked
+
+   preloadSounds(drumSounds)        
     console.log('cliked', drumSounds)
   }
 
   const playSound = soundUrl => {
-    const audio = new Audio(soundUrl)
+    const audio =audioRefs.current[soundUrl]
     if (audio) {
       console.log(audio)
       audio.currentTime = 0
       audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
     }
   }
+
+  
+
   if (!drumKit) {
     return <div>Loading...</div>
   }
@@ -128,11 +145,12 @@ const[isLoading, setIsLoading]=useState(true)
     }
   }*/
   
-  return isLoading?('loading'):(
+  return isLoading?( 
+     <button style={{marginTop:'80px'}}onClick={handleSoundPreLoadClik}>hhh</button>)
+:(
     
     <div className='playDr'>
                  
-      <button style={{marginTop:'80px'}}onClick={handleSoundPreLoadClik}>hhh</button>
 
       
      
