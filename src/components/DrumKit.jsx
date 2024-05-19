@@ -43,9 +43,7 @@ const preloadSounds = drumSounds => {
   }
 };
 
-const preloadSoundsWithDebounce = debounce((sounds) => {
-  preloadSounds(sounds);
-}, 300); // 300 milliseconds debounce interval
+
 
   useEffect(() => {
     const fetchDrumKit = async () => {
@@ -77,14 +75,14 @@ const preloadSoundsWithDebounce = debounce((sounds) => {
     })
   }
 */
-  const handleSoundClick = (drumSound) => {
+  const handleSoundClick = debounce((drumSound) => {
     /*if (recording) {
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
     }*/
     playSound(drumSound)
     
-  }
+  },100)
   
   const handleSoundPreLoadClik = () => {
     /*if (recording) {
@@ -93,7 +91,7 @@ const preloadSoundsWithDebounce = debounce((sounds) => {
     }*/
     setIsLoading(true); // Set isLoading to true when preload button is clicked
 
-    preloadSoundsWithDebounce(drumSounds); // Call the debounced function
+    preloadSounds(drumSounds); // Call the debounced function
     console.log('cliked', drumSounds)
   }
 
