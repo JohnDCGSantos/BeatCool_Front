@@ -5,7 +5,7 @@ import DrumKitSounds from './DrumKitSounds'
 import '../styles/drumKitPage.css'
 import '../styles/create.css'
 import { apiBaseUrl } from '../config'
-
+import debounce from 'lodash.debounce'
 //import { useNavigate } from 'react-router-dom'
 const DrumKit = ({ id }) => {
   const [drumKit, setDrumKit] = useState(null)
@@ -42,6 +42,11 @@ const preloadSounds = drumSounds => {
     setIsLoading(false);
   }
 };
+
+const preloadSoundsWithDebounce = debounce((sounds) => {
+  preloadSounds(sounds);
+}, 300); // 300 milliseconds debounce interval
+
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
@@ -88,7 +93,7 @@ const preloadSounds = drumSounds => {
     }*/
     setIsLoading(true); // Set isLoading to true when preload button is clicked
 
-   preloadSounds(drumSounds)        
+    preloadSoundsWithDebounce(drumSounds); // Call the debounced function
     console.log('cliked', drumSounds)
   }
 

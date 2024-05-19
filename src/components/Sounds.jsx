@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../styles/create.css'
+
 function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('Basico')
