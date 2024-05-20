@@ -5,7 +5,6 @@ import DrumKitSounds from './DrumKitSounds'
 import '../styles/drumKitPage.css'
 import '../styles/create.css'
 import { apiBaseUrl } from '../config'
-import debounce from 'lodash.debounce'
 //import { useNavigate } from 'react-router-dom'
 const DrumKit = ({ id }) => {
   const [drumKit, setDrumKit] = useState(null)
@@ -19,6 +18,26 @@ const DrumKit = ({ id }) => {
  // const timeoutIdsRef = useRef({})
 const[isLoading, setIsLoading]=useState(true)
 
+
+
+
+  useEffect(() => {
+    const fetchDrumKit = async () => {
+      try {
+        const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`)
+        setDrumKit(response.data)
+        setDrumSounds(response.data.drumPads) 
+
+      } catch (error) {
+        console.error('Error fetching drum kit:', error)
+      }
+    }
+
+    fetchDrumKit()
+             
+
+  }, [])
+  
 const preloadSounds = drumSounds => {
   // Clear existing preloaded sounds
   
@@ -43,26 +62,6 @@ const preloadSounds = drumSounds => {
   }
 };
 
-
-
-  useEffect(() => {
-    const fetchDrumKit = async () => {
-      try {
-        const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`)
-        setDrumKit(response.data)
-        setDrumSounds(response.data.drumPads) 
-
-      } catch (error) {
-        console.error('Error fetching drum kit:', error)
-      }
-    }
-
-    fetchDrumKit()
-             
-
-  }, [])
-  
-
   
   /*const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {
@@ -75,14 +74,14 @@ const preloadSounds = drumSounds => {
     })
   }
 */
-  const handleSoundClick = debounce((drumSound) => {
+  const handleSoundClick = drumSound => {
     /*if (recording) {
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
     }*/
     playSound(drumSound)
     
-  },0)
+  }
   
   const handleSoundPreLoadClik = () => {
     /*if (recording) {
