@@ -95,7 +95,7 @@ const preloadSounds = drumSounds => {
     console.log('cliked', drumSounds)
   }
 
-  const playSound = (event,soundUrl) => {
+  const playSound = soundUrl => {
     const audio =audioRefs.current[soundUrl]
     if (audio) {
       console.log(audio)

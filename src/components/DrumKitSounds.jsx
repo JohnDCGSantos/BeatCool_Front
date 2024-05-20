@@ -85,7 +85,6 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
     handleTouchStart(event, drumSound.soundUrl)
   }
   onTouchEnd={(soundUrl) => handleTouchEnd(soundUrl)}
-  style={{ userSelect: 'none' }} // Prevent text selection
 
 >
          
