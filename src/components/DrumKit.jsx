@@ -38,6 +38,7 @@ const[isLoading, setIsLoading]=useState(true)
 
   }, [])
   
+  
 const preloadSounds = drumSounds => {
   // Clear existing preloaded sounds
   
@@ -103,7 +104,26 @@ const preloadSounds = drumSounds => {
     }
   }
 
+  const handleTouchStart = event => {
+    
+    const touch = event.touches[0]; // Get the first touch
+    if (touch) {
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (target && target.dataset.soundUrl) {
+        playSound(target.dataset.soundUrl); // Trigger sound playback
+      }
+    }
+  }
+
+
+useEffect(() => {
+  window.addEventListener('touchstart', handleTouchStart);
   
+  return () => {
+    window.removeEventListener('touchstart', handleTouchStart);
+  };
+}, [playSound]);
+
 
   if (!drumKit) {
     return <div>Loading...</div>
