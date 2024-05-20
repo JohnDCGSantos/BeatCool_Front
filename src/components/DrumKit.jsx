@@ -82,7 +82,7 @@ const preloadSounds = drumSounds => {
     }*/
     playSound(drumSound)
     
-  },300)
+  },0)
   
   const handleSoundPreLoadClik = () => {
     /*if (recording) {
