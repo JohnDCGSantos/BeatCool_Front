@@ -75,7 +75,7 @@ const preloadSounds = drumSounds => {
     })
   }
 */
-  const handleSoundClick = drumSound => {
+  const handleSoundClick = (drumSound) => {
     /*if (recording) {
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
@@ -104,12 +104,14 @@ const preloadSounds = drumSounds => {
     }
   }
 
-  const handleTouchStart = event => {
+  /*const handleTouchStart = event => {
     
     const touch = event.touches[0]; // Get the first touch
     if (touch) {
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
       if (target && target.dataset.soundUrl) {
+        event.preventDefault(); // Prevent default touch behavior
+
         playSound(target.dataset.soundUrl); // Trigger sound playback
       }
     }
@@ -122,7 +124,7 @@ useEffect(() => {
   return () => {
     window.removeEventListener('touchstart', handleTouchStart);
   };
-}, [playSound]);
+}, [playSound]);*/
 
 
   if (!drumKit) {
