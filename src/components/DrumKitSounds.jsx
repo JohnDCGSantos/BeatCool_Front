@@ -6,7 +6,6 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
   const [pressedKey, setPressedKey] = useState(null)
   const handleSoundRelease = () => {
     setPressedKey(null);
-    console.log(pressedKey) // Reset pressed key state when mouse button is released
   };
   useEffect(() => {
     if (drumSounds) {
@@ -25,10 +24,27 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
     }
   }, [drumSounds])
   const handleTouchStart = (event, soundUrl) => {
-    event.preventDefault(); // Prevent default touch behavior
     handleSoundClick(soundUrl);
     setPressedKey(soundUrl); // Set pressed key state
   };
+  const handleTouchEnd = () => {
+    setPressedKey(null); // Reset pressed key state when touch ends
+  };
+  useEffect(() => {
+    // Add passive: false to preventDefault in a touch event listener without causing the warning
+    document.addEventListener('touchstart', (event) => {
+      event.preventDefault();
+
+    }, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchstart', (event) => {
+        event.preventDefault();
+      });
+    };
+  }, []);
+
+
   useEffect(() => {
     const handleKeyDown = event => {
       if (drumSounds) {
@@ -65,11 +81,10 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
 <button
   className={drumSound.soundUrl === pressedKey ? 'pressed' : ''}
   onMouseDown={() => handleSoundClick(drumSound.soundUrl)}
-  onMouseUp={() => handleSoundRelease()}
   onTouchStart={(event) =>
     handleTouchStart(event, drumSound.soundUrl)
   }
-  onTouchEnd={() => handleSoundRelease()}
+  onTouchEnd={(soundUrl) => handleTouchEnd(soundUrl)}
 >
          
               <span>{drumSound?.name}</span>
