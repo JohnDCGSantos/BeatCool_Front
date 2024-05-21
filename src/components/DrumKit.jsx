@@ -18,8 +18,7 @@ const DrumKit = ({ id }) => {
  // const timeoutIdsRef = useRef({})
 const[isLoading, setIsLoading]=useState(true)
 
-const audioContextRef = useRef(new (window.AudioContext || window.webkitAudioContext)());
-  const audioBuffersRef = useRef({});
+
 
 
   useEffect(() => {
@@ -40,18 +39,30 @@ const audioContextRef = useRef(new (window.AudioContext || window.webkitAudioCon
   }, [])
   
   
-  const preloadSounds = async (drumSounds) => {
-    const context = audioContextRef.current;
-    const promises = drumSounds.map(async (drumSound) => {
-      const response = await fetch(drumSound.soundUrl);
-      const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await context.decodeAudioData(arrayBuffer);
-      audioBuffersRef.current[drumSound.soundUrl] = audioBuffer;
-    });
+const preloadSounds = (drumSounds) => {
+  // Clear existing preloaded sounds
+  
 
-    await Promise.all(promises);
+  let loadedCount = 0;
+
+  drumSounds.forEach(drumSound => {
+    const audio =new Audio(drumSound.soundUrl)
+    audio.preload = 'auto';
+    audio.addEventListener('loadedmetadata', () => {
+      loadedCount++;
+      if (loadedCount === drumSounds.length) {
+        setIsLoading(false); // Set isLoading to false when all sounds are loaded
+      }
+    });
+    audioRefs.current[drumSound.soundUrl] = audio;
+  });
+
+  // If drumSounds array is empty, setIsLoading(false) immediately
+  if (drumSounds.length === 0) {
     setIsLoading(false);
-  };
+  }
+};
+
   
   /*const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {
@@ -85,15 +96,14 @@ const audioContextRef = useRef(new (window.AudioContext || window.webkitAudioCon
   }
 
   const playSound = (soundUrl) => {
-    const context = audioContextRef.current;
-    const audioBuffer = audioBuffersRef.current[soundUrl];
-    if (audioBuffer) {
-      const source = context.createBufferSource();
-      source.buffer = audioBuffer;
-      source.connect(context.destination);
-      source.start(0);
+    const originalAudio = audioRefs.current[soundUrl]
+    if (originalAudio) {
+      const audioClone = originalAudio.cloneNode()
+      audioClone.currentTime = 0
+      audioClone.play().catch(error => console.error(`Failed to play sound: ${error}`))
     }
-  };
+  }
+
 
   /*const handleTouchStart = event => {
     
