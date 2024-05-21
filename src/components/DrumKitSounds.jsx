@@ -33,7 +33,8 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
       return;
     }
     setLastTapTime(now);
-playSound(soundUrl);
+
+    handleSoundClick(soundUrl);
     setPressedKey(soundUrl); // Set pressed key state
   };
   const handleTouchEnd = () => {

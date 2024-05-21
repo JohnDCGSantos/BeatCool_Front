@@ -54,7 +54,7 @@ const preloadSounds = drumSounds => {
         setIsLoading(false); // Set isLoading to false when all sounds are loaded
       }
     });
-    audioRefs.current[drumSound.soundUrl] = audio;
+    //audioRefs.current[drumSound.soundUrl] = audio;
   });
 
   // If drumSounds array is empty, setIsLoading(false) immediately
@@ -96,14 +96,12 @@ const preloadSounds = drumSounds => {
   }
 
   const playSound = soundUrl => {
-    const audio =audioRefs.current[soundUrl]
+    const audio =new Audio(soundUrl)
     if (audio) {
       console.log(audio)
-      audio.pause()      
-      audio.volume =0
-
+      
       audio.currentTime = 0
-      audio.volume =0.8
+      
       audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
 
     }
