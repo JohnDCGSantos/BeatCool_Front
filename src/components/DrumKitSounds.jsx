@@ -97,7 +97,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
   onTouchStart={(event) =>
     handleTouchStart(event, drumSound.soundUrl)
   }
-  onTouchEnd={(soundUrl) => handleTouchEnd(soundUrl)}
+  onTouchEnd={handleTouchEnd}
 
 >
          
