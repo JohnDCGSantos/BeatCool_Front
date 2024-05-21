@@ -33,13 +33,17 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
   useEffect(() => {
     // Add passive: false to preventDefault in a touch event listener without causing the warning
     document.addEventListener('touchstart', (event) => {
+      if (event.target.closest('.drum-sound-btn')) {
       event.preventDefault();
-
+      }
     }, { passive: false });
 
     return () => {
       document.removeEventListener('touchstart', (event) => {
-        event.preventDefault();
+        
+        if (event.target.closest('.drum-sound-btn')) {
+          event.preventDefault();
+          }
       });
     };
   }, []);
