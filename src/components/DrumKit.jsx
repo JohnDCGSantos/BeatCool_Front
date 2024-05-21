@@ -18,6 +18,7 @@ const DrumKit = ({ id }) => {
  // const timeoutIdsRef = useRef({})
 const[isLoading, setIsLoading]=useState(true)
 
+const audioPools = useRef({});
 
 
 
@@ -39,29 +40,32 @@ const[isLoading, setIsLoading]=useState(true)
   }, [])
   
   
-const preloadSounds = drumSounds => {
-  // Clear existing preloaded sounds
-  
+  const preloadSounds = (drumSounds) => {
+    let loadedCount = 0;
 
-  let loadedCount = 0;
-
-  drumSounds.forEach(drumSound => {
-    const audio = new Audio(drumSound.soundUrl);
-    audio.preload = 'auto';
-    audio.addEventListener('loadedmetadata', () => {
-      loadedCount++;
-      if (loadedCount === drumSounds.length) {
-        setIsLoading(false); // Set isLoading to false when all sounds are loaded
+    drumSounds.forEach((drumSound) => {
+      const audioElements = [];
+      for (let i = 0; i < 5; i++) {  // Create a pool of 5 audio elements per sound
+        const audio = new Audio(drumSound.soundUrl);
+        audio.preload = 'auto';
+        audio.addEventListener('loadedmetadata', () => {
+          loadedCount++;
+          if (loadedCount === drumSounds.length * 5) {
+            setIsLoading(false);
+          }
+        });
+        audioElements.push(audio);
       }
+      audioPools.current[drumSound.soundUrl] = {
+        elements: audioElements,
+        currentIndex: 0,
+      };
     });
-    audioRefs.current[drumSound.soundUrl] = audio;
-  });
 
-  // If drumSounds array is empty, setIsLoading(false) immediately
-  if (drumSounds.length === 0) {
-    setIsLoading(false);
-  }
-};
+    if (drumSounds.length === 0) {
+      setIsLoading(false);
+    }
+  };
 
   
   /*const handleSoundSelect = sound => {
@@ -95,17 +99,15 @@ const preloadSounds = drumSounds => {
     console.log('cliked', drumSounds)
   }
 
-  const playSound = async soundUrl => {
-    const audio =audioRefs.current[soundUrl]
-    if (audio) {
-      console.log(audio)
-      
-      audio.currentTime = 0
-      
-    await  audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
-
+  const playSound = (soundUrl) => {
+    const pool = audioPools.current[soundUrl];
+    if (pool) {
+      const audio = pool.elements[pool.currentIndex];
+      audio.currentTime = 0;
+      audio.play().catch(error => console.error(`Failed to play sound: ${error}`));
+      pool.currentIndex = (pool.currentIndex + 1) % pool.elements.length;
     }
-  }
+  };
 
   /*const handleTouchStart = event => {
     
