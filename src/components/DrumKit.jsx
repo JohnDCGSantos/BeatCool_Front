@@ -54,7 +54,7 @@ const preloadSounds = drumSounds => {
         setIsLoading(false); // Set isLoading to false when all sounds are loaded
       }
     });
-    //audioRefs.current[drumSound.soundUrl] = audio;
+    audioRefs.current[drumSound.soundUrl] = audio;
   });
 
   // If drumSounds array is empty, setIsLoading(false) immediately
@@ -95,25 +95,17 @@ const preloadSounds = drumSounds => {
     console.log('cliked', drumSounds)
   }
 
-  const playSound = soundUrl => {
-    const audio = audioRefs.current[soundUrl] || new Audio(soundUrl);
-    audio.currentTime = 0;
-  
-    // Check if the audio is already playing
-    if (!audio.paused) {
-      // If it's already playing, pause and reset it
-      audio.pause();
-      audio.currentTime = 0;
+  const playSound = async soundUrl => {
+    const audio =audioRefs.current[soundUrl]
+    if (audio) {
+      console.log(audio)
+      
+      audio.currentTime = 0
+      
+    await  audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
+
     }
-  
-    // Play the sound after a short delay to handle rapid taps
-    setTimeout(() => {
-      audio.play().catch(error => console.error(`Failed to play sound: ${error}`));
-    }, 100); // Adjust the delay as needed
-  
-    // Update the reference
-    audioRefs.current[soundUrl] = audio;
-  };
+  }
 
   /*const handleTouchStart = event => {
     
