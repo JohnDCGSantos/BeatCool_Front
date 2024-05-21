@@ -37,24 +37,31 @@ const[isLoading, setIsLoading]=useState(true)
 
   }, [])
   
+ /* 
+const preloadSounds = async (drumSounds) => {
+  // Clear existing preloaded sounds
   
-  const preloadSounds = (sounds) => {
-    sounds.forEach((sound) => {
-      const audio = new Audio(sound.soundUrl);
-      audio.preload = 'auto';
-      audioRefs.current[sound.soundUrl] = audio;
-      audio.addEventListener('canplaythrough', checkIfAllSoundsLoaded, { once: true });
+
+  let loadedCount = 0;
+
+  drumSounds.forEach( drumSound => {
+    const audio =new Audio(drumSound.soundUrl)
+    audio.preload = 'auto';
+    audio.addEventListener('loadedmetadata', () => {
+      loadedCount++;
+      if (loadedCount === drumSounds.length) {
+        setIsLoading(false); // Set isLoading to false when all sounds are loaded
+      }
     });
-  };
+    audioRefs.current[drumSound.soundUrl] = audio;
+  });
 
-  const checkIfAllSoundsLoaded = () => {
-    for (const audio of Object.values(audioRefs.current)) {
-      if (!audio.readyState === 4) return; // 4 means the audio is completely loaded
-    }
+  // If drumSounds array is empty, setIsLoading(false) immediately
+  if (drumSounds.length === 0) {
     setIsLoading(false);
-  };
-
-
+  }
+};
+*/
   
   /*const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {
@@ -67,34 +74,41 @@ const[isLoading, setIsLoading]=useState(true)
     })
   }
 */
+/*
   const handleSoundClick = (drumSound) => {
     /*if (recording) {
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
     }*/
-    playSound(drumSound)
+    /*playSound(drumSound)
     
-  }
-  
+  }*/
+  /*
   const handleSoundPreLoadClik = () => {
     /*if (recording) {
       const timestamp = Date.now()
       setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
     }*/
-    setIsLoading(true); // Set isLoading to true when preload button is clicked
+   /* setIsLoading(true); // Set isLoading to true when preload button is clicked
 
     preloadSounds(drumSounds); // Call the debounced function
     console.log('cliked', drumSounds)
   }
+*/
+/*
+  const playSound =  soundUrl => {
+    const audio =new Audio(soundUrl)
 
-  const playSound = (soundUrl) => {
-    const audio = audioRefs.current[soundUrl];
     if (audio) {
-      const newAudio = audio.cloneNode(); // Clone the audio node to play multiple instances
-      newAudio.currentTime = 0;
-      newAudio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
+      console.log(audio)
+      
+      audio.currentTime = 0
+      
+      audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
+
     }
-  };
+  }
+*/
   /*const handleTouchStart = event => {
     
     const touch = event.touches[0]; // Get the first touch
@@ -116,6 +130,52 @@ useEffect(() => {
     window.removeEventListener('touchstart', handleTouchStart);
   };
 }, [playSound]);*/
+
+
+
+
+
+const preloadSounds = (sounds) => {
+  sounds.forEach((sound) => {
+    const audio = new Audio(sound.soundUrl)
+    audio.preload = 'auto'
+    audioRefs.current[sound.soundUrl] = audio
+    audio.addEventListener('canplaythrough', checkIfAllSoundsLoaded, { once: true })
+  })
+}
+
+const checkIfAllSoundsLoaded = () => {
+  const allLoaded = Object.values(audioRefs.current).every(audio => audio.readyState >= 4) // 4 means HAVE_ENOUGH_DATA
+  if (allLoaded) {
+    setIsLoading(false)
+  }
+}
+
+const handleSoundClick = (soundUrl) => {
+  playSound(soundUrl)
+}
+
+const handleSoundPreLoadClik = () => {
+  setIsLoading(true)
+  preloadSounds(drumSounds)
+  console.log('Preloading sounds', drumSounds)
+}
+
+const playSound = (soundUrl) => {
+  const audio = audioRefs.current[soundUrl]
+  if (audio) {
+    const newAudio = audio.cloneNode()
+    newAudio.currentTime = 0
+    newAudio.play().catch(error => console.error(`Failed to play sound: ${error}`))
+  }
+}
+
+
+
+
+
+
+
 
 
   if (!drumKit) {
