@@ -99,8 +99,13 @@ const preloadSounds = drumSounds => {
     const audio =audioRefs.current[soundUrl]
     if (audio) {
       console.log(audio)
+      audio.pause()      
+      audio.volume =0
+
       audio.currentTime = 0
+      audio.volume =0.8
       audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
+
     }
   }
 

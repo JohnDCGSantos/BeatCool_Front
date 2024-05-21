@@ -5,6 +5,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
   const [keyAssignments, setKeyAssignments] = useState({})
   const [pressedKey, setPressedKey] = useState(null)
   const [lastTapTime, setLastTapTime] = useState(0);
+  const [touchedKey, setTouchedKey] = useState(null);
 
   const handleSoundRelease = () => {
     setPressedKey(null);
@@ -32,8 +33,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
       return;
     }
     setLastTapTime(now);
-
-    handleSoundClick(soundUrl);
+playSound(soundUrl);
     setPressedKey(soundUrl); // Set pressed key state
   };
   const handleTouchEnd = () => {
@@ -56,7 +56,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
       });
     };
   }, []);
-
+ 
 
   useEffect(() => {
     const handleKeyDown = event => {
@@ -64,10 +64,10 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
         const soundUrl = Object.keys(keyAssignments).find(
           url => keyAssignments[url] === event.key.toLowerCase()
         )
-        if (soundUrl && drumSounds.find(sound => sound?.soundUrl === soundUrl)) {
+        
           handleSoundClick(soundUrl)
           setPressedKey(soundUrl) // Set pressed key state
-        }
+        
       }
     }
 
