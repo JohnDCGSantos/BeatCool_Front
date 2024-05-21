@@ -11,15 +11,12 @@ const DrumKit = ({ id }) => {
   const [drumSounds, setDrumSounds] = useState([])
  // const [selectedSounds, setSelectedSounds] = useState([])
   //const navigate=useNavigate()
-  //const audioRefs = useRef({})
+  const audioRefs = useRef({})
   //const [recording, setRecording] = useState(false)
   //const [recordedSequence, setRecordedSequence] = useState([])
  // const [isPlayingSequence, setIsPlayingSequence] = useState(false)
  // const timeoutIdsRef = useRef({})
 const[isLoading, setIsLoading]=useState(true)
-const audioRef = useRef(new Audio()); // Create a single Audio element
-const soundQueueRef = useRef([]); // Queue for consecutive sound playback
-
 
 
 
@@ -41,14 +38,22 @@ const soundQueueRef = useRef([]); // Queue for consecutive sound playback
   }, [])
   
   
-  const preloadSounds = async (sounds) => {
-    const promises = sounds.map(async (sound) => {
+  const preloadSounds = (sounds) => {
+    sounds.forEach((sound) => {
       const audio = new Audio(sound.soundUrl);
-      await audio.load();
+      audio.preload = 'auto';
+      audioRefs.current[sound.soundUrl] = audio;
+      audio.addEventListener('canplaythrough', checkIfAllSoundsLoaded, { once: true });
     });
-    await Promise.all(promises);
+  };
+
+  const checkIfAllSoundsLoaded = () => {
+    for (const audio of Object.values(audioRefs.current)) {
+      if (!audio.readyState === 4) return; // 4 means the audio is completely loaded
+    }
     setIsLoading(false);
   };
+
 
   
   /*const handleSoundSelect = sound => {
@@ -62,19 +67,15 @@ const soundQueueRef = useRef([]); // Queue for consecutive sound playback
     })
   }
 */
-const handleSoundClick = (soundUrl) => {
-  if (!isLoading) {
-    soundQueueRef.current.push(soundUrl); // Add sound to the queue
-    playNextSound();
+  const handleSoundClick = (drumSound) => {
+    /*if (recording) {
+      const timestamp = Date.now()
+      setRecordedSequence(prevSequence => [...prevSequence, { sound: soundUrl, timestamp }])
+    }*/
+    playSound(drumSound)
+    
   }
-};
-
-const playNextSound = () => {
-  if (soundQueueRef.current.length > 0) {
-    const nextSound = soundQueueRef.current.shift(); // Get the next sound from the queue
-    playSound(nextSound); // Play the next sound
-  }
-};
+  
   const handleSoundPreLoadClik = () => {
     /*if (recording) {
       const timestamp = Date.now()
@@ -87,14 +88,13 @@ const playNextSound = () => {
   }
 
   const playSound = (soundUrl) => {
-    const audio = audioRef.current;
-    audio.pause(); // Stop any currently playing sound
-    audio.src = soundUrl; // Set source to the new sound
-    audio.currentTime = 0; // Reset currentTime to start the sound from the beginning
-    audio.play(); // Play the sound
+    const audio = audioRefs.current[soundUrl];
+    if (audio) {
+      const newAudio = audio.cloneNode(); // Clone the audio node to play multiple instances
+      newAudio.currentTime = 0;
+      newAudio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
+    }
   };
-
-
   /*const handleTouchStart = event => {
     
     const touch = event.touches[0]; // Get the first touch
