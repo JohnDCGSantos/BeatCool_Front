@@ -96,16 +96,21 @@ const preloadSounds = drumSounds => {
   }
 
   const playSound = soundUrl => {
-    const audio =new Audio(soundUrl)
-    if (audio) {
-      console.log(audio)
-      
-      audio.currentTime = 0
-      
-      audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
-
-    }
-  }
+    const audio = new Audio(soundUrl);
+    audio.currentTime = 0;
+  
+    // Pause any currently playing sounds
+    Object.values(audioRefs.current).forEach(audio => {
+      audio.pause();
+      audio.currentTime = 0;
+    });
+  
+    // Play the new sound
+    audio.play().catch(error => console.error(`Failed to play sound: ${error}`));
+  
+    // Store the reference
+    audioRefs.current[soundUrl] = audio;
+  };
 
   /*const handleTouchStart = event => {
     
