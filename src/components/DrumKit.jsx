@@ -96,19 +96,22 @@ const preloadSounds = drumSounds => {
   }
 
   const playSound = soundUrl => {
-    const audio = new Audio(soundUrl);
+    const audio = audioRefs.current[soundUrl] || new Audio(soundUrl);
     audio.currentTime = 0;
   
-    // Pause any currently playing sounds
-    Object.values(audioRefs.current).forEach(audio => {
+    // Check if the audio is already playing
+    if (!audio.paused) {
+      // If it's already playing, pause and reset it
       audio.pause();
       audio.currentTime = 0;
-    });
+    }
   
-    // Play the new sound
-    audio.play().catch(error => console.error(`Failed to play sound: ${error}`));
+    // Play the sound after a short delay to handle rapid taps
+    setTimeout(() => {
+      audio.play().catch(error => console.error(`Failed to play sound: ${error}`));
+    }, 100); // Adjust the delay as needed
   
-    // Store the reference
+    // Update the reference
     audioRefs.current[soundUrl] = audio;
   };
 
