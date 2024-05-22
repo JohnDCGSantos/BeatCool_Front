@@ -1,15 +1,12 @@
 import { useState, useEffect } from 'react'
 import '../styles/drumKitPage.css'
 
-function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
+function DrumKitSounds({ drumSounds, handleSoundClick }) {
   const [keyAssignments, setKeyAssignments] = useState({})
   const [pressedKey, setPressedKey] = useState(null)
   const [lastTapTime, setLastTapTime] = useState(0);
-  const [touchedKey, setTouchedKey] = useState(null);
 
-  const handleSoundRelease = () => {
-    setPressedKey(null);
-  };
+  
   useEffect(() => {
     if (drumSounds) {
       const keys = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ç', 'z', 'x', 'c','v','b','n','m']
@@ -29,7 +26,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick,playSound }) {
   const handleTouchStart = (event, soundUrl) => {
     const now = Date.now();
     if (now - lastTapTime < 100) {
-      // Ignore rapid consecutive taps (less than 200ms apart)
+      // Ignore rapid consecutive taps (less than 100ms apart)
       return;
     }
     setLastTapTime(now);
