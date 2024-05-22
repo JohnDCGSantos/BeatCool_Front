@@ -116,7 +116,6 @@ const DrumKit = ({ id }) => {
         const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`)
         setDrumKit(response.data)
         setDrumSounds(response.data.drumPads) 
-        preloadSounds(response.data.drumPads)
       } catch (error) {
         console.error('Error fetching drum kit:', error)
       }
@@ -155,11 +154,11 @@ const DrumKit = ({ id }) => {
   }
 
   
-  /*const handleSoundPreLoadClik = () => {
+  const handleSoundPreLoadClik = () => {
     setIsLoading(true); 
     preloadSounds(drumSounds); 
     console.log('cliked', drumSounds)
-  }*/
+  }
 
   /*const playSound = soundUrl => {
     const audioPool = audioRefs.current[soundUrl].pool
@@ -197,7 +196,8 @@ const DrumKit = ({ id }) => {
   
  return isLoading?( 
   <div className='playDr'>
-loading...    </div>
+    <button style={{marginTop:'80px'}} onClick={handleSoundPreLoadClik}>hhh</button>
+    </div>
   ):
   (
     <div className='playDr'>
