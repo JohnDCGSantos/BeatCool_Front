@@ -28,25 +28,24 @@ const DrumKit = ({ id }) => {
   
   
   const preloadSounds = (drumSounds) => {
-   let loadedCount = 0;
-   drumSounds.forEach( drumSound => {
-    const audio =new Audio(drumSound.soundUrl)
-    audio.preload = 'auto';
-    audio.addEventListener('loadedmetadata', () => {
-    //audio.addEventListener('canplaythrough', () => {
-
-      loadedCount++;
-      if (loadedCount === drumSounds.length) {
-       setIsLoading(false); // Set isLoading to false when all sounds are loaded
-      }
-    });
-    audioRefs.current[drumSound.soundUrl] = audio;
-  });
-// If drumSounds array is empty, setIsLoading(false) immediately
-   if (drumSounds.length === 0) {
-    setIsLoading(false);
+    let loadedCount = 0
+    drumSounds.forEach(drumSound => {
+      const audioPool = Array.from({ length: 5 }, () => new Audio(drumSound.soundUrl))
+      audioPool.forEach(audio => {
+        audio.preload = 'auto'
+        audio.addEventListener('loadedmetadata', () => {
+          loadedCount++
+          if (loadedCount === drumSounds.length * 5) {
+            setIsLoading(false)
+          }
+        })
+      })
+      audioRefs.current[drumSound.soundUrl] = { pool: audioPool, index: 0 }
+    })
+    if (drumSounds.length === 0) {
+      setIsLoading(false)
+    }
   }
-};
 
   
   const handleSoundPreLoadClik = () => {
@@ -55,15 +54,16 @@ const DrumKit = ({ id }) => {
     console.log('cliked', drumSounds)
   }
 
-  const playSound =  soundUrl => {
-    const audio =audioRefs.current[soundUrl]
-    if (audio) {
-      console.log(audio)
-      audio.pause()
-      audio.currentTime = 0
-      audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
-    }
+  const playSound = soundUrl => {
+    const audioPool = audioRefs.current[soundUrl].pool
+    const currentIndex = audioRefs.current[soundUrl].index
+    const audio = audioPool[currentIndex]
+    audio.pause()
+    audio.currentTime = 0
+    audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
+    audioRefs.current[soundUrl].index = (currentIndex + 1) % audioPool.length
   }
+
 
   
   const handleSoundClick = (drumSound) => {
