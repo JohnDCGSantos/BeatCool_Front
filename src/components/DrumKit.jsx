@@ -27,7 +27,7 @@ const DrumKit = ({ id }) => {
   }, [id])
   
   
-  const preloadSounds = async (drumSounds) => {
+  const preloadSounds = (drumSounds) => {
    let loadedCount = 0;
    drumSounds.forEach( drumSound => {
     const audio =new Audio(drumSound.soundUrl)
