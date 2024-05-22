@@ -144,7 +144,9 @@ const DrumKit = ({ id }) => {
           if (loadedCount === drumSounds.length * 5) {
             setIsLoading(false)
           }
-        })
+        }, { once: true })
+        return audio
+
       })
       audioRefs.current[drumSound.soundUrl] = { pool: audioPool, index: 0 }
     })
