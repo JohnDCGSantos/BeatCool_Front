@@ -136,12 +136,12 @@ const DrumKit = ({ id }) => {
 
     let loadedCount = 0
     drumSounds.forEach(drumSound => {
-      const audioPool = Array.from({ length: 10 }, () => new Audio(drumSound.soundUrl))
+      const audioPool = Array.from({ length: 3 }, () => new Audio(drumSound.soundUrl))
       audioPool.forEach(audio => {
         audio.preload = 'auto'
         audio.addEventListener('loadedmetadata', () => {
           loadedCount++
-          if (loadedCount === drumSounds.length * 10) {
+          if (loadedCount === drumSounds.length * 3) {
             setIsLoading(false)
           }
         })
@@ -195,7 +195,9 @@ const DrumKit = ({ id }) => {
  
   
  return isLoading?( 
+  <div className='playDr'>
     <button style={{marginTop:'80px'}} onClick={handleSoundPreLoadClik}>hhh</button>
+    </div>
   ):
   (
     <div className='playDr'>
