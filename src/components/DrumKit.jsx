@@ -32,8 +32,8 @@ const DrumKit = ({ id }) => {
    drumSounds.forEach( drumSound => {
     const audio =new Audio(drumSound.soundUrl)
     audio.preload = 'auto';
-   // audio.addEventListener('loadedmetadata', () => {
-    audio.addEventListener('canplaythrough', () => {
+    audio.addEventListener('loadedmetadata', () => {
+    //audio.addEventListener('canplaythrough', () => {
 
       loadedCount++;
       if (loadedCount === drumSounds.length) {
