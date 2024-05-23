@@ -138,7 +138,9 @@ const DrumKit = ({ id }) => {
     drumSounds.forEach(drumSound => {
       const audioPool = Array.from({ length: 4 }, () => new Audio(drumSound.soundUrl))
       audioPool.forEach(audio => {
-        audio.preload = 'auto'
+        audio.preload = 'auto'  
+                audio.volume=0
+
         audio.addEventListener('canplaythrough', () => {
           loadedCount++
           if (loadedCount === drumSounds.length * 4) {
@@ -190,6 +192,7 @@ const DrumKit = ({ id }) => {
       instance.pause()
       instance.currentTime = 0
     })
+    audio.volume= 0.9
     audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
     soundRef.index = (currentIndex + 1) % audioPool.length
   }
