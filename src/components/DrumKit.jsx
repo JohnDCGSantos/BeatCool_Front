@@ -186,7 +186,10 @@ const DrumKit = ({ id }) => {
     const audioPool = soundRef.pool
     const currentIndex = soundRef.index
     const audio = audioPool[currentIndex]
-    audio.currentTime = 0
+    audioPool.forEach(instance => {
+      instance.pause()
+      instance.currentTime = 0
+    })
     audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
     soundRef.index = (currentIndex + 1) % audioPool.length
   }
