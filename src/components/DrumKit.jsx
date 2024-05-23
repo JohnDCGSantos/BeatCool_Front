@@ -137,9 +137,11 @@ const DrumKit = ({ id }) => {
     let loadedCount = 0
     drumSounds.forEach(drumSound => {
       const audioPool = Array.from({ length: 4 }, () => new Audio(drumSound.soundUrl))
+      audioPool.volume=0
       audioPool.forEach(audio => {
         audio.preload = 'auto'  
-                audio.volume=0
+
+        audio.volume=0
 
         audio.addEventListener('canplaythrough', () => {
           loadedCount++
@@ -150,6 +152,7 @@ const DrumKit = ({ id }) => {
 
         // Play briefly and pause to force preloading
         audio.play().then(() => {
+          audio.volume=0
           audio.pause()
           audio.currentTime = 0
         }).catch(error => console.error(`Error during preloading: ${error}`))
@@ -208,6 +211,7 @@ const DrumKit = ({ id }) => {
   
  return isLoading?( 
   <div className='playDr'>
+    <p>Loading your sounds....</p>
     <button style={{marginTop:'80px'}} onClick={handleSoundPreLoadClik}>hhh</button>
     </div>
   ):
