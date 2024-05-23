@@ -131,14 +131,14 @@ const DrumKit = ({ id }) => {
   }
 
 
-  const preloadSounds = (drumSounds) => {
+  const preloadSounds = async (drumSounds) => {
     initializeAudioContext()
 
     let loadedCount = 0
-    drumSounds.forEach(drumSound => {
+    await drumSounds.forEach(drumSound => {
       const audioPool = Array.from({ length: 4 }, () => new Audio(drumSound.soundUrl))
       audioPool.volume=0
-      audioPool.forEach(audio => {
+     audioPool.forEach(audio => {
         audio.preload = 'auto'  
 
         audio.volume=0
