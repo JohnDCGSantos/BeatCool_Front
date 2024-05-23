@@ -139,12 +139,18 @@ const DrumKit = ({ id }) => {
       const audioPool = Array.from({ length: 4 }, () => new Audio(drumSound.soundUrl))
       audioPool.forEach(audio => {
         audio.preload = 'auto'
-        audio.addEventListener('loadedmetadata', () => {
+        audio.addEventListener('canplaythrough', () => {
           loadedCount++
           if (loadedCount === drumSounds.length * 4) {
             setIsLoading(false)
           }
-        })
+        }, { once: true })
+
+        // Play briefly and pause to force preloading
+        audio.play().then(() => {
+          audio.pause()
+          audio.currentTime = 0
+        }).catch(error => console.error(`Error during preloading: ${error}`))
       })
       audioRefs.current[drumSound.soundUrl] = { pool: audioPool, index: 0 }
     })
