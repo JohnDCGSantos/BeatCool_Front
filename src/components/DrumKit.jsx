@@ -292,19 +292,9 @@ const DrumKit = ({ id }) => {
   const handleSoundPreLoadClick = () => {
     setIsLoading(true);
   
-    // Create a dummy event listener to mimic user gesture
-    const dummyEventListener = () => {
-      // Remove the dummy event listener
-      document.removeEventListener('click', dummyEventListener);
-  
-      // Preload the actual sounds
-      preloadSounds(drumSounds);
-    };
-  
-    // Add the dummy event listener
-    document.addEventListener('click', dummyEventListener, { once: true });
+    // Preload the actual sounds only if a user gesture is captured
+    preloadSounds(drumSounds);
   };
-  
 
   const playSound = async (soundUrl) => {
     const audioContext = audioContextRef.current;
@@ -319,7 +309,7 @@ const DrumKit = ({ id }) => {
       console.error(`Sound URL ${soundUrl} not found in audioBuffersRef`);
       return;
     }
-console.log(audioBuffer)
+
     const sourceNode = audioContext.createBufferSource();
     sourceNode.buffer = audioBuffer;
     sourceNode.connect(audioContext.destination);
@@ -347,6 +337,7 @@ console.log(audioBuffer)
   return isLoading ? (
     <div className="playDr">
       <p>Loading your sounds....</p>
+      <p>Please tap the screen to load sounds</p>
       <button style={{ marginTop: '80px' }} onClick={handleSoundPreLoadClick}>
         Load Sounds
       </button>
