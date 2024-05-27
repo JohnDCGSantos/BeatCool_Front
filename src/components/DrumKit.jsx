@@ -276,16 +276,10 @@ const DrumKit = ({ id }) => {
         const arrayBuffer = await response.arrayBuffer();
         const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
         audioBuffersRef.current[soundUrl] = audioBuffer;
-
-        // Create an Audio element to play briefly and pause
-        const audio = new Audio(soundUrl);
-        await audio.play();
-        audio.volume = 0;
-        audio.pause();
-        audio.currentTime = 0;
       };
 
-      const loadAllSounds = drumSounds.map(sound => loadSound(sound.soundUrl));
+      const loadAllSounds = drumSounds.map((sound) => loadSound(sound.soundUrl));
+      
       await Promise.all(loadAllSounds);
 
       setIsLoading(false);
@@ -297,9 +291,20 @@ const DrumKit = ({ id }) => {
 
   const handleSoundPreLoadClick = () => {
     setIsLoading(true);
-    preloadSounds(drumSounds);
-    console.log('Clicked', drumSounds);
+  
+    // Create a dummy event listener to mimic user gesture
+    const dummyEventListener = () => {
+      // Remove the dummy event listener
+      document.removeEventListener('click', dummyEventListener);
+  
+      // Preload the actual sounds
+      preloadSounds(drumSounds);
+    };
+  
+    // Add the dummy event listener
+    document.addEventListener('click', dummyEventListener, { once: true });
   };
+  
 
   const playSound = async (soundUrl) => {
     const audioContext = audioContextRef.current;
