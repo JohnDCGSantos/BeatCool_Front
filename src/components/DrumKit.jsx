@@ -136,8 +136,7 @@ const DrumKit = ({ id }) => {
 
     let loadedCount = 0
     await drumSounds.forEach(drumSound => {
-      const audioPool = Array.from({ length: 4 }, () => new Audio(drumSound.soundUrl))
-      audioPool.volume=0
+      const audioPool = Array.from({ length: 3 }, () => new Audio(drumSound.soundUrl))
      audioPool.forEach(audio => {
         audio.preload = 'auto'  
 
@@ -145,7 +144,7 @@ const DrumKit = ({ id }) => {
 
         audio.addEventListener('canplaythrough', () => {
           loadedCount++
-          if (loadedCount === drumSounds.length * 4) {
+          if (loadedCount === drumSounds.length * 3) {
             setIsLoading(false)
           }
         }, { once: true })

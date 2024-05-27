@@ -221,7 +221,7 @@ button.pressed {
 }
 @media (max-width: 477px) {
   .drum-kit-sounds {
-    grid-template-columns: repeat(4, min(14vw, 14vh));
+    grid-template-columns: repeat(4, min(17vw, 17vh));
     height: 70vh;
     top:120px
 
@@ -233,8 +233,8 @@ button.pressed {
       display: inline-block;
       background-color: #7F8C8D; /* Grayish Blue */
       white-space: nowrap;
-      width: min(14vw, 14vh);
-      height: min(14vh, 14vw);
+      width: min(18vw, 18vh);
+      height: min(18vh, 18vw);
       padding: 5px;
       overflow: hidden;
       text-overflow:auto;
