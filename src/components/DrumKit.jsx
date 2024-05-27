@@ -294,15 +294,20 @@ const DrumKit = ({ id }) => {
     console.log('Clicked', drumSounds);
   };
 
-  const playSound = (soundUrl) => {
+  const playSound = async (soundUrl) => {
     const audioContext = audioContextRef.current;
-    const audioBuffer = audioBuffersRef.current[soundUrl];
 
+    // Ensure the audio context is resumed
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume();
+    }
+
+    const audioBuffer = audioBuffersRef.current[soundUrl];
     if (!audioBuffer) {
       console.error(`Sound URL ${soundUrl} not found in audioBuffersRef`);
       return;
     }
-
+console.log(audioBuffer)
     const sourceNode = audioContext.createBufferSource();
     sourceNode.buffer = audioBuffer;
     sourceNode.connect(audioContext.destination);
@@ -319,8 +324,8 @@ const DrumKit = ({ id }) => {
     };
   };
 
-  const handleSoundClick = (drumSound) => {
-    playSound(drumSound);
+  const handleSoundClick = async (drumSound) => {
+    await playSound(drumSound);
   };
 
   if (!drumKit) {
@@ -331,7 +336,7 @@ const DrumKit = ({ id }) => {
     <div className="playDr">
       <p>Loading your sounds....</p>
       <button style={{ marginTop: '80px' }} onClick={handleSoundPreLoadClick}>
-        hhh
+        Load Sounds
       </button>
     </div>
   ) : (
