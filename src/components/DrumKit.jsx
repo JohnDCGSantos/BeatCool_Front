@@ -243,9 +243,7 @@ const DrumKit = ({ id }) => {
   const [drumKit, setDrumKit] = useState(null);
   const [drumSounds, setDrumSounds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const audioContextRef = useRef(null);
-  const audioBuffersRef = useRef({});
-  const audioSourceNodesRef = useRef({});
+  const audioRefs = useRef({});
 
   useEffect(() => {
     const fetchDrumKit = async () => {
@@ -253,7 +251,7 @@ const DrumKit = ({ id }) => {
         const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`);
         setDrumKit(response.data);
         setDrumSounds(response.data.drumPads);
-  
+
         // Preload sounds when component mounts
         preloadSounds(response.data.drumPads);
       } catch (error) {
@@ -262,90 +260,44 @@ const DrumKit = ({ id }) => {
     };
     fetchDrumKit();
   }, [id]);
-  
-
-  const initializeAudioContext = () => {
-    if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
-    }
-  };
 
   const preloadSounds = async (drumSounds) => {
-    initializeAudioContext();
-    const audioContext = audioContextRef.current;
+    let loadedCount = 0;
+    drumSounds.forEach((drumSound) => {
+      const audio = new Audio(drumSound.soundUrl);
+      audio.preload = 'auto';
+      audio.addEventListener('canplaythrough', () => {
+        loadedCount++;
+        if (loadedCount === drumSounds.length) {
+          setIsLoading(false); // Set isLoading to false when all sounds are loaded
+        }
+      });
+      audioRefs.current[drumSound.soundUrl] = audio;
+    });
 
-    try {
-      const loadSound = async (soundUrl) => {
-        const response = await fetch(soundUrl);
-        const arrayBuffer = await response.arrayBuffer();
-        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-        audioBuffersRef.current[soundUrl] = audioBuffer;
-      };
-
-      const loadAllSounds = drumSounds.map((sound) => loadSound(sound.soundUrl));
-      
-      await Promise.all(loadAllSounds);
-
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error loading sounds:', error);
+    // If drumSounds array is empty, setIsLoading(false) immediately
+    if (drumSounds.length === 0) {
       setIsLoading(false);
     }
   };
 
   const handleSoundPreLoadClick = () => {
     setIsLoading(true);
-  
-    // Preload the actual sounds only if a user gesture is captured
     preloadSounds(drumSounds);
+    console.log('clicked', drumSounds);
   };
 
-  const playSound = async (soundUrl) => {
-    const audioContext = audioContextRef.current;
-  
-    // Ensure the audio context is resumed
-    if (audioContext.state === 'suspended') {
-      await audioContext.resume();
-    }
-  
-    try {
-      const audioBuffer = audioBuffersRef.current[soundUrl];
-      if (!audioBuffer) {
-        console.error(`Sound URL ${soundUrl} not found in audioBuffersRef`);
-        return;
-      }
-  
-      const sourceNode = audioContext.createBufferSource();
-      sourceNode.buffer = audioBuffer;
-      sourceNode.connect(audioContext.destination);
-  
-      // For iOS, play() must be triggered by a user gesture
-      // For Android, play() can be called directly
-      const playPromise = sourceNode.start(0);
-  
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.error(`Error playing sound: ${error}`);
-        });
-      }
-  
-      // Keep track of active source nodes to handle rapid playback
-      if (!audioSourceNodesRef.current[soundUrl]) {
-        audioSourceNodesRef.current[soundUrl] = [];
-      }
-      audioSourceNodesRef.current[soundUrl].push(sourceNode);
-  
-      sourceNode.onended = () => {
-        audioSourceNodesRef.current[soundUrl] = audioSourceNodesRef.current[soundUrl].filter((node) => node !== sourceNode);
-      };
-    } catch (error) {
-      console.error('Error playing sound:', error);
+  const playSound = (soundUrl) => {
+    const audio = audioRefs.current[soundUrl];
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
     }
   };
-  
 
-  const handleSoundClick = async (drumSound) => {
-    await playSound(drumSound);
+  const handleSoundClick = (drumSound) => {
+    playSound(drumSound);
   };
 
   if (!drumKit) {
