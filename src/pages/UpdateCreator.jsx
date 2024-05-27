@@ -67,12 +67,14 @@ const UpdateCreator = () => {
   return (
     <div className='imageCreate'>
     <div className= 'shadows'>
+    <div className='mainerContainer'>
+
     <div className='create'>
       <h3>Edit Beat Maker</h3>
       {!isLoading && beatMaker && sounds && (
         <UpdateCreatorForm onSubmit={handleSubmit} defaultValues={beatMaker} sounds={sounds} />
       )}
-    </div> </div></div>
+    </div> </div></div></div>
   )
 }
 
