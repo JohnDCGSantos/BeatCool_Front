@@ -302,33 +302,47 @@ const DrumKit = ({ id }) => {
 
   const playSound = async (soundUrl) => {
     const audioContext = audioContextRef.current;
-
+  
     // Ensure the audio context is resumed
     if (audioContext.state === 'suspended') {
       await audioContext.resume();
     }
-
-    const audioBuffer = audioBuffersRef.current[soundUrl];
-    if (!audioBuffer) {
-      console.error(`Sound URL ${soundUrl} not found in audioBuffersRef`);
-      return;
+  
+    try {
+      const audioBuffer = audioBuffersRef.current[soundUrl];
+      if (!audioBuffer) {
+        console.error(`Sound URL ${soundUrl} not found in audioBuffersRef`);
+        return;
+      }
+  
+      const sourceNode = audioContext.createBufferSource();
+      sourceNode.buffer = audioBuffer;
+      sourceNode.connect(audioContext.destination);
+  
+      // For iOS, play() must be triggered by a user gesture
+      // For Android, play() can be called directly
+      const playPromise = sourceNode.start(0);
+  
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error(`Error playing sound: ${error}`);
+        });
+      }
+  
+      // Keep track of active source nodes to handle rapid playback
+      if (!audioSourceNodesRef.current[soundUrl]) {
+        audioSourceNodesRef.current[soundUrl] = [];
+      }
+      audioSourceNodesRef.current[soundUrl].push(sourceNode);
+  
+      sourceNode.onended = () => {
+        audioSourceNodesRef.current[soundUrl] = audioSourceNodesRef.current[soundUrl].filter((node) => node !== sourceNode);
+      };
+    } catch (error) {
+      console.error('Error playing sound:', error);
     }
-
-    const sourceNode = audioContext.createBufferSource();
-    sourceNode.buffer = audioBuffer;
-    sourceNode.connect(audioContext.destination);
-    sourceNode.start(0);
-
-    // Keep track of active source nodes to handle rapid playback
-    if (!audioSourceNodesRef.current[soundUrl]) {
-      audioSourceNodesRef.current[soundUrl] = [];
-    }
-    audioSourceNodesRef.current[soundUrl].push(sourceNode);
-
-    sourceNode.onended = () => {
-      audioSourceNodesRef.current[soundUrl] = audioSourceNodesRef.current[soundUrl].filter((node) => node !== sourceNode);
-    };
   };
+  
 
   const handleSoundClick = async (drumSound) => {
     await playSound(drumSound);
