@@ -251,6 +251,8 @@ const DrumKit = ({ id }) => {
         const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`);
         setDrumKit(response.data);
         setDrumSounds(response.data.drumPads);
+        setIsLoading(true);
+        await preloadSounds(response.data.drumPads);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching drum kit:', error);
@@ -259,9 +261,24 @@ const DrumKit = ({ id }) => {
     fetchDrumKit();
   }, [id]);
 
+  const preloadSounds = async (drumSounds) => {
+    try {
+      await Promise.all(drumSounds.map(async (drumSound) => {
+        const audio = new Audio(drumSound.soundUrl);
+        await audio.load();
+        audioRefs.current[drumSound.soundUrl] = audio;
+      }));
+    } catch (error) {
+      console.error('Error preloading sounds:', error);
+    }
+  };
+
   const playSound = (soundUrl) => {
-    const audio = new Audio(soundUrl);
-    audio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
+    const audio = audioRefs.current[soundUrl];
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
+    }
   };
 
   const handleSoundClick = (drumSound) => {
@@ -285,4 +302,3 @@ const DrumKit = ({ id }) => {
 };
 
 export default DrumKit;
-
