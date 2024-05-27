@@ -94,14 +94,13 @@ authenticateUser()
     <div className='imageCreate' >
      <div className= 'shadows'>
       <div className='create'>
-       <div className='mainerContainer'>
+       <div className='mainContainer'>
       {isLoading ? (
         <p>Loading sounds...</p>
       ) : (
         <div className='intro'>
-          <div className='titcreate'>
         <h1>Create something,  &nbsp;  { user ? user.username : null}&nbsp;!!</h1>
-         </div>
+         
           <div className='selectCard'>
             {selectedOption === '' ? (
               <div className='selecter'>
