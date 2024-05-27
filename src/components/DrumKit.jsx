@@ -253,12 +253,16 @@ const DrumKit = ({ id }) => {
         const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`);
         setDrumKit(response.data);
         setDrumSounds(response.data.drumPads);
+  
+        // Preload sounds when component mounts
+        preloadSounds(response.data.drumPads);
       } catch (error) {
         console.error('Error fetching drum kit:', error);
       }
     };
     fetchDrumKit();
   }, [id]);
+  
 
   const initializeAudioContext = () => {
     if (!audioContextRef.current) {
