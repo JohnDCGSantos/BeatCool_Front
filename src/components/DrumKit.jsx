@@ -266,22 +266,6 @@ const DrumKit = ({ id }) => {
     }
   };
 
-  const handleUserGesture = async () => {
-    if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
-      await audioContextRef.current.resume();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('touchstart', handleUserGesture, { once: true });
-    window.addEventListener('mousedown', handleUserGesture, { once: true });
-
-    return () => {
-      window.removeEventListener('touchstart', handleUserGesture);
-      window.removeEventListener('mousedown', handleUserGesture);
-    };
-  }, []);
-
   const preloadSounds = async (drumSounds) => {
     initializeAudioContext();
     const audioContext = audioContextRef.current;
@@ -305,6 +289,16 @@ const DrumKit = ({ id }) => {
   };
 
   const handleSoundPreLoadClick = () => {
+    initializeAudioContext();
+    const audioContext = audioContextRef.current;
+
+    // Play a short silent sound to unlock the audio context
+    const silentBuffer = audioContext.createBuffer(1, 1, 22050);
+    const silentSource = audioContext.createBufferSource();
+    silentSource.buffer = silentBuffer;
+    silentSource.connect(audioContext.destination);
+    silentSource.start(0);
+
     setIsLoading(true);
     preloadSounds(drumSounds);
     console.log('Clicked', drumSounds);
@@ -313,6 +307,7 @@ const DrumKit = ({ id }) => {
   const playSound = async (soundUrl) => {
     const audioContext = audioContextRef.current;
 
+    // Ensure the audio context is resumed
     if (audioContext.state === 'suspended') {
       await audioContext.resume();
     }
@@ -322,12 +317,13 @@ const DrumKit = ({ id }) => {
       console.error(`Sound URL ${soundUrl} not found in audioBuffersRef`);
       return;
     }
-
+    console.log(audioBuffer);
     const sourceNode = audioContext.createBufferSource();
     sourceNode.buffer = audioBuffer;
     sourceNode.connect(audioContext.destination);
     sourceNode.start(0);
 
+    // Keep track of active source nodes to handle rapid playback
     if (!audioSourceNodesRef.current[soundUrl]) {
       audioSourceNodesRef.current[soundUrl] = [];
     }
