@@ -411,19 +411,8 @@ const DrumKit = ({ id }) => {
   };
 
   const playSound = (soundUrl) => {
-    const audio = audioRefs.current[soundUrl];
-    if (audio) {
-      const currentTime = audio.currentTime;
-      const duration = audio.duration;
-      if (currentTime === 0 || (duration - currentTime) < 0.1) {
-        audio.currentTime = 0;
-        audio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
-      } else {
-        const clone = audio.cloneNode();
-        clone.currentTime = 0;
-        clone.play().catch((error) => console.error(`Failed to play sound: ${error}`));
-      }
-    }
+    const audio = new Audio(soundUrl);
+    audio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
   };
   
 
