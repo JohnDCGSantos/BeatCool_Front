@@ -6,10 +6,11 @@
   align-items: center;
   display: flex;
   flex-direction: column;
- 
+ position:absolute;
   justify-content: space-evenly
   ;
-  height: 100vh;
+  height: 80vh;
+  top:500px
 }
 
 .intro{
