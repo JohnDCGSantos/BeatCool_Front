@@ -276,9 +276,16 @@ const DrumKit = ({ id }) => {
         const arrayBuffer = await response.arrayBuffer();
         const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
         audioBuffersRef.current[soundUrl] = audioBuffer;
+
+        // Create an Audio element to play briefly and pause
+        const audio = new Audio(soundUrl);
+        await audio.play();
+        audio.volume = 0;
+        audio.pause();
+        audio.currentTime = 0;
       };
 
-      const loadAllSounds = drumSounds.map((sound) => loadSound(sound.soundUrl));
+      const loadAllSounds = drumSounds.map(sound => loadSound(sound.soundUrl));
       await Promise.all(loadAllSounds);
 
       setIsLoading(false);
@@ -289,16 +296,6 @@ const DrumKit = ({ id }) => {
   };
 
   const handleSoundPreLoadClick = () => {
-    initializeAudioContext();
-    const audioContext = audioContextRef.current;
-
-    // Play a short silent sound to unlock the audio context
-    const silentBuffer = audioContext.createBuffer(1, 1, 22050);
-    const silentSource = audioContext.createBufferSource();
-    silentSource.buffer = silentBuffer;
-    silentSource.connect(audioContext.destination);
-    silentSource.start(0);
-
     setIsLoading(true);
     preloadSounds(drumSounds);
     console.log('Clicked', drumSounds);
@@ -317,7 +314,7 @@ const DrumKit = ({ id }) => {
       console.error(`Sound URL ${soundUrl} not found in audioBuffersRef`);
       return;
     }
-    console.log(audioBuffer);
+console.log(audioBuffer)
     const sourceNode = audioContext.createBufferSource();
     sourceNode.buffer = audioBuffer;
     sourceNode.connect(audioContext.destination);
