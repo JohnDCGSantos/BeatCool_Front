@@ -251,9 +251,7 @@ const DrumKit = ({ id }) => {
         const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`);
         setDrumKit(response.data);
         setDrumSounds(response.data.drumPads);
-
-        // Preload sounds when component mounts
-        preloadSounds(response.data.drumPads);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching drum kit:', error);
       }
@@ -261,39 +259,9 @@ const DrumKit = ({ id }) => {
     fetchDrumKit();
   }, [id]);
 
-  const preloadSounds = async (drumSounds) => {
-    let loadedCount = 0;
-    drumSounds.forEach((drumSound) => {
-      const audio = new Audio(drumSound.soundUrl);
-      audio.preload = 'auto';
-      audio.addEventListener('canplaythrough', () => {
-        loadedCount++;
-        if (loadedCount === drumSounds.length) {
-          setIsLoading(false); // Set isLoading to false when all sounds are loaded
-        }
-      });
-      audioRefs.current[drumSound.soundUrl] = audio;
-    });
-
-    // If drumSounds array is empty, setIsLoading(false) immediately
-    if (drumSounds.length === 0) {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSoundPreLoadClick = () => {
-    setIsLoading(true);
-    preloadSounds(drumSounds);
-    console.log('clicked', drumSounds);
-  };
-
   const playSound = (soundUrl) => {
-    const audio = audioRefs.current[soundUrl];
-    if (audio) {
-      audio.pause();
-      audio.currentTime = 0;
-      audio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
-    }
+    const audio = new Audio(soundUrl);
+    audio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
   };
 
   const handleSoundClick = (drumSound) => {
@@ -308,9 +276,6 @@ const DrumKit = ({ id }) => {
     <div className="playDr">
       <p>Loading your sounds....</p>
       <p>Please tap the screen to load sounds</p>
-      <button style={{ marginTop: '80px' }} onClick={handleSoundPreLoadClick}>
-        Load Sounds
-      </button>
     </div>
   ) : (
     <div className="playDr">
@@ -320,3 +285,4 @@ const DrumKit = ({ id }) => {
 };
 
 export default DrumKit;
+
