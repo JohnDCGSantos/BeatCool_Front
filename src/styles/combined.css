@@ -42,7 +42,7 @@ input#name{
 .combined{
   height: 100%; /* Full viewport height */
   width: 100%;
-  overflow-y:auto;
+  overflow-y:scroll;
   display: flex;
   flex-direction: column;
   position: fixed;
