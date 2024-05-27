@@ -51,14 +51,7 @@ const CombinedPage = () => {
       {beatMakerAndDrumKit && (
        <div className='combined'>
           
-          <p>Name: {beatMakerAndDrumKit.name}</p>
-          
-         {beatMaker && (
-          
-            <div className='beatMaker'>
-              <BeatCreator id={beatMakerId} />
-            </div>
-          )} 
+        
           
         {drumKit && (
             <div className='drumMaker'>
