@@ -232,10 +232,14 @@ background-color: rgba(0, 0, 0, 0.673);
   text-align: center;
 }
 
-@media(max-width: 380px) {
+@media(max-width: 400px) {
   .categoriesAndGenres {
      flex-direction: column;
     gap:10px;
     align-items: center
+  }
+  .create{
+    
+    top:200px
   }
 }
