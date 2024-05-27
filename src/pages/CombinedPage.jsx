@@ -43,12 +43,7 @@ const CombinedPage = () => {
 
     fetchBeatMakerAndDrumKit()
   }, [id])
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const combinedElement = document.querySelector('.combined');
-    if (combinedElement) {
-      combinedElement.style.overflowY = 'auto';
-    }
-  });
+  
   return (
     <div className='imageKitsPlay' >
     <div className= 'shadows'>

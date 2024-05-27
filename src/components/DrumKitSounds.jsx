@@ -24,7 +24,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
     }
   }, [drumSounds])
 
-
+/*
   const handleTouchStart = (event, soundUrl) => {
     const now = Date.now();
     if (now - lastTapTime < 100) {
@@ -61,7 +61,7 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
     };
   }, []);
  
-
+*/
   useEffect(() => {
     const handleKeyDown = event => {
       if (drumSounds) {
@@ -98,10 +98,11 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
 <button
   className={drumSound.soundUrl === pressedKey ? 'pressed' : ''}
   onMouseDown={() => handleSoundClick(drumSound.soundUrl)}
-  onTouchStart={(event) =>
+  /*onTouchStart={() =>
     handleTouchStart(event, drumSound.soundUrl)
   }
-  onTouchEnd={handleTouchEnd}
+  onTouchEnd={handleTouchEnd}*/
+  onTouchStart={() => handleSoundClick(drumSound.soundUrl)}
 
 >
          
