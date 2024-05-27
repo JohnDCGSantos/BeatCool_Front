@@ -23,6 +23,8 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
       setKeyAssignments(newKeyAssignments)
     }
   }, [drumSounds])
+
+
   const handleTouchStart = (event, soundUrl) => {
     const now = Date.now();
     if (now - lastTapTime < 100) {
@@ -34,9 +36,13 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
     handleSoundClick(soundUrl);
     setPressedKey(soundUrl); // Set pressed key state
   };
+
+
   const handleTouchEnd = () => {
     setPressedKey(null); // Reset pressed key state when touch ends
   };
+
+  
   useEffect(() => {
     // Add passive: false to preventDefault in a touch event listener without causing the warning
     document.addEventListener('touchstart', (event) => {
