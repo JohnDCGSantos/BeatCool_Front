@@ -231,7 +231,7 @@ const DrumKit = ({ id }) => {
 
 export default DrumKit*/ 
 
-/*
+
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import DrumKitSounds from './DrumKitSounds';
@@ -367,74 +367,5 @@ const DrumKit = ({ id }) => {
   );
 };
 
-export default DrumKit;*/  
- 
-import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import DrumKitSounds from './DrumKitSounds';
-import '../styles/drumKitPage.css';
-import '../styles/create.css';
-import { apiBaseUrl } from '../config';
-
-const DrumKit = ({ id }) => {
-  const [drumKit, setDrumKit] = useState(null);
-  const [drumSounds, setDrumSounds] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const audioRefs = useRef({});
-
-  useEffect(() => {
-    const fetchDrumKit = async () => {
-      try {
-        const response = await axios.get(`${apiBaseUrl}/drumkits/${id}`);
-        setDrumKit(response.data);
-        setDrumSounds(response.data.drumPads);
-        setIsLoading(true);
-        await preloadSounds(response.data.drumPads);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching drum kit:', error);
-      }
-    };
-    fetchDrumKit();
-  }, [id]);
-
-  const preloadSounds = async (drumSounds) => {
-    try {
-      await Promise.all(drumSounds.map(async (drumSound) => {
-        const audio = new Audio(drumSound.soundUrl);
-        await audio.load();
-        audioRefs.current[drumSound.soundUrl] = audio;
-      }));
-    } catch (error) {
-      console.error('Error preloading sounds:', error);
-    }
-  };
-
-  const playSound = (soundUrl) => {
-    const audio = new Audio(soundUrl);
-    audio.play().catch((error) => console.error(`Failed to play sound: ${error}`));
-  };
-  
-
-  const handleSoundClick = (drumSound) => {
-    playSound(drumSound);
-  };
-
-  if (!drumKit) {
-    return <div>Loading...</div>;
-  }
-
-  return isLoading ? (
-    <div className="playDr">
-      <p>Loading your sounds....</p>
-      <p>Please tap the screen to load sounds</p>
-    </div>
-  ) : (
-    <div className="playDr">
-      <DrumKitSounds drumSounds={drumSounds} handleSoundClick={handleSoundClick} />
-    </div>
-  );
-};
-
 export default DrumKit;
-
+ 
