@@ -232,7 +232,7 @@ background-color: rgba(0, 0, 0, 0.673);
   text-align: center;
 }
 
-@media(max-width: 400px) {
+@media(max-width: 450px) {
   .categoriesAndGenres {
      flex-direction: column;
     gap:10px;
@@ -240,6 +240,6 @@ background-color: rgba(0, 0, 0, 0.673);
   }
   .create{
     
-    top:200px
+    top:400px
   }
 }
