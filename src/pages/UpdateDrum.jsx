@@ -71,7 +71,7 @@ const UpdateDrum = () => {
     
     >
     <div className= 'shadows'>
-    <div className='mainerContainer'>
+    <div className='mainC'>
     <div className='create'>
       <h3>Edit Drum Kit</h3>
       {!isLoading && drumKit && sounds && (
