@@ -118,7 +118,7 @@ navigate(`/combined/${response.data._id}`)
 
 
     <div className='create'>
-    <div className='dkBm'> 
+   
       <h2>Update BeatMakerAndDrumKit</h2>
       <form onSubmit={handleSubmit}>
       <div className='name'>
@@ -167,14 +167,14 @@ navigate(`/combined/${response.data._id}`)
                 <label htmlFor={`beatMaker-${beatMaker._id}`}>{beatMaker.name}</label>
                 <button className='details' onClick={()=>handleBeatMakerClick((beatMaker._id))}>Details</button>
 
-              </div>
+              </div> 
             ))}
           </div>
-        </div>
+        </div>  
         <div className='centerBtn'><button className='submitUpdate' type='submit'>Update</button></div>
-        
+     
       </form>
-    </div></div></div></div></div>
+    </div></div></div></div>
   );
 };
 
