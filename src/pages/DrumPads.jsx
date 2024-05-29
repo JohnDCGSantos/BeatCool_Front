@@ -99,8 +99,9 @@ authenticateUser()
         <p>Loading sounds...</p>
       ) : (
         <div className='intro'>
+          <div className='createT'>
         <h1>Create something,  &nbsp;  { user ? user.username : null}&nbsp;!!</h1>
-         
+         </div>
           <div className='selectCard'>
             {selectedOption === '' ? (
               <div className='selecter'>

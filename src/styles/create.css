@@ -60,12 +60,25 @@ left:-10%
                -1px 1px 0 black,
                 1px 1px 0 black;
                 background-color: rgba(0, 0, 0, 0.352);
+                height:auto;
+                width:100%
+
+}
+.createT{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:100vw;
+  height:150px;
+  text-align: center;
 }
 .create h4{
   border-radius: 10px;
   padding: 12px;
   
 }
+
 h1{
   margin-top: 
 5rem;
