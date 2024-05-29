@@ -114,7 +114,7 @@ navigate(`/combined/${response.data._id}`)
   return (
     <div className='imageCreate'>
     <div className= 'shadows'>
-    <div className= 'mainC'>
+    <div className= 'mainerContainer'>
 
 
     <div className='create'>
