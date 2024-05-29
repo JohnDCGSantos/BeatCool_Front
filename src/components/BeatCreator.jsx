@@ -420,6 +420,28 @@ const BeatCreator = ({ id }) => {
     }
   }, [beatGrid, tempo]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const controls = document.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+
+      controls.forEach(control => {
+        if (scrollY > windowHeight / 2) {
+          control.style.top = `${scrollY}px`;
+        } else {
+          control.style.top = '50%';
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return isLoading ? (
     <div>Loading sounds...</div>
   ) : (
@@ -427,8 +449,7 @@ const BeatCreator = ({ id }) => {
       <div className='carousel-inner'>
         {[...Array(4).keys()].map((slide, slideIndex) => (
           <div key={slideIndex} className={`carousel-item ${slideIndex === 0 ? 'active' : ''}`}>
-            <div className='beat-grid'>
-              {/* Beat Grid Content */}
+            <div className='beat-grid'> slideIndex:{slideIndex + 1}/4
               {Object.keys(sounds).map((sound, soundIndex) => (
                 <div key={sound} className='beat-row'>
                   <div className='noteNames'>{sounds[sound].name}</div>
@@ -447,6 +468,8 @@ const BeatCreator = ({ id }) => {
                   ))}
                 </div>
               ))}
+                              slideIndex:{slideIndex + 1}/4
+
             </div>
             <button
               className='carousel-control-prev'

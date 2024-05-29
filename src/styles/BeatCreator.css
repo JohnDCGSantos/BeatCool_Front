@@ -234,7 +234,7 @@ color: #00000063;
 span.carousel-control-prev-icon,
 span.carousel-control-next-icon { 
   background-color: #0fb30088;
-  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+  box-shadow: inset 3px 3px 3px #cbced1, inset -3px -3px 3px #fff;
 
 }
 span.carousel-control-prev-icon{
@@ -242,13 +242,15 @@ span.carousel-control-prev-icon{
 }
 
 .carousel-control-next { 
-  width: 7vw;
-  left:85%
-
+  width: 5vw;
+  left:85%;
+top:-5%
 }
 .carousel-control-prev { 
-  width: 7vw;
-    margin-left:3vw;
+  width: 5vw;
+    margin-left:4vw;
+    top:-5%
+
 }
 
 
