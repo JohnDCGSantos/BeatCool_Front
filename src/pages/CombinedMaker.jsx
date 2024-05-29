@@ -101,6 +101,8 @@ const CombinedMaker = () => {
   return (
 <div className='imageCreate'>
     <div className= 'shadows'>
+    <div className= 'mainC'>
+
     <div className='create'>  <h2>Create New BeatMakerAndDrumKit</h2>
   <form onSubmit={handleSubmit}>
     <div className='name'>
@@ -176,6 +178,8 @@ const CombinedMaker = () => {
   </form>
 </div></div>
 </div>
+</div>
+
 
 
   );

@@ -114,6 +114,8 @@ navigate(`/combined/${response.data._id}`)
   return (
     <div className='imageCreate'>
     <div className= 'shadows'>
+    <div className= 'mainC'>
+
     <div className='mainerContainer'>
 
     <div className='create'>
@@ -173,7 +175,7 @@ navigate(`/combined/${response.data._id}`)
         <div className='centerBtn'><button className='submitUpdate' type='submit'>Update</button></div>
         
       </form>
-    </div></div></div></div>
+    </div></div></div></div></div>
   </div>);
 };
 

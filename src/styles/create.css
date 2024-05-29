@@ -2,7 +2,6 @@
 
 .create {
   width: 100%;
-  max-width: 600px;
   margin: 6rem 0 0 0;
   display: flex;
   flex-direction: column;
@@ -41,6 +40,7 @@ left:-10%
   
 
 }
+
 .genre{
   width: 300px;
   border-radius: 10px;
@@ -118,6 +118,8 @@ h1{
                 padding: 5px;
 }
 
+
+
 button.selected-sound-item{
   margin:5px;
   width:100px;
@@ -168,6 +170,7 @@ input{
   align-items: center;
   margin-top: 3rem;
 }
+
 button{
   margin:5px;
   width:100px;
@@ -249,4 +252,16 @@ background-color: rgba(0, 0, 0, 0.673);
     align-items: center
   }
   
+ 
+
+  button.selected-sound-items{
+  }
+}
+@media(max-width: 360px) {
+  
+ 
+
+  button.selected-sound-items{
+    width:200px
+  }
 }
