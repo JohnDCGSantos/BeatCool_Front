@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../styles/create.css'
 
-function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
+function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound }) {
   //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('Basico')
   const [selectedCategory, setSelectedCategory] = useState('Basic')
@@ -46,11 +46,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds }) {
     playSound(soundUrl)
   }*/
 
-  const playSound = soundUrl => {
-    const audio = new Audio(soundUrl)
-    audio.currentTime = 0
-    audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
-  }
+  
   
   
   const handlePlayButtonClick = soundUrl => {

@@ -1,4 +1,4 @@
-import { useState, /*useRef,*/ useEffect, useContext } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import Sounds from '../components/Sounds'
 import CreateDrumKit from '../components/CreateDrumKit'
 import CreateBeat from '../components/CreateBeat'
@@ -6,6 +6,7 @@ import '../styles/create.css'
 import { AuthContext  } from '../context/Auth.context'
 import { useNavigate } from 'react-router-dom'
 import { apiBaseUrl } from '../config'
+
 
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -16,6 +17,81 @@ const DrumPads = () => {
   const [selectedOption, setSelectedOption] = useState('')
   const {authenticateUser, user}=useContext(AuthContext)
 const nav =useNavigate()
+
+const audioContextRef = useRef(null);
+  const audioBuffersRef = useRef({});
+  const audioSourceNodesRef = useRef({});
+  const initializeAudioContext = () => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  };
+
+  const preloadSounds = async (drumSounds) => {
+    initializeAudioContext();
+    const audioContext = audioContextRef.current;
+
+    try {
+      const loadSound = async (soundUrl) => {
+        const response = await fetch(soundUrl);
+        const arrayBuffer = await response.arrayBuffer();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        audioBuffersRef.current[soundUrl] = audioBuffer;
+      };
+
+      const loadAllSounds = drumSounds.map((sound) => loadSound(sound.soundUrl));
+      
+      await Promise.all(loadAllSounds);
+
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error loading sounds:', error);
+      setIsLoading(false);
+    }
+  };
+  const playSound = async (soundUrl) => {
+    const audioContext = audioContextRef.current;
+  
+    // Ensure the audio context is resumed
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume();
+    }
+  
+    try {
+      const audioBuffer = audioBuffersRef.current[soundUrl];
+      if (!audioBuffer) {
+        console.error(`Sound URL ${soundUrl} not found in audioBuffersRef`);
+        return;
+      }
+  
+      const sourceNode = audioContext.createBufferSource();
+      sourceNode.buffer = audioBuffer;
+      sourceNode.connect(audioContext.destination);
+  
+      // For iOS, play() must be triggered by a user gesture
+      // For Android, play() can be called directly
+      const playPromise = sourceNode.start(0);
+  
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error(`Error playing sound: ${error}`);
+        });
+      }
+  
+      // Keep track of active source nodes to handle rapid playback
+      if (!audioSourceNodesRef.current[soundUrl]) {
+        audioSourceNodesRef.current[soundUrl] = [];
+      }
+      audioSourceNodesRef.current[soundUrl].push(sourceNode);
+  
+      sourceNode.onended = () => {
+        audioSourceNodesRef.current[soundUrl] = audioSourceNodesRef.current[soundUrl].filter((node) => node !== sourceNode);
+      };
+    } catch (error) {
+      console.error('Error playing sound:', error);
+    }
+  };
+  
 
 /*const preloadSounds = sounds => {
   sounds.forEach(sound => {
@@ -32,6 +108,8 @@ const nav =useNavigate()
           const parsed = await response.json()
           console.log(parsed)
           setSounds(parsed)
+          preloadSounds(parsed);
+
         //  preloadSounds(parsed)
           setIsLoading(false) // Set loading state to false once sounds are loaded
         } else {
@@ -120,6 +198,7 @@ authenticateUser()
                   sounds={sounds}
                   handleSoundSelect={handleSoundSelect}
                   selectedSounds={selectedSounds}
+                  playSound={playSound}
                 />
                 <CreateBeat selectedSounds={selectedSounds} />
               </>
@@ -129,6 +208,8 @@ authenticateUser()
                   sounds={sounds}
                   handleSoundSelect={handleSoundSelect}
                   selectedSounds={selectedSounds}
+                  playSound={playSound} // Pass playSound as a prop
+
                 />
                 <CreateDrumKit selectedSounds={selectedSounds} />
               </>
