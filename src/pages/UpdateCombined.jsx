@@ -116,7 +116,6 @@ navigate(`/combined/${response.data._id}`)
     <div className= 'shadows'>
     <div className= 'mainC'>
 
-    <div className='mainerContainer'>
 
     <div className='create'>
     <div className='dkBm'> 
@@ -176,7 +175,7 @@ navigate(`/combined/${response.data._id}`)
         
       </form>
     </div></div></div></div></div>
-  </div>);
+  );
 };
 
 export default UpdateCombined;
