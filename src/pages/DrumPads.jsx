@@ -92,7 +92,23 @@ const audioContextRef = useRef(null);
     }
   };
   
+  const stopAllSounds = () => {
+    Object.values(audioSourceNodesRef.current).forEach(nodes => {
+      nodes.forEach(node => {
+        node.stop();
+      });
+    });
+  };
 
+  useEffect(() => {
+    return () => {
+      // Cleanup when component unmounts
+      stopAllSounds();
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
+    };
+  }, []);
 /*const preloadSounds = sounds => {
   sounds.forEach(sound => {
     const audio = new Audio(sound.soundUrl)

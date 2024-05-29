@@ -420,6 +420,24 @@ const BeatCreator = ({ id }) => {
     }
   }, [beatGrid, tempo]);
 
+  const stopAllSounds = () => {
+    Object.values(audioSourceNodesRef.current).forEach(nodes => {
+      nodes.forEach(node => {
+        node.stop();
+      });
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      // Cleanup when component unmounts
+      stopAllSounds();
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
+    };
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;

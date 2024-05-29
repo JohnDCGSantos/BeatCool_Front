@@ -343,7 +343,23 @@ const DrumKit = ({ id }) => {
     }
   };
   
+  const stopAllSounds = () => {
+    Object.values(audioSourceNodesRef.current).forEach(nodes => {
+      nodes.forEach(node => {
+        node.stop();
+      });
+    });
+  };
 
+  useEffect(() => {
+    return () => {
+      // Cleanup when component unmounts
+      stopAllSounds();
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
+    };
+  }, []);
   const handleSoundClick = async (drumSound) => {
     await playSound(drumSound);
   };
