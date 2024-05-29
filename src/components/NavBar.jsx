@@ -8,6 +8,7 @@ import LoginBtn from './LoginBtn'
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
+import image from '../images/download.png'
 
 function Navbar() {
   const [click, setClick] = useState(false)
@@ -33,7 +34,9 @@ function Navbar() {
     <div className='header'>
       <div>
         <NavLink to='/home'>
-          <h1>Beat it Up</h1>
+        
+            <img className='navLogo' src={image} alt="" />
+        
         </NavLink>
         </div>
       <ul className={click ? 'nav-menu active' : 'nav-menu'}>
