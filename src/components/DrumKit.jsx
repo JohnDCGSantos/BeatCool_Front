@@ -315,21 +315,21 @@ const DrumKit = ({ id }) => {
         return;
       }
   
+      // Stop all currently playing instances of the sound
+      if (audioSourceNodesRef.current[soundUrl]) {
+        audioSourceNodesRef.current[soundUrl].forEach((node) => {
+          node.stop();
+        });
+        audioSourceNodesRef.current[soundUrl] = [];
+      }
+  
       const sourceNode = audioContext.createBufferSource();
       sourceNode.buffer = audioBuffer;
       sourceNode.connect(audioContext.destination);
   
-      // For iOS, play() must be triggered by a user gesture
-      // For Android, play() can be called directly
-      const playPromise = sourceNode.start(0);
+      sourceNode.start(0);
   
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.error(`Error playing sound: ${error}`);
-        });
-      }
-  
-      // Keep track of active source nodes to handle rapid playback
+      // Track the new source node
       if (!audioSourceNodesRef.current[soundUrl]) {
         audioSourceNodesRef.current[soundUrl] = [];
       }
