@@ -148,7 +148,7 @@ navigate(`/combined/${response.data._id}`)
             ))}
           </div>
         </div>
-        <div>
+        <div className='wrap'>
           <div className='centerBtn'>
           <label>Select Beat Maker:</label></div>
           <div className='dk'>

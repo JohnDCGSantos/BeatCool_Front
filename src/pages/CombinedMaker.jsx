@@ -147,7 +147,8 @@ const CombinedMaker = () => {
     <div className='wrap'>
 
     <label>Select Beat Maker:</label>
-    {beatMakers.length>0?(<div className='dk'>
+    {beatMakers.length>0?(
+    <div className='dk'>
       
       {beatMakers.map((beatMaker) => (
          <div  key={beatMaker._id}>
