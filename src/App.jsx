@@ -30,9 +30,9 @@ function App() {
       <Navbar />
 
       <Routes>
-      <Route path='/home' element={<Home />} />
+      <Route path='/' element={<Home />} />
 
-        <Route path='/' element={<DrumPads />} />
+        <Route path='/create' element={<DrumPads />} />
         <Route path='/drumkits/:id/update' element={<IsPrivate><UpdateDrum /></IsPrivate>} />
         <Route path='/beatCreator/:id/update' element={<IsPrivate><UpdateCreator /></IsPrivate>} />
         <Route path='/combined/:id/update' element={<IsPrivate><CombinedUpdate /></IsPrivate>} />
