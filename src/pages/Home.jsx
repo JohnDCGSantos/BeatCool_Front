@@ -20,7 +20,7 @@ const Home = () => {
                 <h2 className='selectOptionTitle'>Select an Option</h2>
                 <div className='optionSelect'>
                   <div className='selectBtnContainer'>
-                    <button className='selected-sound-items'onClick={() => nav('/')}>Create</button>
+                    <button className='selected-sound-items'onClick={() => nav('/create')}>Create</button>
                     <button className='selected-sound-items' onClick={() => nav('/drumKits')}>Drum Kit List</button>
                     <button className='selected-sound-items' onClick={() => nav('/beatCreator')}>BeatMaker List</button>
                     <button className='selected-sound-items' onClick={() => nav('/combined')}>Combined List</button>
