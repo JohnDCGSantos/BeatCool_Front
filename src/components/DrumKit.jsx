@@ -239,6 +239,7 @@ import '../styles/drumKitPage.css';
 import '../styles/create.css';
 import { apiBaseUrl } from '../config';
 
+
 const DrumKit = ({ id }) => {
   const [drumKit, setDrumKit] = useState(null);
   const [drumSounds, setDrumSounds] = useState([]);
@@ -246,7 +247,7 @@ const DrumKit = ({ id }) => {
   const audioContextRef = useRef(null);
   const audioBuffersRef = useRef({});
   const audioSourceNodesRef = useRef({});
-
+  
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
@@ -368,7 +369,7 @@ const DrumKit = ({ id }) => {
     return <div>Loading...</div>;
   }
 
-  return isLoading ? (
+  return isLoading?(
     <div className="playDr">
       <p>Loading your sounds....</p>
       <p>Please tap the screen to load sounds</p>

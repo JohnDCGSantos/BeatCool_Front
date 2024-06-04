@@ -6,10 +6,12 @@ import '../styles/create.css'
 import { AuthContext  } from '../context/Auth.context'
 import { useNavigate } from 'react-router-dom'
 import { apiBaseUrl } from '../config'
-
+import CreateTutorial from '../components/CreateTutorial'
 
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const [showTutorial, setShowTutorial] = useState(true);
+
   
   const [sounds, setSounds] = useState([])
   const [selectedSounds, setSelectedSounds] = useState([])
@@ -17,7 +19,10 @@ const DrumPads = () => {
   const [selectedOption, setSelectedOption] = useState('')
   const {authenticateUser, user}=useContext(AuthContext)
 const nav =useNavigate()
-
+  
+const handleTutorialClose = () => {
+    setShowTutorial(false);
+  };
 const audioContextRef = useRef(null);
   const audioBuffersRef = useRef({});
   const audioSourceNodesRef = useRef({});
@@ -185,58 +190,59 @@ authenticateUser()
   }
 
   return (
-    <div className='imageCreate' >
-     <div className= 'shadows'>
-      <div className='create'>
-       <div className='mainContainer'>
-      {isLoading ? (
-        <p>Loading sounds...</p>
-      ) : (
-        <div className='intro'>
-          <div className='createT'>
-        <h1>Create something,  &nbsp;  { user ? user.username : null}&nbsp;!!</h1>
-         </div>
-          <div className='selectCard'>
-            {selectedOption === '' ? (
-              <div className='selecter'>
-                <div className='optionSelect'>
-                  <div className='selectBtnContainer'>
-                    <button className='selected-sound-items'onClick={() => handleOptionSelect('beatMaker')}>Beat Maker</button>
-                    <button className='selected-sound-items' onClick={() => handleOptionSelect('drumKit')}>Drum Kit</button>
-                    <button className='selected-sound-items' onClick={handleCombo}>Combined</button>
-
-                  </div>
+    <div className='imageCreate'>
+      <div className='shadows'>
+        <div className='create'>
+          <div className='mainContainer'>
+            {showTutorial ? (
+              <CreateTutorial onClose={handleTutorialClose} />
+            ) : isLoading ? (
+              <p>Loading sounds...</p>
+            ) : (
+              <div className='intro'>
+                <div className='createT'>
+                  <h1>Create something, &nbsp; {user ? user.username : null}&nbsp;!!</h1>
+                </div>
+                <div className='selectCard'>
+                  {selectedOption === '' ? (
+                    <div className='selecter'>
+                      <div className='optionSelect'>
+                        <div className='selectBtnContainer'>
+                          <button className='selected-sound-items' onClick={() => handleOptionSelect('beatMaker')}>Beat Maker</button>
+                          <button className='selected-sound-items' onClick={() => handleOptionSelect('drumKit')}>Drum Kit</button>
+                          <button className='selected-sound-items' onClick={handleCombo}>Combined</button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : selectedOption === 'beatMaker' ? (
+                    <>
+                      <Sounds
+                        sounds={sounds}
+                        handleSoundSelect={handleSoundSelect}
+                        selectedSounds={selectedSounds}
+                        playSound={playSound}
+                      />
+                      <CreateBeat selectedSounds={selectedSounds} />
+                    </>
+                  ) : (
+                    <>
+                      <Sounds
+                        sounds={sounds}
+                        handleSoundSelect={handleSoundSelect}
+                        selectedSounds={selectedSounds}
+                        playSound={playSound}
+                      />
+                      <CreateDrumKit selectedSounds={selectedSounds} />
+                    </>
+                  )}
                 </div>
               </div>
-            ) : selectedOption === 'beatMaker' ? (
-              <>
-                <Sounds
-                  sounds={sounds}
-                  handleSoundSelect={handleSoundSelect}
-                  selectedSounds={selectedSounds}
-                  playSound={playSound}
-                />
-                <CreateBeat selectedSounds={selectedSounds} />
-              </>
-            ) : (
-              <>
-                <Sounds
-                  sounds={sounds}
-                  handleSoundSelect={handleSoundSelect}
-                  selectedSounds={selectedSounds}
-                  playSound={playSound} // Pass playSound as a prop
-
-                />
-                <CreateDrumKit selectedSounds={selectedSounds} />
-              </>
             )}
           </div>
         </div>
-      )}
-       </div>
-      </div> 
-     </div>
-    </div> )
+      </div>
+    </div>
+  );
 }
 
 export default DrumPads

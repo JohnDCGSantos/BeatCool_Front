@@ -1,11 +1,20 @@
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import '../styles/create.css'
+import Tutorial from '../components/HomeTutorial'
 const Home = () => {
+  const [showTutorial, setShowTutorial] = useState(true);
+  const handleTutorialClose = () => {
+    setShowTutorial(false);
+  };
     const nav= useNavigate()
-  
   return (
     <div className='image'>
       <div className='create'>
+        {showTutorial ? (
+    <Tutorial onClose={handleTutorialClose} 
+    />
+  ) :(
     <div className='selectCard'>
               <div className='selecter'>
                 <h2 className='selectOptionTitle'>Select an Option</h2>
@@ -18,8 +27,10 @@ const Home = () => {
 
 
                   </div> </div> </div> </div>
-                  </div> </div>
   )
-
+}
+</div> </div>
+  )
+ 
 }
 export default Home

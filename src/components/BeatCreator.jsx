@@ -284,7 +284,7 @@ const BeatCreator = ({ id }) => {
   const audioBuffersRef = useRef({});
   const audioSourceNodesRef = useRef({});
   const nextBeatTimeout = useRef(null); // Variable to store the timeout ID
-
+  
   useEffect(() => {
     const fetchDrumKit = async () => {
       try {
