@@ -33,7 +33,7 @@ function Navbar() {
   return (
     <div className='header'>
       <div>
-        <NavLink to='/home'>
+        <NavLink to='/'>
         
             <img className='navLogo' src={image} alt="" />
         
@@ -41,7 +41,7 @@ function Navbar() {
         </div>
       <ul className={click ? 'nav-menu active' : 'nav-menu'}>
         <li>
-          <NavLink to='/' onClick={closeMenu}> Create </NavLink>
+          <NavLink to='/create' onClick={closeMenu}> Create </NavLink>
         </li>
        
         <li>
