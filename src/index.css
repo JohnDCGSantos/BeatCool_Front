@@ -398,21 +398,45 @@ top:0;
 .tutorial-content {
   background: rgba(0, 0, 0, 0.036);
   width: 100%;
-  padding: 20px;
+  margin: 5px;
+  padding: 10px;
   border-radius: 8px;
   max-width: 600px;
   text-align: center;
+  box-shadow: inset 4px 4px 2px #a8d4af, inset -4px -4px 2px #a8d4af;
+
 }
 .btnSkip{
   width:80px;
   height: 50px;
   background-color: rgba(0, 0, 0, 0.327);
-  color: green;
+  color: white;
+  text-shadow: -2px -2px 0  rgba(10, 161, 231, 0.376),  
+  2px -2px 0  rgba(10, 161, 231, 0.376),
+ -2px 2px 0  rgba(10, 161, 231, 0.376),
+  2px 2px 0  rgba(10, 161, 231, 0.376);
+  box-shadow: inset 4px 4px 2px #a8d4af, inset -4px -4px 2px #a8d4af;
+font-size: 15px!important;
+border: none !important;
 }
 
 
 .tutorial-content h2 {
   margin-bottom: 20px;
+  height: 80px;
+  align-content: center;
+  background-color:rgba(8, 149, 214, 0.376) !important;
+  text-shadow: -0.5px -0.5px 0  #a8d4af,  
+  0.5px -0.5px 0  #a8d4af,
+ -0.5px 0.5px 0  #a8d4af,
+  0.5px 0.5px 0  #a8d4af !important;
+  
+}
+.skip{
+  margin-top: 30px;
+}
+.tutorial-content p {
+font-size: 18px;
 }
 
 .tutorial-content img {

@@ -55,11 +55,11 @@ const Tutorial = ({ onClose, }) => {
         <h2>{steps[step].title}</h2>
         <p>{steps[step].description}</p>
         <div className="tutorial-buttons">
-          {step > 0 && <button onClick={prevStep}>Previous</button>}
-          <button onClick={nextStep}>{step < steps.length - 1 ? 'Next' : 'Finish'}</button>
+          {step > 0 && <button className='btnSkip' onClick={prevStep}>Previous</button>}
+          <button className='btnSkip' onClick={nextStep}>{step < steps.length - 1 ? 'Next' : 'Finish'}</button>
 
         </div>
-        <div>          <button className='btnSkip' onClick={skipAll}>SKIP</button>
+        <div className='skip'>          <button className='btnSkip' onClick={skipAll}>SKIP</button>
 </div>
       </div>
     </div>
