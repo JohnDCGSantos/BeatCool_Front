@@ -1,4 +1,4 @@
-/*.playDr{
+.playDr{
   width: 100vw;
   margin: 6rem 0 0 0rem;
   align-content: center;
@@ -10,7 +10,7 @@
   ;
   height: 90vh;
   position: absolute;
-}*/
+}
 
 .playDr h2{
   width: auto; 
@@ -58,7 +58,7 @@ margin-right: 20px;
   height: 80vh;
   background-color: #2c3e50da; /* Midnight Blue */
   padding: 50px;
-  margin-top: 0;
+  margin-top: 0px;
   border-radius: 15px;
   justify-items: center;
   box-shadow: inset 4vw 8vh 20rem #cbced1, inset -4vw -8vh 20rem #fff;

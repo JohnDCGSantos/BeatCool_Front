@@ -6,6 +6,8 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
   const [pressedKey, setPressedKey] = useState(null)
   const [lastTapTime, setLastTapTime] = useState(0);
 
+ 
+
   
   useEffect(() => {
     if (drumSounds) {
@@ -91,7 +93,10 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
 
   
   return (
+   
+
     <div className="drum-kit-sounds" id="drumKitSounds">
+     
       {drumSounds &&
         drumSounds.map(drumSound => (
           <div className={`drum-sound-btn ${drumSound.soundUrl === pressedKey ? 'pressed' : ''}`} key={drumSound?.soundUrl}>

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import '../styles/create.css'
 import Tutorial from '../components/HomeTutorial'
 const Home = () => {
-  const [showTutorial, setShowTutorial] = useState(true);
+  const [showTutorial, setShowTutorial] = useState(false);
   const handleTutorialClose = () => {
     setShowTutorial(false);
   };
@@ -11,10 +11,15 @@ const Home = () => {
   return (
     <div className='image'>
       <div className='create'>
-        {showTutorial ? (
-    <Tutorial onClose={handleTutorialClose} 
-    />
-  ) :(
+        
+      <div style={{marginTop:'10px'}}>
+                <button style={{width:'100%', padding:'5px'}} className="btnSkip" onClick={() => setShowTutorial(true)}>
+                 Tutorial- Know what you can do with Beat It Up!
+              </button>
+              </div>
+            
+            {showTutorial && <Tutorial onClose={handleTutorialClose} />}
+
     <div className='selectCard'>
               <div className='selecter'>
                 <h2 className='selectOptionTitle'>Select an Option</h2>
@@ -28,7 +33,7 @@ const Home = () => {
 
                   </div> </div> </div> </div>
   )
-}
+
 </div> </div>
   )
  

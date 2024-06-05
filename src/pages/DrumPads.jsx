@@ -10,7 +10,7 @@ import CreateTutorial from '../components/CreateTutorial'
 
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
-  const [showTutorial, setShowTutorial] = useState(true);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   
   const [sounds, setSounds] = useState([])
@@ -194,15 +194,21 @@ authenticateUser()
       <div className='shadows'>
         <div className='create'>
           <div className='mainContainer'>
-            {showTutorial ? (
-              <CreateTutorial onClose={handleTutorialClose} />
-            ) : isLoading ? (
+            {isLoading ? (
               <p>Loading sounds...</p>
             ) : (
               <div className='intro'>
+                <div style={{marginTop:'10px'}}>
+                <button style={{width:'100%', padding:'5px'}} className="btnSkip" onClick={() => setShowTutorial(true)}>
+                 Tutorial- How to create?
+              </button>
+              </div>
+            
+            {showTutorial && <CreateTutorial onClose={handleTutorialClose} />}
                 <div className='createT'>
                   <h1>Create something, &nbsp; {user ? user.username : null}&nbsp;!!</h1>
                 </div>
+                
                 <div className='selectCard'>
                   {selectedOption === '' ? (
                     <div className='selecter'>
@@ -234,10 +240,13 @@ authenticateUser()
                       />
                       <CreateDrumKit selectedSounds={selectedSounds} />
                     </>
+                    
                   )}
                 </div>
+                
               </div>
             )}
+            
           </div>
         </div>
       </div>

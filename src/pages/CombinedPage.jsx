@@ -47,11 +47,11 @@ const CombinedPage = () => {
   return (
     <div className='imageKitsPlay' >
     <div className= 'shadows'>
-      <h2>Combined Page</h2>
+    
       {beatMakerAndDrumKit && (
        <div className='combined'>
           
-          <p>Name: {beatMakerAndDrumKit.name}</p>
+        
           
          {beatMaker && (
           

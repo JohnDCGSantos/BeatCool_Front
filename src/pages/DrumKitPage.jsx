@@ -10,6 +10,7 @@ const DrumKitPage = () => {
   const { id } = useParams()
 
   return(   
+    <>
   <div className='imageKitsPlay' >
      
   <div className= 'shadows'>
@@ -23,8 +24,7 @@ const DrumKitPage = () => {
       </div>
 
       </div>
-  
-)
+</>)
 }
 
 export default DrumKitPage

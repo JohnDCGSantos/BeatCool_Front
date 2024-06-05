@@ -371,6 +371,7 @@ const DrumKit = ({ id }) => {
 
   return isLoading?(
     <div className="playDr">
+     
       <p>Loading your sounds....</p>
       <p>Please tap the screen to load sounds</p>
       <button style={{ marginTop: '80px' }} onClick={handleSoundPreLoadClick}>
@@ -379,6 +380,7 @@ const DrumKit = ({ id }) => {
     </div>
   ) : (
     <div className="playDr">
+      
       <DrumKitSounds drumSounds={drumSounds} handleSoundClick={handleSoundClick} />
     </div>
   );
