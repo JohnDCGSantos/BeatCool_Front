@@ -3,8 +3,8 @@ import '../styles/create.css'
 
 function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound }) {
   //const [selectedOption, setSelectedOption] = useState('')
-  const [selectedGenre, setSelectedGenre] = useState('Basico')
-  const [selectedCategory, setSelectedCategory] = useState('Basic')
+  const [selectedGenre, setSelectedGenre] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
 
   /*const handleOptionChange = option => {
