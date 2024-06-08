@@ -23,6 +23,8 @@ const nav =useNavigate()
 const handleTutorialClose = () => {
     setShowTutorial(false);
   };
+
+  
 const audioContextRef = useRef(null);
   const audioBuffersRef = useRef({});
   const audioSourceNodesRef = useRef({});
@@ -58,6 +60,8 @@ const audioContextRef = useRef(null);
     }
   };
   const playSound = async (soundUrl) => {
+    initializeAudioContext();
+
     const audioContext = audioContextRef.current;
   
     // Ensure the audio context is resumed
