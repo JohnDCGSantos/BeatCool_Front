@@ -12,7 +12,6 @@ import unmuteIosAudio from 'unmute-ios-audio'
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [showTutorial, setShowTutorial] = useState(false);
-  const unmute = unmuteIosAudio
 
   
   const [sounds, setSounds] = useState([])
@@ -42,7 +41,7 @@ const audioContextRef = useRef(null);
 
   const preloadSounds = async (drumSounds) => {
     initializeAudioContext();
-unmute()
+    unmuteIosAudio()
     const audioContext = audioContextRef.current;
 
     try {
