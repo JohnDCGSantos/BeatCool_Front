@@ -129,7 +129,6 @@ const audioContextRef = useRef(null);
           const parsed = await response.json()
           console.log(parsed)
           setSounds(parsed)
-          preloadSounds(parsed);
 
         //  preloadSounds(parsed)
           setIsLoading(false) // Set loading state to false once sounds are loaded
