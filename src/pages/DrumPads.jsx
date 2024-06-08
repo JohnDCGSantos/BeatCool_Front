@@ -7,11 +7,12 @@ import { AuthContext  } from '../context/Auth.context'
 import { useNavigate } from 'react-router-dom'
 import { apiBaseUrl } from '../config'
 import CreateTutorial from '../components/CreateTutorial'
+import unmuteIosAudio from 'unmute-ios-audio'
 
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [showTutorial, setShowTutorial] = useState(false);
-  const [isSilent, setIsSilent] = useState(false); // State to keep track of silent mode
+  const unmute = unmuteIosAudio
 
   
   const [sounds, setSounds] = useState([])
@@ -25,31 +26,7 @@ const handleTutorialClose = () => {
     setShowTutorial(false);
   };
 
-  const checkSilentMode = async () => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    try {
-      const buffer = audioContext.createBuffer(1, 1, 22050);
-      const source = audioContext.createBufferSource();
-      source.buffer = buffer;
-      source.connect(audioContext.destination);
-      source.start(0);
-      await new Promise(resolve => setTimeout(resolve, 100));
-      source.stop(0);
-      audioContext.close();
-      return false;
-    } catch (error) {
-      return true;
-    }
-  };
-
-  const handleCheckSilentMode = () => {
-    checkSilentMode().then(result => {
-      setIsSilent(result);
-      if (result) {
-        alert("Your device is in silent mode. Please turn off silent mode for sounds to play.");
-      }
-    });
-  };
+  
 
 
 const audioContextRef = useRef(null);
@@ -65,6 +42,7 @@ const audioContextRef = useRef(null);
 
   const preloadSounds = async (drumSounds) => {
     initializeAudioContext();
+unmute()
     const audioContext = audioContextRef.current;
 
     try {
@@ -254,7 +232,6 @@ authenticateUser()
                 </div>
                 
                 <div className='selectCard'>
-                  {isSilent && <p style={{ color: 'red' }}>Your device is in silent mode. Please turn off silent mode for sounds to play.</p>}
                   {selectedOption === '' ? (
                     <div className='selecter'>
                       <div className='optionSelect'>
