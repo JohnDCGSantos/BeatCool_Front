@@ -35,61 +35,25 @@ const audioContextRef = useRef(null);
   const preloadSounds = async (drumSounds) => {
     initializeAudioContext();
     const audioContext = audioContextRef.current;
-    const maxConcurrentRequests = 5; // Adjust based on your needs
-    const delayBetweenBatches = 200; // Delay in milliseconds between batches
-  
-    const loadSound = async (soundUrl) => {
-      try {
+
+    try {
+      const loadSound = async (soundUrl) => {
         const response = await fetch(soundUrl);
-        if (!response.ok) {
-          throw new Error(`Failed to load sound: ${soundUrl}`);
-        }
         const arrayBuffer = await response.arrayBuffer();
         const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
         audioBuffersRef.current[soundUrl] = audioBuffer;
-      } catch (error) {
-        console.error(`Error loading sound: ${soundUrl}`, error);
-      }
-    };
-  
-    const loadBatch = async (batch) => {
-      await Promise.all(batch.map(sound => loadSound(sound.soundUrl)));
-    };
-  
-    const loadAllSounds = async (sounds) => {
-      for (let i = 0; i < sounds.length; i += maxConcurrentRequests) {
-        const batch = sounds.slice(i, i + maxConcurrentRequests);
-        await loadBatch(batch);
-        await new Promise(resolve => setTimeout(resolve, delayBetweenBatches)); // Throttle the requests
-      }
+      };
+
+      const loadAllSounds = drumSounds.map((sound) => loadSound(sound.soundUrl));
+      
+      await Promise.all(loadAllSounds);
+
       setIsLoading(false);
-    };
-  
-    await loadAllSounds(drumSounds);
+    } catch (error) {
+      console.error('Error loading sounds:', error);
+      setIsLoading(false);
+    }
   };
-  
-  // Fetch sounds and preload them in a useEffect
-  useEffect(() => {
-    const fetchSounds = async () => {
-      try {
-        const response = await fetch(`${apiBaseUrl}/pads`);
-        if (response.ok) {
-          const parsed = await response.json();
-          console.log(parsed);
-          setSounds(parsed);
-          preloadSounds(parsed);
-        } else {
-          console.error('Error fetching sounds:', response.status);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error('Error fetching sounds:', error);
-        setIsLoading(false);
-      }
-    };
-    fetchSounds();
-  }, []);
-  
   const playSound = async (soundUrl) => {
     const audioContext = audioContextRef.current;
   
