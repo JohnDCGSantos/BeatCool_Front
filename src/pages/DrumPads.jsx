@@ -42,11 +42,14 @@ const audioContextRef = useRef(null);
         const arrayBuffer = await response.arrayBuffer();
         const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
         audioBuffersRef.current[soundUrl] = audioBuffer;
+        console.log(`Loaded sound: ${soundUrl}`);
+
       };
 
       const loadAllSounds = drumSounds.map((sound) => loadSound(sound.soundUrl));
       
       await Promise.all(loadAllSounds);
+      console.log('All sounds preloaded');
 
       setIsLoading(false);
     } catch (error) {
@@ -129,7 +132,6 @@ const audioContextRef = useRef(null);
           const parsed = await response.json()
           console.log(parsed)
           setSounds(parsed)
-          preloadSounds(parsed);
 
         //  preloadSounds(parsed)
           setIsLoading(false) // Set loading state to false once sounds are loaded
@@ -227,6 +229,8 @@ authenticateUser()
                         handleSoundSelect={handleSoundSelect}
                         selectedSounds={selectedSounds}
                         playSound={playSound}
+                        preloadSounds={preloadSounds}
+
                       />
                       <CreateBeat selectedSounds={selectedSounds} />
                     </>
@@ -237,6 +241,8 @@ authenticateUser()
                         handleSoundSelect={handleSoundSelect}
                         selectedSounds={selectedSounds}
                         playSound={playSound}
+                        preloadSounds={preloadSounds}
+
                       />
                       <CreateDrumKit selectedSounds={selectedSounds} />
                     </>

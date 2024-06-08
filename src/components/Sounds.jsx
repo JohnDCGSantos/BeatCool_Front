@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../styles/create.css'
 
-function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound }) {
+function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preloadSounds }) {
   //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
@@ -29,7 +29,15 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound }) {
     event.stopPropagation() // Prevent event bubbling to parent elements
     handleSoundClick(soundUrl)
   }*/
- 
+  useEffect(() => {
+    if (selectedGenre && selectedCategory) {
+      const filteredSounds = sounds.filter(
+        sound => sound.genre === selectedGenre && sound.category === selectedCategory
+      );
+      preloadSounds(filteredSounds);
+    }
+  }, [selectedGenre, selectedCategory, sounds, preloadSounds]);
+
   const handleCheckboxChange = (event, sound) => {
     event.stopPropagation(); // Prevent event bubbling to parent elements
     
