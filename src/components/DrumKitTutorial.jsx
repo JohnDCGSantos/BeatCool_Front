@@ -4,6 +4,11 @@ const DrumKitTutorial = ({ onClose, }) => {
   const [step, setStep] = useState(0);
 
   const steps = [
+    {
+        title: "Unmute",
+        description: "Make sure that SILENT MODE IS OFF, is the only way to ear your sounds!! If you have volume up and ear no sound, you must TURN OFF SILENT MODE of your device.",
+      },
+     
     
       {
         title: "DrumKit",

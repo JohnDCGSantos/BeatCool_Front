@@ -7,11 +7,13 @@ import { AuthContext  } from '../context/Auth.context'
 import { useNavigate } from 'react-router-dom'
 import { apiBaseUrl } from '../config'
 import CreateTutorial from '../components/CreateTutorial'
-import unmuteIosAudio from 'unmute-ios-audio'
+import UnmuteWarn from '../components/UnmuteWarn'
 
 const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [showTutorial, setShowTutorial] = useState(false);
+  const [showWarn, setShowWarn] = useState(true);
+
 
   
   const [sounds, setSounds] = useState([])
@@ -24,7 +26,9 @@ const nav =useNavigate()
 const handleTutorialClose = () => {
     setShowTutorial(false);
   };
-
+  const handleWarnClose = () => {
+    setShowWarn(false);
+  };
   
 
 
@@ -41,7 +45,6 @@ const audioContextRef = useRef(null);
 
   const preloadSounds = async (drumSounds) => {
     initializeAudioContext();
-    unmuteIosAudio()
     const audioContext = audioContextRef.current;
 
     try {
@@ -91,7 +94,6 @@ const audioContextRef = useRef(null);
       const sourceNode = audioContext.createBufferSource();
       sourceNode.buffer = audioBuffer;
       sourceNode.connect(audioContext.destination);
-  
       // For iOS, play() must be triggered by a user gesture
       // For Android, play() can be called directly
       const playPromise = sourceNode.start(0);
@@ -102,6 +104,7 @@ const audioContextRef = useRef(null);
         });
       }
   
+
       // Keep track of active source nodes to handle rapid playback
       if (!audioSourceNodesRef.current[soundUrl]) {
         audioSourceNodesRef.current[soundUrl] = [];
@@ -213,6 +216,8 @@ authenticateUser()
   return (
     <div className='imageCreate'>
       <div className='shadows'>
+      {showWarn ? (
+        <UnmuteWarn onClose={handleWarnClose}/>):
         <div className='create'>
           <div className='mainContainer'>
             {isLoading ? (
@@ -274,6 +279,7 @@ authenticateUser()
             
           </div>
         </div>
+}
       </div>
     </div>
   );
