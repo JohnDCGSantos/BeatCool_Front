@@ -17,7 +17,6 @@ const CreateDrumKit = ({ selectedSounds }) => {
       if (!user) {
         const confirmLogin = window.confirm("Please login or sign up to create a drum kit. Would you like to log in now?");
         if (confirmLogin) {
-          // Simulate a login action
           nav('/login');
         }
         return;

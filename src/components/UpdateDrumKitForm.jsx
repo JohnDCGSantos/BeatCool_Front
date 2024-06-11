@@ -1,8 +1,8 @@
 // DrumKitForm.js
-import { useState } from 'react'
+import { useState, } from 'react'
 import Sounds from './Sounds'
 import '../index.css'
-const UpdateDrumKitForm = ({ onSubmit, defaultValues, sounds }) => {
+const UpdateDrumKitForm = ({ onSubmit, defaultValues, sounds, selectedOption, playSound, preloadSounds }) => {
   const [name, setName] = useState(defaultValues.name || '')
   const [drumPads, setDrumPads] = useState(defaultValues.drumPads || [])
 
@@ -19,7 +19,11 @@ const UpdateDrumKitForm = ({ onSubmit, defaultValues, sounds }) => {
     console.log('Sound clicked:', soundUrl);
 
   }
-
+  
+  
+ 
+  
+  
   const handleSoundSelect = sound => {
     setDrumPads(prevSelected => {
       const isSelected = prevSelected.some(prevSound => prevSound.soundUrl === sound.soundUrl)
@@ -46,12 +50,16 @@ const UpdateDrumKitForm = ({ onSubmit, defaultValues, sounds }) => {
         <Sounds
           sounds={sounds}
           selectedSounds={drumPads}
+          playSound={playSound}
+preloadSounds={preloadSounds}
+
           handleSoundClick={handleSoundClick}
           handleSoundSelect={handleSoundSelect}
-        />
+selectedOption={selectedOption}
+      />
       )}
       <div className='centerBtn'>
-      <button className='submitUpdate' type='submit'>Update  </button></div>
+      <button className='submitUpdate' type='submit'>Update</button></div>
     </form>
       )
 }

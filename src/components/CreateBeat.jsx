@@ -14,10 +14,14 @@ const CreateBeat = ({ selectedSounds }) => {
   const createBeatMaker = async () => {
     try {
       if (!user) {
-        // If user is not logged in, navigate to the signup page
-        nav('/signup');
+        const confirmLogin = window.confirm("Please login or sign up to create a drum kit. Would you like to log in now?");
+        if (confirmLogin) {
+          // Simulate a login action
+          nav('/login');
+        }
         return;
       }
+
       // Filter out null values from selectedSounds array
       const filteredSounds = selectedSounds.filter(sound => sound !== null)
 

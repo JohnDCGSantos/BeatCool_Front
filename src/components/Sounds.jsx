@@ -2,16 +2,11 @@ import { useEffect, useState } from 'react'
 import '../styles/create.css'
 
 function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preloadSounds }) {
-  //const [selectedOption, setSelectedOption] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
 
-  /*const handleOptionChange = option => {
-    setSelectedOption(option)
-    setSelectedGenre('')
-    setSelectedCategory('')
-  }*/
+  
   
   const handleGenreChange = event => {
     setSelectedGenre(event.target.value)
@@ -25,10 +20,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
     setSelectedCategory(event.target.value)
   }
 
-  /*const handleSoundNameClick = (event, soundUrl) => {
-    event.stopPropagation() // Prevent event bubbling to parent elements
-    handleSoundClick(soundUrl)
-  }*/
+  
   useEffect(() => {
     if (selectedGenre && selectedCategory) {
       const filteredSounds = sounds.filter(
@@ -49,14 +41,8 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
     setMaxSoundsReached(false); // Reset the state if the limit is not reached
     handleSoundSelect(sound);
   }
-  /*const handleSelectedSoundClick = (event, soundUrl) => {
-    event.stopPropagation() // Prevent event bubbling to parent elements
-    playSound(soundUrl)
-  }*/
+  
 
-  
-  
-  
   const handlePlayButtonClick = soundUrl => {
     playSound(soundUrl)
   }
@@ -124,7 +110,6 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
 
 
                     
-                  {/*  <span onClick={event => handleSoundNameClick(event, sound.soundUrl)}></span>*/}
                     <div className='form-check form-switch'>
                       <input
                         className='form-check-input'
@@ -147,7 +132,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
           )}
         </div>
         {maxSoundsReached && (
-  <p style={{ color: 'red' }}>You can only select a maximum of 27 sounds.</p>
+  <p style={{ color: 'red' }}>You can only select a maximum of 24 sounds.</p>
 )}
         {selectedSounds.length > 0 && (
           <>
@@ -166,7 +151,21 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
                     >
                      <span> {sound.name}</span>
                     </button>
-                     {/*<span onClick={event => handleSelectedSoundClick(event, sound.soundUrl)}></span>*/}
+                    <div className='form-check form-switch'>
+                    <input
+                      className='form-check-input'
+                      type='checkbox'
+                      checked={selectedSounds.some(
+                        selectedSound => selectedSound.soundUrl === sound.soundUrl
+                      )}
+                      onChange={event => handleCheckboxChange(event, sound)}
+                      id={`switch-${sound.soundUrl}`}
+                    />
+                    <label
+                      className='form-check-label'
+                      htmlFor={`switch-${sound.soundUrl}`}
+                    ></label>
+                  </div>
                   </li>
                 ))}
               

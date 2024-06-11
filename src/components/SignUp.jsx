@@ -5,48 +5,41 @@ import image from '../images/download.png'
 import { apiBaseUrl } from '../config'
 
 function SignUp() {
-    /*const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: ''
-      });*/
       const [email, setEmail]=useState('')
       const [userName, setUserName]=useState('')
-const [errorMessage, setErrorMessage]=useState(null)
+      const [errorMessage, setErrorMessage]=useState(null)
       const [password, SetPassword]=useState('')
-const nav=useNavigate()
+      const nav=useNavigate()
     
       
       const handleGoToLogin = () => {
-        
-          // Navigate to the DrumKitPage with the selected drum kit ID
-          nav(`/login`) // Pass the drumKitId as a parameter in the URL
-       
+          nav(`/login`)  
       }
+
       const handleSignUp = async (event) => {
         event.preventDefault(); console.log(apiBaseUrl)
-        // Handle form submission
         try {       
-
             const response= await axios.post(`${apiBaseUrl}/auth/signup`,{email, password, userName})
 console.log('here is your signup response',response)
         } catch (error) {
             console.log(error)
             setErrorMessage(error.response.data.errorMessage)
-
         }
       };
     
-      return ( <div className='image'>
-        <div className='create'>
-         
-        <div className="wrapper">
-          <div className="logo">
-            <img src={image} alt="" />
-          </div>
+      return (
+      <div className='image'>
+      <div className='create'>
+      <div className="wrapper">
+
+      <div className="logo">
+        <img src={image} alt="" />
+      </div>
+
           <div className="text-center mt-4 name">
             Beat It Up
           </div>
+
           <form className="p-3 mt-3" onSubmit={handleSignUp}>
             <div className="form-field d-flex align-items-center">
               <span className="far fa-user"></span>
@@ -90,7 +83,6 @@ console.log('here is your signup response',response)
           </form>
           {errorMessage ? <p style={{ color: 'red' , textAlign:'center'}}>{errorMessage}</p> : null}
 
-          {/* Conditional rendering of error message */}
           < div style={{width:'100%', display:'flex', justifyContent:'center'}}  >      
 
                      <button id='signUpBtn' className="btn mt-3" onClick={handleGoToLogin}   >Go to Login</button>

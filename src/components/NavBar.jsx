@@ -19,17 +19,16 @@ function Navbar() {
   const { logout}=useContext(AuthContext)
 
   const handleLogin = () => {
-    // Clear JWT token from localStorage
-   
     nav('/login')
     closeMenu()
   };
+
   const handleLogout = () => {
-    // Clear JWT token from localStorage
     nav('/login')
    logout()
    closeMenu()
   };
+  
   return (
     <div className='header'>
       <div>

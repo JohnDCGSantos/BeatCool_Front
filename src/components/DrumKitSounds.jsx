@@ -93,31 +93,26 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
 
   
   return (
-   
 
-    <div className="drum-kit-sounds" id="drumKitSounds">
-     
-      {drumSounds &&
-        drumSounds.map(drumSound => (
-          <div className={`drum-sound-btn ${drumSound.soundUrl === pressedKey ? 'pressed' : ''}`} key={drumSound?.soundUrl}>
-<button
-  className={drumSound.soundUrl === pressedKey ? 'pressed' : ''}
-  onMouseDown={() => handleSoundClick(drumSound.soundUrl)}
-  onTouchStart={(event) =>
-    handleTouchStart(event, drumSound.soundUrl)
-  }
-  onTouchEnd={handleTouchEnd}
-
->
+<div className="drum-kit-sounds" id="drumKitSounds">
+{drumSounds &&
+  drumSounds.map(drumSound => (
+    <div className={`drum-sound-btn ${drumSound.soundUrl === pressedKey ? 'pressed' : ''}`} key={drumSound?.soundUrl}>
+     <button
+      className={drumSound.soundUrl === pressedKey ? 'pressed' : ''}
+      onMouseDown={() => handleSoundClick(drumSound.soundUrl)}
+      onTouchStart={(event) => handleTouchStart(event, drumSound.soundUrl)}
+      onTouchEnd={handleTouchEnd}
+     >
          
-              <span>{drumSound?.name}</span>
+        <span>{drumSound?.name}</span>
              
-              <span className='span2'>{keyAssignments[drumSound?.soundUrl]}</span> 
+        <span className='span2'>{keyAssignments[drumSound?.soundUrl]}</span> 
 
-            </button>
-          </div>
-        ))}
-    </div>
+      </button>
+      </div>
+    ))}
+</div>
   )
 }
 
