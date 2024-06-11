@@ -10,7 +10,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
   
   const handleGenreChange = event => {
     setSelectedGenre(event.target.value)
-    setSelectedCategory('') // Reset selected category when genre changes
+    setSelectedCategory('') // Reseting selected category when genre changes
   }
   useEffect(() => {
     handleGenreChange
@@ -38,7 +38,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
       return;
     }
     
-    setMaxSoundsReached(false); // Reset the state if the limit is not reached
+    setMaxSoundsReached(false); // Reseting the state if the limit is not reached
     handleSoundSelect(sound);
   }
   

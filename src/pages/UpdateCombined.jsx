@@ -16,7 +16,6 @@ const UpdateCombined = () => {
   const [selectedBeatMakers, setSelectedBeatMakers] = useState([]);
   const {authenticateUser, user}=useContext(AuthContext)
   useEffect(() => {
-    // This effect runs only once when the component mounts
     authenticateUser(); // Ensure user is authenticated
   }, []);
   
@@ -87,14 +86,12 @@ const UpdateCombined = () => {
       });
       console.log('BeatMakerAndDrumKit updated:', response.data);
 navigate(`/combined/${response.data._id}`)
-      // Redirect to the details page or any other page as needed
     } catch (error) {
       console.error('Error updating BeatMakerAndDrumKit:', error);
     }
   };
   const handleDrumKitClick = async drumKitId => {
     try {
-      // Navigate to the DrumKitPage with the selected drum kit ID
       navigate(`/drumkits/${drumKitId}`) // Pass the drumKitId as a parameter in the URL
     } catch (error) {
       console.error('Error navigating to drum kit:', error)
@@ -109,7 +106,6 @@ navigate(`/combined/${response.data._id}`)
     }
   }
 
-  // Your handleDrumKitToggle, handleBeatMakerToggle, handleDrumKitClick, handleBeatMakerClick functions remain the same
 
   return (
     <div className='imageCreate'>

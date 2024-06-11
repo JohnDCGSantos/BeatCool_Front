@@ -144,7 +144,7 @@ const UpdateDrum = () => {
 
     fetchData()     
 
-  }, [id]) // Include id in the dependency array to refetch data when id changes
+  }, [id]) 
 
   const handleUpdateDrum = async (updatedDrumKit) => {
     try {

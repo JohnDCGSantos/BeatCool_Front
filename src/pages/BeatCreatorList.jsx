@@ -11,10 +11,11 @@ const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
   const nav = useNavigate()
   const [selectedBeatCreators, setSelectedBeatCreators] = useState([])
   const {authenticateUser, user}=useContext(AuthContext)
+
   useEffect(() => {
-    // This effect runs only once when the component mounts
     authenticateUser(); // Ensure user is authenticated
   }, []);
+
   useEffect(() => {         
      console.log('apiBaseUrl is', apiBaseUrl)
 
@@ -38,7 +39,6 @@ const BeatCreatorsList = ({ showCheckboxes, onSelect}) => {
 
   const handleBeatCreatorClick = async beatCreatorId => {
     try {
-      // Navigate to the BeatCreatorPage with the selected beat creator ID
       nav(`/beatCreator/${beatCreatorId}`) // Pass the beatCreatorId as a parameter in the URL
     } catch (error) {
       console.error('Error navigating to beat creator:', error)

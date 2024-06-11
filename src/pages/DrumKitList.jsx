@@ -12,7 +12,6 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
   const [selectedDrumKits, setSelectedDrumKits] = useState([])
   const {authenticateUser, user}=useContext(AuthContext)
   useEffect(() => {
-    // This effect runs only once when the component mounts
     authenticateUser(); // Ensure user is authenticated
   }, []);
   
@@ -26,7 +25,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
         console.log(user)
         const userDrumKits = response.data.filter(drumKit => drumKit.user === user._id);
        
-  console.log(userDrumKits); // Display only the drum kits created by the authenticated user
+  console.log(userDrumKits); 
         setDrumKits(userDrumKits);
         
  }
@@ -40,8 +39,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
   
   const handleDrumKitClick = async drumKitId => {
     try {
-      // Navigate to the DrumKitPage with the selected drum kit ID
-      nav(`/drumkits/${drumKitId}`) // Pass the drumKitId as a parameter in the URL
+      nav(`/drumkits/${drumKitId}`) 
     } catch (error) {
       console.error('Error navigating to drum kit:', error)
     }
@@ -58,14 +56,12 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
   }
 
   const handleConfirmSelection = () => {
-    // Pass the selected drum kits to the parent component
     onSelect(selectedDrumKits)
   }
   const handleDelete = async drumKitId => {
     const isConfirmed = window.confirm('Are you sure you want to delete this drum kit?');
     if (isConfirmed) {
       try {
-        // Proceed with the deletion if confirmed
         const response = await fetch(`${apiBaseUrl}/drumKits/${drumKitId}`, {
           method: 'DELETE',
         });
@@ -74,7 +70,6 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
           setDrumKits(prevDrumKits =>
             prevDrumKits.filter(item => item._id !== drumKitId)
           );
-          // Navigate to the drum kits page after successful deletion
           nav('/drumKits');
         }
       } catch (error) {

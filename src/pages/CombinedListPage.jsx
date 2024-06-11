@@ -11,7 +11,6 @@ const CombinedListPage = () => {
  
 const navigate=useNavigate()
   useEffect(() => {
-    // This effect runs only once when the component mounts
     authenticateUser(); // Ensure user is authenticated
   }, []);
   
@@ -36,7 +35,6 @@ const navigate=useNavigate()
     const isConfirmed = window.confirm('Are you sure you want to delete this drum kit?');
     if (isConfirmed) {
       try {
-        // Proceed with the deletion if confirmed
         const response = await fetch(`${apiBaseUrl}/beatMakerAndDrumKit/${beatMakerAndDrumKitId}`, {
           method: 'DELETE',
         });
@@ -46,7 +44,6 @@ const navigate=useNavigate()
           setBeatMakerAndDrumKits(prevBeatMakerAndDrumKits =>
             prevBeatMakerAndDrumKits.filter(item => item._id !== beatMakerAndDrumKitId)
           );
-          // Navigate to the drum kits page after successful deletion
           navigate('/combined');
         }
       } catch (error) {

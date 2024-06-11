@@ -56,7 +56,7 @@ const CombinedMaker = () => {
   }, [])
 
   if (isLoading ) {
-    return <div>Loading...</div>; // Placeholder for loading state
+    return <div>Loading...</div>;
   }
 
   
@@ -83,16 +83,14 @@ const CombinedMaker = () => {
   
   const handleDrumKitClick = async drumKitId => {
     try {
-      // Navigate to the DrumKitPage with the selected drum kit ID
-      nav(`/drumkits/${drumKitId}`) // Pass the drumKitId as a parameter in the URL
+      nav(`/drumkits/${drumKitId}`) 
     } catch (error) {
       console.error('Error navigating to drum kit:', error)
     }
   }
   const handleBeatMakerClick = async beatMakerId => {
     try {
-      // Navigate to the DrumKitPage with the selected drum kit ID
-      nav(`/beatCreator/${beatMakerId}`) // Pass the drumKitId as a parameter in the URL
+      nav(`/beatCreator/${beatMakerId}`) 
     } catch (error) {
       console.error('Error navigating to drum kit:', error)
     }

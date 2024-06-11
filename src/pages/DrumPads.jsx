@@ -136,16 +136,9 @@ const audioContextRef = useRef(null);
       }
     };
   }, []);
-/*const preloadSounds = sounds => {
-  sounds.forEach(sound => {
-    const audio = new Audio(sound.soundUrl)
-    audio.preload = 'auto'
-    audioRefs.current[sound.soundUrl] = audio
-  })
-}*/
+
   useEffect(() => {
    
-      // Function to check if the device is in silent mode
       
     const fetchSounds = async () => {
       try {
@@ -155,34 +148,29 @@ const audioContextRef = useRef(null);
           console.log(parsed)
           setSounds(parsed)
 
-        //  preloadSounds(parsed)
-          setIsLoading(false) // Set loading state to false once sounds are loaded
+          setIsLoading(false) 
         } else {
           console.error('Error fetching sounds:', response.status)
-          setIsLoading(false) // Set loading state to false if there's an error
+          setIsLoading(false) 
         }
       } catch (error) {
         console.error('Error fetching sounds:', error)
-        setIsLoading(false) // Set loading state to false if there's an error
+        setIsLoading(false) 
       }
     }
     fetchSounds()
   }, [])
 
 
-/*useEffect(()=>{
-authenticateUser()
-},[])*/
+
 
 
   const handleSoundSelect = sound => {
     setSelectedSounds(prevSelected => {
       const isSelected = prevSelected.some(prevSound => prevSound.soundUrl === sound.soundUrl)
       if (isSelected) {
-        // If the sound is already selected, remove it
         return prevSelected.filter(prevSound => prevSound.soundUrl !== sound.soundUrl)
       } else {
-        // If the sound is not selected, add it to the selectedSounds array
         return [...prevSelected, sound]
       }
     })
@@ -196,18 +184,9 @@ authenticateUser()
   }
 
 
-  /*const playSound = soundUrl => {
-    const audio = audioRefs.current[soundUrl]
-    if (audio) {
-      audio.currentTime = 0
-      audio.play().catch(error => console.error(`Failed to play sound: ${error}`))
-    }
-  }*/
+  
 
-  /*const handleSoundClick = soundUrl => {
-    playSound(soundUrl)
-    
-  }*/
+  
 
   const handleOptionSelect = option => {
     setSelectedOption(option)
