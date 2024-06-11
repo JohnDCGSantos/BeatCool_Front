@@ -1,20 +1,28 @@
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import '../styles/create.css'
 import Tutorial from '../components/HomeTutorial'
+import { AuthContext  } from '../context/Auth.context'
+
 const Home = () => {
   const [showTutorial, setShowTutorial] = useState(false);
+  
   const handleTutorialClose = () => {
     setShowTutorial(false);
   };
+  const {authenticateUser, user}=useContext(AuthContext)
     const nav= useNavigate()
+    useEffect(()=>{
+      authenticateUser()
+      },[])
+      
   return (
     <div className='image'>
       <div className='create'>
         
       <div style={{marginTop:'10px'}}>
                 <button style={{width:'100%', padding:'5px'}} className="btnSkip" onClick={() => setShowTutorial(true)}>
-                 Tutorial- Know what you can do with Beat It Up!
+                 Tutorial- Know what you can do with Beat It Up,  &nbsp; {user ? user.username : null}&nbsp;!!
               </button>
               </div>
             

@@ -20,7 +20,7 @@ const DrumPads = () => {
   const [selectedSounds, setSelectedSounds] = useState([])
   //const audioRefs = useRef({})
   const [selectedOption, setSelectedOption] = useState('')
-  const {authenticateUser, user}=useContext(AuthContext)
+  const {/*authenticateUser,*/ user}=useContext(AuthContext)
 const nav =useNavigate()
   
 const handleTutorialClose = () => {
@@ -170,9 +170,9 @@ const audioContextRef = useRef(null);
   }, [])
 
 
-useEffect(()=>{
+/*useEffect(()=>{
 authenticateUser()
-},[])
+},[])*/
 
 
   const handleSoundSelect = sound => {
@@ -212,6 +212,8 @@ authenticateUser()
   const handleOptionSelect = option => {
     setSelectedOption(option)
   }
+
+  
 
   return (
     <div className='imageCreate'>

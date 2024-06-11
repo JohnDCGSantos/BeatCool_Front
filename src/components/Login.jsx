@@ -1,4 +1,4 @@
-import { useState, } from 'react';
+import {  useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import image from '../images/download.png'
@@ -22,7 +22,7 @@ const nav=useNavigate()
         [e.target.name]: e.target.value
       });
     };*/
-  
+    
     const handleLogin = async (e) => {
       e.preventDefault();
       try {
@@ -32,6 +32,7 @@ const nav=useNavigate()
         })
         console.log('here is login response', response);
         localStorage.setItem('authToken', response.data.token)
+        
         nav('/')   
       } catch (error) {
         console.log(error);
@@ -40,6 +41,8 @@ const nav=useNavigate()
     
       // Handle form submission
     };
+
+   
     const handleGoToSignUp = () => {
         
         // Navigate to the DrumKitPage with the selected drum kit ID
