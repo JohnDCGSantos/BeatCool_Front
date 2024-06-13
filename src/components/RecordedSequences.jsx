@@ -58,12 +58,12 @@ const RecordedSequences = () => {
   }
 
   return (
-    <div>
-      <h2>Recorded Sequences</h2>
-      <ul>
+    <div style={{position:'absolute'}}>
+     
+      <ul style={{position:'absolute'}}>
         {recordedSequences.map((sequence, index) => (
-          <li style={{ listStyle: 'none', marginBottom: '5px' }} key={index}>
-            <button onClick={() => playSequence(sequence)}>{sequence.name}</button>
+          <li style={{ listStyle: 'none', marginBottom: '5px' , position:'absolute'}} key={index}>
+            <button style={{position:'absolute'}} onClick={() => playSequence(sequence)}>{sequence.name}</button>
           </li>
         ))}
       </ul>

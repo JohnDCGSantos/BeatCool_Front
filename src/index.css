@@ -420,6 +420,16 @@ font-size: 15px!important;
 border: none !important;
 }
 
+.recording-controls{
+  position: absolute;
+  bottom: 15%;
+  height: 10px!important;
+}
+.recording-controls button{
+ 
+  height: 30px!important;
+  color:red
+}
 
 .tutorial-content h2 {
   margin-bottom: 20px;

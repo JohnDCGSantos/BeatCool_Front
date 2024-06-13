@@ -10,16 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "audiobuffer-to-wav": "^1.0.0",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "express": "^4.19.1",
+    "lamejs": "^1.2.1",
     "lodash.debounce": "^4.0.8",
     "nodemon": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.1.0",
     "react-router-dom": "^6.22.1",
-    "unmute-ios-audio": "^3.3.0"
+    "unmute-ios-audio": "^3.3.0",
+    "wav-encoder": "^1.3.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",
