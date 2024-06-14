@@ -371,7 +371,7 @@ import '../styles/drumKitPage.css';
 import '../styles/create.css';
 import { apiBaseUrl } from '../config';
 
-const DrumKit = ({ id }) => {
+const DrumKit = ({ id, enableRecording }) => {
   const [drumKit, setDrumKit] = useState(null);
   const [drumSounds, setDrumSounds] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -609,12 +609,14 @@ useEffect(()=>{
   ) : (
     <div className="playDr">
       <DrumKitSounds drumSounds={drumSounds} handleSoundClick={handleSoundClick} />
+      {!enableRecording && (
       <div className='recording-controls'>
         <button onClick={startRecording}>Start Recording</button>
         <button onClick={stopRecording}>Stop Recording</button>
-        <button onClick={playRecordedSounds}>Play Recorded Sequence</button>
+        <button onClick={playRecordedSounds}>Play Record</button>
         <button onClick={exportToWav}>Export to WAV</button>
       </div>
+        )}
     </div>
   );
 };

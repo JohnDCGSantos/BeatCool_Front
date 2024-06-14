@@ -62,7 +62,7 @@ const CombinedPage = () => {
           
         {drumKit && (
             <div className='drumMaker'>
-              <DrumKit id={drumKitId} />
+              <DrumKit id={drumKitId}  enableRecording={true} />
             </div>
           )}
       </div>)}

@@ -421,15 +421,53 @@ border: none !important;
 }
 
 .recording-controls{
+  width:80%;
   position: absolute;
-  bottom: 15%;
-  height: 10px!important;
+  bottom: 5%;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: auto!important;
+  background-color: #66666692;
+  border-radius: 5px;
+
 }
+.recordingBM-controls{
+  position: absolute;
+  bottom: -17%;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: auto!important; 
+   width:90%;
+
+}
+.recordingBM-controls button{
+ 
+  height: 55px!important;
+  color:red
+}
+
 .recording-controls button{
  
   height: 30px!important;
   color:red
 }
+@media screen and (min-width:482px)  {
+  .recordingBM-controls{
+    
+    bottom: -6%;
+    
+  }
+  }
+
+  @media screen and (min-width:477px) and (max-width: 549px) {
+    .recording-controls{
+      
+      bottom: 1%;
+      
+    }
+    }
 
 .tutorial-content h2 {
   margin-bottom: 20px;
