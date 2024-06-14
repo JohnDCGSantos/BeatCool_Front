@@ -25,7 +25,7 @@ flex-direction: column;
   box-shadow: inset 18px 18px 18px rgba(0, 128, 0, 0.273), inset -18px -18px 18px rgba(0, 128, 0, 0.273);
 
   width: 90vw;
-  margin: 130px 0 0 0rem;
+  margin: 0px 0 0 0rem;
   align-content: center;
   align-items: center;
   display: flex;
@@ -36,6 +36,8 @@ flex-direction: column;
   border-radius: 10px;
   height: 75vh;
  left:5%;
+ position: relative;
+ bottom: -15%;
  padding: 20px;
 
 
@@ -234,6 +236,7 @@ height: 10px;
 /* Center the control buttons vertically within their container */
 .carousel-control-prev,
 .carousel-control-next { 
+  position: fixed;
   height: 100%; /* Adjust size as needed */
   margin-top: 2vh;
  z-index: 9999;
@@ -267,7 +270,7 @@ top:-5%
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   
-  height: 90%; /* Adjust size as needed */
+  height: 10%; /* Adjust size as needed */
  
 }
 input{
