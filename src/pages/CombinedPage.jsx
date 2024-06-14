@@ -56,7 +56,7 @@ const CombinedPage = () => {
          {beatMaker && (
           
             <div className='beatMaker'>
-              <BeatCreator id={beatMakerId} />
+              <BeatCreator id={beatMakerId}  enableRecording={true} />
             </div>
           )} 
           

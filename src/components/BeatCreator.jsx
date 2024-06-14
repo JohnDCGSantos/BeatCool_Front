@@ -275,7 +275,7 @@ import axios from 'axios';
 import '../styles/BeatCreator.css';
 import { apiBaseUrl } from '../config';
 
-const BeatCreator = ({ id }) => {
+const BeatCreator = ({ id, enableRecording }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [tempo, setTempo] = useState(120); 
   const [currentSoundIndex, setCurrentSoundIndex] = useState(null);
@@ -292,12 +292,7 @@ const BeatCreator = ({ id }) => {
   const [recording, setRecording] = useState(false);
   const [recordedSequence, setRecordedSequence] = useState([]);
   const [isPlayingSequence, setIsPlayingSequence] = useState(false);
-  const timeoutIdsRef = useRef({});
-
-  const addTimeoutIdForSound = (key, timeoutId) => {
-    timeoutIdsRef.current[key] = timeoutIdsRef.current[key] || [];
-    timeoutIdsRef.current[key].push(timeoutId);
-  };
+  
 
   const startRecording = () => {
     setRecording(true);
@@ -669,22 +664,24 @@ const BeatCreator = ({ id }) => {
             inputMode='numeric'
             style={{ marginRight: '10px' }}
           />
-        </div>
+        </div> </div>
+        {!enableRecording && (
         <div className='recordingBM-controls'>
-        <button onClick={startRecording} disabled={recording || isPlayingSequence}>
+        <button className='recB' onClick={startRecording} disabled={recording || isPlayingSequence}>
           Start Recording
         </button>
-        <button onClick={stopRecording} disabled={!recording}>
+        <button className='recB' onClick={stopRecording} disabled={!recording}>
           Stop Recording
         </button>
-        <button onClick={exportToWav} disabled={recording || recordedSequence.length === 0}>
+        <button className='recB' onClick={exportToWav} disabled={recording || recordedSequence.length === 0}>
           Export to WAV
         </button>
-        <button onClick={playRecordedSequence} disabled={recording || recordedSequence.length === 0}>
+        <button className='recB' onClick={playRecordedSequence} disabled={recording || recordedSequence.length === 0}>
           Play Record
         </button>
         </div>
-      </div>
+        )}
+     
     </div>
   );
 };

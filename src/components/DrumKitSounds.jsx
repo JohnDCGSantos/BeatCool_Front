@@ -7,7 +7,6 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
   const [lastTapTime, setLastTapTime] = useState(0);
 
  
-
   
   useEffect(() => {
     if (drumSounds) {
