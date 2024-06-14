@@ -420,7 +420,7 @@ font-size: 15px!important;
 border: none !important;
 }
 
-.recording-controls{
+.recording-control{
   width:80%;
   position: absolute;
   bottom: 5%;
@@ -431,7 +431,7 @@ border: none !important;
   border-radius: 5px;
 
 }
-.recordingBM-control{
+.recordingBM-controls{
   position: absolute;
   bottom: -22%;
   display:flex;
