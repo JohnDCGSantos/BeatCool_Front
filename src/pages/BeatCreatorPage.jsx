@@ -13,7 +13,7 @@ const BeatCreatorPage = () => {
   };
   return( 
   <div className='imageKitsPlay' >
-    <div className= 'shadows'>
+    <div className= 'shadowsBM'>
     {showTutorial ? (
     <BeatMakerTutorial onClose={handleTutorialClose} />):
       <BeatCreator id={id} />
