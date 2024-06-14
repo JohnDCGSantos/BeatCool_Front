@@ -431,7 +431,7 @@ border: none !important;
   border-radius: 5px;
 
 }
-.recordingBM-controls{
+.recordingBM-control{
   position: absolute;
   bottom: -22%;
   display:flex;
