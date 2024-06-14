@@ -354,7 +354,7 @@ position: relative
 }
 .imageKitsPlayBM{
   position: fixed;
-  overflow-y:hidden;
+  overflow:hidden;
   width: 100%;
   height: 100%;
   background-size:cover;
@@ -378,7 +378,7 @@ top:0;
   width: 100%;
   height: 100%;
   position: fixed;
-  overflow-y:hidden ;
+  overflow:hidden ;
   padding-top: 0px;
 
 }

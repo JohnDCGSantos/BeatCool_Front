@@ -30,11 +30,11 @@ flex-direction: column;
   align-items: center;
   display: flex;
   flex-direction: column;
- overflow-y:hidden ;
+ overflow:hidden ;
   justify-content: space-evenly
   ;
   border-radius: 10px;
-  height: 70vh;
+  height: 75vh;
  left:5%;
  padding: 20px;
 
@@ -68,7 +68,7 @@ flex-direction: column;
 }
 
 .carousel-item{
-  overflow-y: hidden;
+  overflow: hidden;
 }
 .carousel-inner {
   overflow-y: auto;
@@ -109,7 +109,7 @@ border-radius: 10px;
 
 /* Controls container */
 .controls {
-  overflow-x: hidden;
+  overflow: hidden;
   align-items: center;
  justify-content: space-evenly;
  height: 120px;
@@ -236,6 +236,7 @@ height: 10px;
 .carousel-control-next { 
  
   height: 100%; /* Adjust size as needed */
+  margin-top: 2vh;
  z-index: 9999;
 color: #00000063;
 }
@@ -256,6 +257,7 @@ span.carousel-control-prev-icon{
 .carousel-control-prev { 
   width: 5vw;
     margin-left:4vw;
+    top:-5%
 
 }
 
@@ -277,7 +279,7 @@ input{
     
     margin: 90px 0 0 0rem;
     
-    height: 70vh;
+    height: 75vh;
    left:5%;
    
   
@@ -290,7 +292,7 @@ input{
     
     margin: 82px 0 0 0rem;
     
-    height: 70vh;
+    height: 75vh;
    left:5%;
   padding-bottom: 5px;
   
