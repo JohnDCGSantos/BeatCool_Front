@@ -360,7 +360,6 @@ position: relative
   background-size:cover;
   background-position: center ;
   background-repeat: no-repeat;
-  padding-top: 10px;
   background-image: url('../src/images/drumPage.jpeg')!important;
 }
 .shadows{
