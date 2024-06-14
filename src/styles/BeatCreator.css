@@ -34,7 +34,7 @@ flex-direction: column;
   justify-content: space-evenly
   ;
   border-radius: 10px;
-  height: 75vh;
+  height: 70vh;
  left:5%;
  padding: 20px;
 
@@ -234,9 +234,8 @@ height: 10px;
 /* Center the control buttons vertically within their container */
 .carousel-control-prev,
 .carousel-control-next { 
-  position: fixed;
+ 
   height: 100%; /* Adjust size as needed */
-  margin-top: 2vh;
  z-index: 9999;
 color: #00000063;
 }
@@ -253,12 +252,10 @@ span.carousel-control-prev-icon{
 .carousel-control-next { 
   width: 5vw;
   left:85%;
-top:-5%
 }
 .carousel-control-prev { 
   width: 5vw;
     margin-left:4vw;
-    top:-5%
 
 }
 
@@ -280,7 +277,7 @@ input{
     
     margin: 90px 0 0 0rem;
     
-    height: 75vh;
+    height: 70vh;
    left:5%;
    
   
@@ -293,7 +290,7 @@ input{
     
     margin: 82px 0 0 0rem;
     
-    height: 75vh;
+    height: 70vh;
    left:5%;
   padding-bottom: 5px;
   
