@@ -427,7 +427,6 @@ border: none !important;
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
-  height: auto!important;
   background-color: #66666692;
   border-radius: 5px;
 
@@ -450,7 +449,7 @@ border: none !important;
 }
 
 .rec{
- 
+ border-radius: none;
   height: 30px;
   color:red
 }
