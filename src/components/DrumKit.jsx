@@ -610,7 +610,7 @@ useEffect(()=>{
     <div className="playDr">
       <DrumKitSounds drumSounds={drumSounds} handleSoundClick={handleSoundClick} />
       {!enableRecording && (
-      <div className='recording-control'>
+      <div className='recordingD-controls'>
         <button  onClick={startRecording}>Start Recording</button>
         <button  onClick={stopRecording}>Stop Recording</button>
         <button  onClick={playRecordedSounds}>Play Record</button>
