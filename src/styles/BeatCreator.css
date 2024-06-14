@@ -329,11 +329,10 @@ input{
   .controls{
     flex-direction: column-reverse;
     justify-content: center;
-    height: 180px;
+    height: 120px;
     padding: 50px;
   }
   #startBeat{
-    width:180px
   }
 }
 

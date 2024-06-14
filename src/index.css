@@ -421,7 +421,11 @@ top:0;
 font-size: 15px!important;
 border: none !important;
 }
-
+.startAndBpm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .recordingD-controls{
   width:80%;
   position: absolute;

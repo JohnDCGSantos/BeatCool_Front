@@ -653,8 +653,9 @@ import { IoDownload } from "react-icons/io5";const BeatCreator = ({ id, enableRe
         ))}
       </div>
       <div className='controls'>
-        <button style={{width:'150px'}}id='startBeat' onClick={() => setIsPlaying(!isPlaying)}>
-          {isPlaying ? 'Stop' : 'Start'} Beat
+        <div className='startAndBpm' >
+        <button style={{width:'80px'}}id='startBeat' onClick={() => setIsPlaying(!isPlaying)}>
+          {isPlaying ? 'Stop' : 'Start'} 
         </button>
         <div className='bpm'>
           <label>BPM</label>
@@ -675,7 +676,7 @@ import { IoDownload } from "react-icons/io5";const BeatCreator = ({ id, enableRe
             inputMode='numeric'
             style={{ marginRight: '10px' }}
           />
-        </div> 
+        </div> </div>
         {!enableRecording && (
         <div className='recordingBM-controls'>
         <button className='recB' onClick={toggleRecording} disabled={isPlayingSequence}>
