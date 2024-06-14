@@ -451,7 +451,7 @@ border: none !important;
 .recordingD-controls button{
  border-radius: 0px;
   height: 30px;
-  color:red
+  color:white
 }
 @media screen and (min-width:482px)  {
   .recordingBM-controls{
