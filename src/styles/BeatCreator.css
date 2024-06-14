@@ -17,7 +17,7 @@ flex-direction: column;
     top: 70vh;
     left: 50%;
     transform: translate(-50%, -70%);
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 #carouselExample{          
@@ -60,7 +60,7 @@ flex-direction: column;
   padding-top: 20px;
   padding-bottom: 20px;
   box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
-
+overflow: hidden;
   width: 100%;
   background-color: rgba(145, 143, 143, 0.475);
   border-radius: 20px;
@@ -234,9 +234,7 @@ height: 10px;
 /* Center the control buttons vertically within their container */
 .carousel-control-prev,
 .carousel-control-next { 
- 
   height: 100%; /* Adjust size as needed */
-  margin-top: 2vh;
  z-index: 9999;
 color: #00000063;
 }
@@ -244,6 +242,8 @@ span.carousel-control-prev-icon,
 span.carousel-control-next-icon { 
   background-color: #0fb30088;
   box-shadow: inset 3px 3px 3px #cbced1, inset -3px -3px 3px #fff;
+height: 100%;
+ position: relative;
 
 }
 span.carousel-control-prev-icon{
@@ -257,7 +257,6 @@ span.carousel-control-prev-icon{
 .carousel-control-prev { 
   width: 5vw;
     margin-left:4vw;
-    top:-5%
 
 }
 
