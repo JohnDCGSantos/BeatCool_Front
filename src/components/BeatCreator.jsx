@@ -274,8 +274,10 @@ import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/BeatCreator.css';
 import { apiBaseUrl } from '../config';
-
-const BeatCreator = ({ id, enableRecording }) => {
+import { BsRecord2 } from "react-icons/bs";
+import { BsStopFill } from 'react-icons/bs';
+import { IoPlayCircleSharp } from "react-icons/io5";
+import { IoDownload } from "react-icons/io5";const BeatCreator = ({ id, enableRecording }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [tempo, setTempo] = useState(120); 
   const [currentSoundIndex, setCurrentSoundIndex] = useState(null);
@@ -389,7 +391,13 @@ const BeatCreator = ({ id, enableRecording }) => {
 
     return new Blob([result], { type: 'audio/wav' });
   };
-
+  const toggleRecording = () => {
+    if (recording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  };
   const playRecordedSequence = async () => {
     if (recordedSequence.length === 0 || isPlayingSequence) return;
 
@@ -590,9 +598,12 @@ const BeatCreator = ({ id, enableRecording }) => {
     };
   }, []);
 
+
+
   return isLoading ? (
     <div>Loading sounds...</div>
   ) : (
+    
     <div id='carouselExample' className='carousel slide'>
       <div className='carousel-inner'>
         {[...Array(4).keys()].map((slide, slideIndex) => (
@@ -642,7 +653,7 @@ const BeatCreator = ({ id, enableRecording }) => {
         ))}
       </div>
       <div className='controls'>
-        <button onClick={() => setIsPlaying(!isPlaying)}>
+        <button style={{width:'150px'}}id='startBeat' onClick={() => setIsPlaying(!isPlaying)}>
           {isPlaying ? 'Stop' : 'Start'} Beat
         </button>
         <div className='bpm'>
@@ -664,25 +675,25 @@ const BeatCreator = ({ id, enableRecording }) => {
             inputMode='numeric'
             style={{ marginRight: '10px' }}
           />
-        </div> </div>
+        </div> 
         {!enableRecording && (
         <div className='recordingBM-controls'>
-        <button className='recB' onClick={startRecording} disabled={recording || isPlayingSequence}>
-          Start Recording
+        <button className='recB' onClick={toggleRecording} disabled={isPlayingSequence}>
+          {recording ? <BsStopFill style={{fill:'red', fontSize: '20px'}}  /> : <BsRecord2 style={{fill:'red', fontSize: '20px'}}  />}
         </button>
-        <button className='recB' onClick={stopRecording} disabled={!recording}>
-          Stop Recording
+        
+        <button className='recB' onClick={playRecordedSequence} disabled={recording || recordedSequence.length === 0}>
+       <IoPlayCircleSharp/>
         </button>
         <button className='recB' onClick={exportToWav} disabled={recording || recordedSequence.length === 0}>
-          Export to WAV
-        </button>
-        <button className='recB' onClick={playRecordedSequence} disabled={recording || recordedSequence.length === 0}>
-          Play Record
+     <IoDownload/>
         </button>
         </div>
         )}
-     
-    </div>
+        </div> 
+        
+    
+   </div>
   );
 };
 

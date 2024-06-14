@@ -36,7 +36,7 @@ flex-direction: column;
   border-radius: 10px;
   height: 80vh;
  left:5%;
- padding: 30px;
+ padding: 20px;
 
 
 }
@@ -136,6 +136,7 @@ padding: 5px;
 
 /* Button style */
 .controls button {
+  display: flex;
   padding: 1px 5px ;
   margin-bottom: 8px;
   font-size: 15px;
@@ -145,10 +146,12 @@ padding: 5px;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
-width: 90px;
+width: 55px;
 height:35px;
 position: relative;
 box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+align-items: center;
+justify-content: center;
 
 }
 
@@ -175,7 +178,7 @@ padding-right: 5px;
 .controls label {
   font-size: 12px;
   width:50px;
-  height: 30px;
+  height: 25px;
 
   border-radius: 5px;
   text-align: center;
@@ -266,12 +269,12 @@ input{
   width: 100%;
 }
 
-@media (max-height: 700px) {
+@media  (min-height:499px) and (max-height: 700px) {
   #carouselExample{          
     
     margin: 90px 0 0 0rem;
     
-    height: 80vh;
+    height: 85vh;
    left:5%;
    
   
@@ -297,7 +300,7 @@ input{
 
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 640px) {
   
   .controls input[type="range"] {
     width: 70px;
@@ -305,8 +308,9 @@ input{
     margin-top: 0px;
   height: 10px;
   }
+  
   .controls button {
-    padding: 1px 5px ;
+    padding:  6px ;
     margin-bottom: 8px;
     font-size: 14px;
     border: none;
@@ -315,8 +319,8 @@ input{
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  width: 90px;
-  height:55px;
+  width: 55px;
+  height:30px;
   position: relative;
   box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
   margin-left: 0px;
@@ -325,9 +329,11 @@ input{
   .controls{
     flex-direction: column-reverse;
     justify-content: center;
-    height: 120px;
+    height: 180px;
     padding: 50px;
   }
-  
+  #startBeat{
+    width:180px
+  }
 }
 
