@@ -80,10 +80,12 @@ button:focus-visible {
 body{
   background-color: black !important;
   height: 100vh;
+  overflow-y: hidden;
+
 }
 #root{
   overflow-x: hidden;
-
+overflow-y: hidden;
   height: 100%;
   padding: 10;
   width: 100vw;
