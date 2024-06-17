@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+/*import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { apiBaseUrl } from '../config'
 
@@ -71,4 +71,4 @@ const RecordedSequences = () => {
   )
 }
 
-export default RecordedSequences
+export default RecordedSequences*/

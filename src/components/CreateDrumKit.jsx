@@ -29,7 +29,6 @@ const CreateDrumKit = ({ selectedSounds }) => {
       const response = await axios.post(`${apiBaseUrl}/drumkits`, {
         name: drumKitName,
         drumPads: filteredSounds.map(sound => sound._id),
-         // Assuming each sound has an _id property
          user,
       })
       console.log('ppppp',user)

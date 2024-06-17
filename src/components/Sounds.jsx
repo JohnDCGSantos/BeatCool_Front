@@ -10,7 +10,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
   
   const handleGenreChange = event => {
     setSelectedGenre(event.target.value)
-    setSelectedCategory('') // Reseting selected category when genre changes
+    setSelectedCategory('') 
   }
   useEffect(() => {
     handleGenreChange
@@ -33,7 +33,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
   const handleCheckboxChange = (event, sound) => {
     event.stopPropagation(); // Prevent event bubbling to parent elements
     
-    if (selectedSounds.length >= 24 && !selectedSounds.some(selectedSound => selectedSound.soundUrl === sound.soundUrl)) {
+    if (selectedSounds.length >= 20 && !selectedSounds.some(selectedSound => selectedSound.soundUrl === sound.soundUrl)) {
       setMaxSoundsReached(true);
       return;
     }
@@ -132,7 +132,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
           )}
         </div>
         {maxSoundsReached && (
-  <p style={{ color: 'red' }}>You can only select a maximum of 24 sounds.</p>
+  <p style={{ color: 'red' }}>You can only select a maximum of 20 sounds.</p>
 )}
         {selectedSounds.length > 0 && (
           <>

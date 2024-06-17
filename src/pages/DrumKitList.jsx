@@ -11,6 +11,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
   const nav = useNavigate()
   const [selectedDrumKits, setSelectedDrumKits] = useState([])
   const {authenticateUser, user}=useContext(AuthContext)
+  const [isLoading, setIsLoading]= useState(true)
   useEffect(() => {
     authenticateUser(); // Ensure user is authenticated
   }, []);
@@ -27,6 +28,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
        
   console.log(userDrumKits); 
         setDrumKits(userDrumKits);
+        setIsLoading(false)
         
  }
     
@@ -77,7 +79,7 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
       }
     }
   };
-  return (
+  return isLoading?(<p>Loading...</p>):(
     
     <div className= 'imageKits'>
 <div className= 'shadows'>

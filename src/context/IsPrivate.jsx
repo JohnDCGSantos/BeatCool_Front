@@ -17,8 +17,7 @@ function IsPrivate({children}) {
       return <p>Loading...</p>;
     }
     
-      // ELse... return the child component.
-      //Everything was ok
+      
     
       return <div>{children}</div>;
     }

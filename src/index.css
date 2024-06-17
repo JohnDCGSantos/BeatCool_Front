@@ -213,7 +213,7 @@ width: 75%;
   margin: auto;
 }
 .navLogo{
-  background-color: #039ae5b2;
+  background-color: #039ae5cd;
   border-radius: 50%;
   height: 70px;
 }
@@ -477,8 +477,8 @@ border: none !important;
 .recordingD-controls button{
  border-radius: 0px;
   height: 30px;
-  color:white
-}
+background-color: rgba(0, 128, 0, 0.498);
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;}
 @media screen and (min-width:640px)  {
   
     #startBeat{
@@ -489,13 +489,7 @@ border: none !important;
   }
   
 
-  @media screen and (min-width:477px) and (max-width: 549px) {
-    .recordingD-controls{
-      
-      bottom: 1%;
-      
-    }
-    }
+  
 
 .tutorial-content h2 {
   margin-bottom: 20px;

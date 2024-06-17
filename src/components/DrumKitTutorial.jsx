@@ -21,6 +21,10 @@ const DrumKitTutorial = ({ onClose, }) => {
         title: "DrumKit - Playing Pads",
         description: "Click on the pads to play the corresponding sounds. Experiment with different pads to create unique rhythms.",
       },
+      {
+        title: "DrumKit - Record and Export",
+        description: "If you want you can record your session and export it ;)",
+      },
 
     
       
@@ -32,7 +36,7 @@ const DrumKitTutorial = ({ onClose, }) => {
     if (step < steps.length - 1) {
       setStep(step + 1);
     } else {
-      onClose(); // Close the tutorial when finished
+      onClose(); 
     }
   };
 

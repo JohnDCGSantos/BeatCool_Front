@@ -28,7 +28,6 @@ const AuthContextWrapper=({children})=> {
         setIsLoggedIn(false);
       }
         }else{
- //we will set the user back null, set isLoading to false, set isLoggedIn to false
  setUser(null);
  setIsLoggedIn(false);
  setIsLoading(false);

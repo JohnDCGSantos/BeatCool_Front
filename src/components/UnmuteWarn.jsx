@@ -14,7 +14,7 @@ const UnmuteWarn= ({ onClose, }) => {
   
   const gotIt = () => {
    
-      onClose(); // Close the tutorial when finished
+      onClose(); 
    
   };
 

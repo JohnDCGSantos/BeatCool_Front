@@ -8,6 +8,10 @@ const Tutorial = ({ onClose, }) => {
         title: "Welcome to Beat It Up.",
         description: "Beat it Up, is an app where you can create and play with Drumkits, BeatMakers and even combine them if you want! ",
       },
+      {
+        title: "Record and export",
+        description: "Record whyle you are playing, save your record and export it!! ",
+      },
       
       {
         title: "BeatMaker",
@@ -34,7 +38,7 @@ const Tutorial = ({ onClose, }) => {
     if (step < steps.length - 1) {
       setStep(step + 1);
     } else {
-      onClose(); // Close the tutorial when finished
+      onClose(); 
     }
   };
 

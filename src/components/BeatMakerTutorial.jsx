@@ -7,12 +7,15 @@ const BeatMakerTutorial = ({ onClose, }) => {
       title: "Unmute",
       description: "Make sure that SILENT MODE IS OFF, is the only way to ear your sounds!! If you have volume up and ear no sound, you must TURN OFF SILENT MODE of your device.",
     },
-    
+
       {
         title: "BeatMaker",
         description: "With a BeatMaker, you can compose a sound melody in 32 steps. Each step represents an specific moment in beat time. Combine the sounds you want and explore the magic they can do in 32 steps ;) ",
       },
-
+{
+        title: "How to use BeatMaker - Record",
+        description: "If you want to record you need to start record BEFORE start playing your sequence!",
+      },
       
       {
         title: "How to use BeatMaker - Navigation slides",
@@ -40,7 +43,7 @@ const BeatMakerTutorial = ({ onClose, }) => {
     if (step < steps.length - 1) {
       setStep(step + 1);
     } else {
-      onClose(); // Close the tutorial when finished
+      onClose(); 
     }
   };
 

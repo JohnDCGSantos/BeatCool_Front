@@ -34,7 +34,7 @@ const CreateTutorial = ({ onClose, }) => {
     if (step < steps.length - 1) {
       setStep(step + 1);
     } else {
-      onClose(); // Close the tutorial when finished
+      onClose(); 
     }
   };
 

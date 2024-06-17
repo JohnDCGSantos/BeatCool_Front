@@ -370,6 +370,10 @@ import DrumKitSounds from './DrumKitSounds';
 import '../styles/drumKitPage.css';
 import '../styles/create.css';
 import { apiBaseUrl } from '../config';
+import { BsRecord2 } from "react-icons/bs";
+import { BsStopFill } from 'react-icons/bs';
+import { IoPlayCircleSharp } from "react-icons/io5";
+import { IoDownload } from "react-icons/io5";
 
 const DrumKit = ({ id, enableRecording }) => {
   const [drumKit, setDrumKit] = useState(null);
@@ -602,6 +606,14 @@ useEffect(()=>{
     return <div>Loading...</div>;
   }
 
+  const toggleRecording = () => {
+    if (recording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  };
+
   return isLoading ? (
     <div className="playDr">
       <p>Loading your sounds....</p>
@@ -611,11 +623,17 @@ useEffect(()=>{
       <DrumKitSounds drumSounds={drumSounds} handleSoundClick={handleSoundClick} />
       {!enableRecording && (
       <div className='recordingD-controls'>
-        <button className='recB' onClick={startRecording}>Start Recording</button>
-        <button className='recB' onClick={stopRecording}>Stop Recording</button>
-        <button className='recB' onClick={playRecordedSounds}>Play Record</button>
-        <button className='recB' onClick={exportToWav}>Export to WAV</button>
-      </div>
+ <button className='recB' onClick={toggleRecording} disabled={isPlayingSequence}>
+          {recording ? <BsStopFill style={{fill:'red', fontSize: '20px'}}  /> : <BsRecord2 style={{fill:'red', fontSize: '20px'}}  />}
+          </button>
+          <button className='recB' onClick={playRecordedSounds} disabled={recording || recordedSequence.length === 0}>
+       <IoPlayCircleSharp/>
+        </button>
+        <button className='recB' onClick={exportToWav} disabled={recording || recordedSequence.length === 0}>
+
+     <IoDownload/>
+        </button>
+        </div>
         )}
     </div>
   );

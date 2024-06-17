@@ -29,23 +29,23 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
   const handleTouchStart = (event, soundUrl) => {
     const now = Date.now();
     if (now - lastTapTime < 100) {
-      // Ignore rapid consecutive taps (less than 100ms apart)
+      // Ignore rapid consecutive taps (less than 100ms)
       return;
     }
     setLastTapTime(now);
 
     handleSoundClick(soundUrl);
-    setPressedKey(soundUrl); // Set pressed key state
+    setPressedKey(soundUrl); 
   };
 
 
   const handleTouchEnd = () => {
-    setPressedKey(null); // Reset pressed key state when touch ends
+    setPressedKey(null); 
   };
 
   
   useEffect(() => {
-    // Add passive: false to preventDefault in a touch event listener without causing the warning
+    // Add passive: false to preventDefault in a touch event listener without causing  warning
     document.addEventListener('touchstart', (event) => {
       if (event.target.closest('.drum-sound-btn')) {
       event.preventDefault();
@@ -71,13 +71,13 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
         )
         
           handleSoundClick(soundUrl)
-          setPressedKey(soundUrl) // Set pressed key state
+          setPressedKey(soundUrl) 
         
       }
     }
 
     const handleKeyUp = () => {
-      setPressedKey(null) // Reset pressed key state when key is released
+      setPressedKey(null) 
     }
 
     window.addEventListener('keydown', handleKeyDown)

@@ -8,7 +8,7 @@ import { apiBaseUrl } from '../config'
 const CombinedListPage = () => {
   const [beatMakerAndDrumKits, setBeatMakerAndDrumKits] = useState([])
   const {authenticateUser, user}=useContext(AuthContext)
- 
+  const [isLoading, setIsLoading]=useState(true)
 const navigate=useNavigate()
   useEffect(() => {
     authenticateUser(); // Ensure user is authenticated
@@ -21,7 +21,9 @@ const navigate=useNavigate()
         
         const response = await axios.get(`${apiBaseUrl}/beatMakerAndDrumkit`)
         const userCombo = response.data.filter(beatMakerAndDrumKit => beatMakerAndDrumKit.user === user._id);
-        setBeatMakerAndDrumKits(userCombo)
+        setBeatMakerAndDrumKits(userCombo)  
+          setIsLoading(false)
+
         }
        
       } catch (error) {
@@ -53,7 +55,7 @@ const navigate=useNavigate()
   };
   
 
-  return (
+  return isLoading?(<p>Loading...</p>):(
     <div className= 'imageKits'>
     <div className= 'shadows'>
     <div className='creater'>

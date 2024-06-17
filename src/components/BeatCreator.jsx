@@ -277,7 +277,9 @@ import { apiBaseUrl } from '../config';
 import { BsRecord2 } from "react-icons/bs";
 import { BsStopFill } from 'react-icons/bs';
 import { IoPlayCircleSharp } from "react-icons/io5";
-import { IoDownload } from "react-icons/io5";const BeatCreator = ({ id, enableRecording }) => {
+import { IoDownload } from "react-icons/io5";
+
+const BeatCreator = ({ id, enableRecording }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [tempo, setTempo] = useState(120); 
   const [currentSoundIndex, setCurrentSoundIndex] = useState(null);
