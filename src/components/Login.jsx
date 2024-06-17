@@ -44,6 +44,7 @@ const Login = () => {
 
           <div className="text-center mt-4 name">
             Beat It Up
+           
           </div>
 
           <form className="p-3 mt-3" onSubmit={handleLogin}>
@@ -87,6 +88,15 @@ const Login = () => {
           <div style={{width:'100%', display:'flex', justifyContent:'center'}}  >      
            <button style={{textAlign:'center'}} id='signUpBtn' className="btn mt-3" onClick={handleGoToSignUp}>Go to SignUp</button>
           </div>
+
+          <div style={{textAlign:'center',position:'relative', bottom:'-17%'}}>
+  <div>
+ <p style={{margin:'0', fontSize:'10px', color:'black'}}>Created by João Santos, 2024.</p>
+ </div>
+ <div>
+  <p style={{margin:'0', fontSize:'10px', color:'black'}}>All rights reserved.</p>
+  </div>
+</div>
           
       </div>
       </div>

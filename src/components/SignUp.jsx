@@ -88,6 +88,14 @@ console.log('here is your signup response',response)
                      <button id='signUpBtn' className="btn mt-3" onClick={handleGoToLogin}   >Go to Login</button>
 
                      </div>
+                     <div style={{textAlign:'center',position:'relative', bottom:'-5%'}}>
+  <div>
+ <p style={{margin:'0', fontSize:'10px', color:'black'}}>Created by João Santos, 2024.</p>
+ </div>
+ <div>
+  <p style={{margin:'0', fontSize:'10px', color:'black'}}>All rights reserved.</p>
+  </div>
+</div>
         </div>
         </div></div> );
       }

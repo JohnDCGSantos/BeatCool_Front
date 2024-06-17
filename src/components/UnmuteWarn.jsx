@@ -1,11 +1,10 @@
 
 const UnmuteWarn= ({ onClose, }) => {
   const warn = 
-    {
-      title: "Unmute",
-      description: "Make sure that SILENT MODE IS OFF, is the only way to ear your sounds!! If you have volume up and ear no sound, you must TURN OFF SILENT MODE of your device.",
-    }
-    
+  {
+    title: "Unmute",
+    description: "Make sure that SILENT MODE IS OFF; it's the only way to hear your sounds! If you have the volume up and hear no sound, you must TURN OFF SILENT MODE on your device.",
+  }
      
       
    

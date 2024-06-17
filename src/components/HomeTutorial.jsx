@@ -5,32 +5,30 @@ const Tutorial = ({ onClose, }) => {
 
   const steps = [
     {
-        title: "Welcome to Beat It Up.",
-        description: "Beat it Up, is an app where you can create and play with Drumkits, BeatMakers and even combine them if you want! ",
-      },
-      {
-        title: "Record and export",
-        description: "Record whyle you are playing, save your record and export it!! ",
-      },
-      
-      {
-        title: "BeatMaker",
-        description: "With a BeatMaker, you can compose a sound melody in 32 steps. Each step represents an specific moment in beat time. Combine the sounds you want and explore the magic they can do in 32 steps ;) ",
-      },
-      {
-        title: "DrumKit",
-        description: "The drum kit consists of various pads, each representing a different  sound (e.g., snare, kick, hi-hat). Pack your sounds and play with no limits!!!",
-      },
-
-      {
-        title: "Combining Drum Kit and Beat Maker",
-        description: "Enjoy the mix of both drum kit and beat maker. Ensure you have created at least one drum kit and one beat maker.",
-      },
-      {
-        title: "SignUp/Login to have full access",
-        description: "Make sure you are logged in to save your creations and access your lists ;) ",
-      },
-     
+      title: "Welcome to Beat It Up",
+      description: "Beat It Up is an app where you can create and play with Drumkits, BeatMakers, and even combine them if you want!",
+    },
+    {
+      title: "Record and Export",
+      description: "Record while you are playing, save your recording, and export it!",
+    },
+    {
+      title: "BeatMaker",
+      description: "With a BeatMaker, you can compose a sound melody in 32 steps. Each step represents a specific moment in beat time. Combine the sounds you want and explore the magic they can create in 32 steps ;)",
+    },
+    {
+      title: "DrumKit",
+      description: "The drum kit consists of various pads, each representing a different sound (e.g., snare, kick, hi-hat). Pack your sounds and play with no limits!!!",
+    },
+    {
+      title: "Combining DrumKit and BeatMaker",
+      description: "Enjoy the mix of both DrumKit and BeatMaker. Ensure you have created at least one DrumKit and one BeatMaker.",
+    },
+    {
+      title: "Sign Up/Login to Have Full Access",
+      description: "Make sure you are logged in to save your creations and access your lists ;)",
+    },
+    
   ];
 
   

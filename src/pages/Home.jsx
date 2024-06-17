@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <div className='image'>
       <div className='create'>
-        
+       
       <div style={{marginTop:'10px'}}>
                 <button style={{width:'100%', padding:'5px'}} className="btnSkip" onClick={() => setShowTutorial(true)}>
                  Tutorial- Know what you can do with Beat It Up,  &nbsp; {user ? user.username : null}&nbsp;!!
@@ -39,10 +39,19 @@ const Home = () => {
                     <button className='selected-sound-items' onClick={() => nav('/combined')}>Combined List</button>
 
 
-                  </div> </div> </div> </div>
+                  </div> </div> </div>
+   <div style={{textAlign:'center',position:'relative', bottom:'0%'}}>
+  <div>
+ <p style={{margin:'0', fontSize:'10px'}}>Created by João Santos, 2024.</p>
+ </div>
+ <div>
+  <p style={{margin:'0', fontSize:'10px'}}>All rights reserved.</p>
+  </div>
+</div></div> 
+ </div>
   )
-
-</div> </div>
+  
+  </div>
   )
  
 }

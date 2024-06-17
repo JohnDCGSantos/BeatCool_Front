@@ -213,7 +213,8 @@ const audioContextRef = useRef(null);
             
             {showTutorial && <CreateTutorial onClose={handleTutorialClose} />}
                 <div className='createT'>
-                  <h1>Create something, &nbsp; {user ? user.username : null}&nbsp;!!</h1>
+                  
+                  <h1> {user ? 'Create something,'+ ' '+ user.username+'!!' :'Create something !!'}</h1>
                 </div>
                 
                 <div className='selectCard'>

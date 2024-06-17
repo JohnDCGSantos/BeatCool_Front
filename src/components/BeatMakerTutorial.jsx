@@ -5,34 +5,35 @@ const BeatMakerTutorial = ({ onClose, }) => {
   const steps = [
     {
       title: "Unmute",
-      description: "Make sure that SILENT MODE IS OFF, is the only way to ear your sounds!! If you have volume up and ear no sound, you must TURN OFF SILENT MODE of your device.",
+      description: "Make sure that SILENT MODE IS OFF. It is the only way to hear your sounds! If you have the volume up and hear no sound, you must TURN OFF SILENT MODE on your device.",
     },
-
-      {
-        title: "BeatMaker",
-        description: "With a BeatMaker, you can compose a sound melody in 32 steps. Each step represents an specific moment in beat time. Combine the sounds you want and explore the magic they can do in 32 steps ;) ",
-      },
-{
-        title: "How to use BeatMaker - Record",
-        description: "If you want to record you need to start record BEFORE start playing your sequence!",
-      },
-      
-      {
-        title: "How to use BeatMaker - Navigation slides",
-        description: "Use the navigation buttons to switch between the 4 slides. Each slide have 8 squares and represents a different part of the sequence. Use all slides to achieve 32 steps, adding complexity and variety to your beat.",
-      },
-      {
-        title: "How to use BeatMaker - Activate steps",
-        description: "Click on the squares to activate or deactivate them. Activated squares will play a sound when the sequence runs. Use all slides to create a richer composition.",
-      },
-      {
-        title: "How to use BeatMaker - BPM",
-        description: "BPM (Beats Per Minute) controls the tempo of your beat. Adjusting the BPM changes the speed and feel of your music. Higher BPM means a faster tempo, while lower BPM means a slower tempo.",
-      },
-      {
-        title: "How to use BeatMaker - Playing the sequence",
-        description: "Press the play button to hear your composed beat. The sequence will loop through all 32 steps, and using all slides ensures a fuller, more dynamic sound.",
-      },
+    
+    {
+      title: "BeatMaker",
+      description: "With a BeatMaker, you can compose a sound melody in 32 steps. Each step represents a specific moment in beat time. Combine the sounds you want and explore the magic they can create in 32 steps. :)",
+    },
+    {
+      title: "How to use BeatMaker - Record",
+      description: "If you want to record, you need to start recording BEFORE you start playing your sequence!",
+    },
+    
+    {
+      title: "How to use BeatMaker - Navigation slides",
+      description: "Use the navigation buttons to switch between the 4 slides. Each slide has 8 squares and represents a different part of the sequence. Use all slides to achieve 32 steps, adding complexity and variety to your beat.",
+    },
+    {
+      title: "How to use BeatMaker - Activate steps",
+      description: "Click on the squares to activate or deactivate them. Activated squares will play a sound when the sequence runs. Use all slides to create a richer composition.",
+    },
+    {
+      title: "How to use BeatMaker - BPM",
+      description: "BPM (Beats Per Minute) controls the tempo of your beat. Adjusting the BPM changes the speed and feel of your music. Higher BPM means a faster tempo, while lower BPM means a slower tempo.",
+    },
+    {
+      title: "How to use BeatMaker - Playing the sequence",
+      description: "Press the play button to hear your composed beat. The sequence will loop through all 32 steps, and using all slides ensures a fuller, more dynamic sound.",
+    },
+    
 
       
    

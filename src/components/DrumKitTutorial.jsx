@@ -5,26 +5,25 @@ const DrumKitTutorial = ({ onClose, }) => {
 
   const steps = [
     {
-        title: "Unmute",
-        description: "Make sure that SILENT MODE IS OFF, is the only way to ear your sounds!! If you have volume up and ear no sound, you must TURN OFF SILENT MODE of your device.",
-      },
-     
+      title: "Unmute",
+      description: "Make sure that SILENT MODE IS OFF. It is the only way to hear your sounds! If you have the volume up and hear no sound, you must TURN OFF SILENT MODE on your device.",
+    },
     
-      {
-        title: "DrumKit",
-        description: "The drum kit consists of various pads, each representing a different  sound (e.g., snare, kick, hi-hat). Pack your sounds and play with no limits!!!",
-      },
-     
-
-      
-      {
-        title: "DrumKit - Playing Pads",
-        description: "Click on the pads to play the corresponding sounds. Experiment with different pads to create unique rhythms.",
-      },
-      {
-        title: "DrumKit - Record and Export",
-        description: "If you want you can record your session and export it ;)",
-      },
+    {
+      title: "DrumKit",
+      description: "The drum kit consists of various pads, each representing a different sound (e.g., snare, kick, hi-hat). Pack your sounds and play with no limits!!!",
+    },
+    
+    {
+      title: "DrumKit - Playing Pads",
+      description: "Click on the pads to play the corresponding sounds. Experiment with different pads to create unique rhythms.",
+    },
+    
+    {
+      title: "DrumKit - Record and Export",
+      description: "You can record your session and export it ;)",
+    },
+    
 
     
       
