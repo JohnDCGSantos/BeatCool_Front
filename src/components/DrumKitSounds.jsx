@@ -4,6 +4,7 @@ import '../styles/drumKitPage.css'
 function DrumKitSounds({ drumSounds, handleSoundClick }) {
   const [keyAssignments, setKeyAssignments] = useState({})
   const [pressedKey, setPressedKey] = useState(null)
+  const [lastTapTime, setLastTapTime] = useState(0);
 
  
   
@@ -26,7 +27,12 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
 
 
   const handleTouchStart = (event, soundUrl) => {
-    
+    const now = Date.now();
+    if (now - lastTapTime < 100) {
+      // Ignore rapid consecutive taps (less than 100ms)
+      return;
+    }
+    setLastTapTime(now);
 
     handleSoundClick(soundUrl);
     setPressedKey(soundUrl); 
