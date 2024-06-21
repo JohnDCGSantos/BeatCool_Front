@@ -13,6 +13,8 @@ const DrumPads = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [showTutorial, setShowTutorial] = useState(false);
   const [showWarn, setShowWarn] = useState(true);
+  const [keyAssignments, setKeyAssignments] = useState({});
+  const [pressedKeys, setPressedKeys] = useState(new Set());
 
 
   
@@ -162,10 +164,71 @@ const audioContextRef = useRef(null);
   }, [])
 
 
+  useEffect(() => {
+    if (selectedSounds) {
+      const keys = [
+        'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ç',
+        'z', 'x', 'c', 'v', 'b', 'n', 'm'
+      ];
 
+      const newKeyAssignments = {};
 
+      selectedSounds.forEach((sound, index) => {
+        const soundUrl = sound?.soundUrl;
+        if (soundUrl) {
+          newKeyAssignments[soundUrl] = keys[index % keys.length];
+        }
+      });
 
-  const handleSoundSelect = sound => {
+      setKeyAssignments(newKeyAssignments);
+    }
+  }, [selectedSounds]);
+
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (selectedSounds) {
+        const soundUrl = Object.keys(keyAssignments).find(
+          url => keyAssignments[url] === event.key.toLowerCase()
+        );
+
+        if (soundUrl) {
+          playSound(soundUrl);
+          setPressedKeys(prevKeys => new Set(prevKeys).add(soundUrl));
+        }
+      }         
+    };
+
+    const handleKeyUp = event => {
+      if (selectedSounds) {
+        const soundUrl = Object.keys(keyAssignments).find(
+          url => keyAssignments[url] === event.key.toLowerCase()
+        );
+
+        if (soundUrl) {
+          setPressedKeys(prevKeys => {
+            const newKeys = new Set(prevKeys);
+            newKeys.delete(soundUrl);
+            return newKeys;
+          });
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [keyAssignments,selectedSounds]);
+
+  useEffect(()=>{
+    console.log('pressed key:', pressedKeys)
+
+  },[pressedKeys])
+  const handleSoundSelect = sound => {     
+
     setSelectedSounds(prevSelected => {
       const isSelected = prevSelected.some(prevSound => prevSound.soundUrl === sound.soundUrl)
       if (isSelected) {
@@ -176,7 +239,7 @@ const audioContextRef = useRef(null);
     })
   }
 
-  
+
 
 
   const handleCombo = () => {
@@ -248,6 +311,8 @@ const audioContextRef = useRef(null);
                         selectedSounds={selectedSounds}
                         playSound={playSound}
                         preloadSounds={preloadSounds}
+                        keyAssignments={keyAssignments} // Pass keyAssignments here
+
 
                       />
                       <CreateDrumKit selectedSounds={selectedSounds} />

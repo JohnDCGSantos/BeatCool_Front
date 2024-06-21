@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import '../styles/create.css'
 
-function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preloadSounds }) {
+function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preloadSounds, keyAssignments}) {
   const [selectedGenre, setSelectedGenre] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [maxSoundsReached, setMaxSoundsReached] = useState(false);
 
-  
+
   
   const handleGenreChange = event => {
     setSelectedGenre(event.target.value)
@@ -58,38 +58,47 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
     }
     groupedSounds[sound.genre][sound.category].push(sound)
   })
-
+  
   return (
     <div>
-      <div className='selectCards'>
-        <div className='categoriesAndGenres'>
-        <h4 >Select Genre and category </h4>
+    <div className='selectCards'>
+      <div className='categoriesAndGenres'>
+        <h4>Select Genre and category</h4>
 
-          <div className='category'>
-            Categories
-            <select value={selectedGenre} onChange={handleGenreChange}>
-              <option value=''>Select Genre</option>
-              {Object.keys(groupedSounds).map(genre => (
-                <option key={genre} value={genre}>
+        <div className="dropdown">
+          <button className="btn btn-secondary dropdown-toggle" type="button" id="genreDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+            {selectedGenre ? selectedGenre : 'Select Genre'}
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="genreDropdownButton">
+            {Object.keys(groupedSounds).map(genre => (
+              <li key={genre}>
+                <button className="dropdown-item" onClick={() => { handleGenreChange({ target: { value: genre } }); setSelectedGenre(genre); }}>
                   {genre}
-                </option>
-              ))}
-            </select>
-          </div>
-          {selectedGenre && (
-            <div className='genre'>
-              Genres
-              <select value={selectedCategory} onChange={handleCategoryChange}>
-                <option value=''>Select Category</option>
-                {Object.keys(groupedSounds[selectedGenre]).map(category => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
+
+        {selectedGenre && (
+         
+            <div className="dropdown">
+              <button className="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+                {selectedCategory ? selectedCategory : 'Select Category'}
+              </button>
+              <ul className="dropdown-menu " aria-labelledby="categoryDropdownButton">
+                {Object.keys(groupedSounds[selectedGenre]).map(category => (
+                  <li key={category}>
+                    <button className="dropdown-item" onClick={() => { handleCategoryChange({ target: { value: category } }); setSelectedCategory(category); }}>
+                      {category}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+        
+        )}
+      </div>
 
         <div className='availableSounds'>
           {selectedGenre && selectedCategory && (
@@ -142,6 +151,8 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
             <ul>
              
                 {selectedSounds.map(sound => (
+
+
                   <li key={sound.soundUrl}>
                     <button
                       className='selected-sound-item'
@@ -149,7 +160,10 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
 
                       onClick={() => handlePlayButtonClick(sound.soundUrl)}
                     >
-                     <span> {sound.name}</span>
+                      <div className='selectedSoundsSpan'>
+                     <span style={{fontSize:'12px'}}> {sound.name}</span>
+                     <span style={{fontSize:'12px'}}className='span2'>  {keyAssignments[sound.soundUrl]}</span> {/* Display assigned key */}
+</div>
                     </button>
                     <div className='form-check form-switch'>
                     <input

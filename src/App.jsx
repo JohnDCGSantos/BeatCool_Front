@@ -31,6 +31,7 @@ function App() {
 
       <Routes>
       <Route path='/' element={<Home />} />
+      
 
         <Route path='/create' element={<DrumPads />} />
         <Route path='/drumkits/:id/update' element={<IsPrivate><UpdateDrum /></IsPrivate>} />

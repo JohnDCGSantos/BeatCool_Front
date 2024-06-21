@@ -103,6 +103,41 @@ h1{
   align-items: center; /* Align items horizontally center */
 
 }
+#genreDropdownButton{
+  background-color: rgba(0, 128, 0, 0.498);
+  color: #fff;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+  width: auto;
+
+
+}
+#categoryDropdownButton{
+  
+   background-color: rgba(0, 128, 0, 0.498);
+  color: #fff;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+width: auto;
+}
+
+.dropdown-item{
+  height: auto;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+}
+.dropdown-menu{
+  background-color: rgba(18, 18, 20, 0.734);
+  color: #fff;
+  box-shadow: inset 6px 6px 6px #cbcbd1, inset -6px -6px 6px #fff;
+width: auto;
+max-height: 200px;
+overflow-y: auto;}
+
+.dropdown-item:hover{
+  background-color:whitesmoke;
+  color:green
+}
+
 .genreAndCategoryTitle{
   margin-top:2rem
 }
@@ -208,8 +243,6 @@ border-radius: 10px;
 
 }
 
-
- 
 ul{
   display:flex;
   width:100%;

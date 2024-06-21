@@ -90,7 +90,9 @@ overflow-y: hidden;
   padding: 10;
   width: 100vw;
 }
-
+.mm option{
+  color: red!important;
+}
 button.selected-sound-item{
   color: whitesmoke;
   font-weight: 80px;
@@ -394,6 +396,7 @@ top:0;
   ;
   height: auto;
 }
+ 
 
 
 @media(max-width: 380px) {
@@ -466,6 +469,12 @@ border: none !important;
   height: auto; 
    width:90%;
 
+}
+
+.selectedSoundsSpan{
+  display:flex;
+  flex-direction: column;
+  
 }
 .recB{
  
