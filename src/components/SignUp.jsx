@@ -20,6 +20,8 @@ function SignUp() {
         event.preventDefault(); console.log(apiBaseUrl)
         try {       
             const response= await axios.post(`${apiBaseUrl}/auth/signup`,{email, password, userName})
+            nav('/login')   
+
 console.log('here is your signup response',response)
         } catch (error) {
             console.log(error)
