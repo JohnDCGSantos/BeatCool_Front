@@ -120,11 +120,13 @@ export default DrumKitSounds*/
 import { useState, useEffect } from 'react';
 import '../styles/drumKitPage.css';
 
-function DrumKitSounds({ drumSounds, handleSoundClick }) {
+function DrumKitSounds({ drumSounds, handleSoundClick, colors, customKeyAssignments }) {
   const [keyAssignments, setKeyAssignments] = useState({});
   const [pressedKeys, setPressedKeys] = useState(new Set());
   const [lastTapTime, setLastTapTime] = useState(0);
 
+  
+  
   useEffect(() => {
     if (drumSounds) {
       const keys = [
@@ -132,18 +134,26 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
         'z', 'x', 'c', 'v', 'b', 'n', 'm'
       ];
 
-      const newKeyAssignments = {};
+      //const newKeyAssignments = {};
+      const defaultKeyAssignments = {};
 
       drumSounds.forEach((sound, index) => {
         const soundUrl = sound?.soundUrl;
         if (soundUrl) {
-          newKeyAssignments[soundUrl] = keys[index % keys.length];
+          defaultKeyAssignments[soundUrl] =  keys[index % keys.length];
         }
       });
 
-      setKeyAssignments(newKeyAssignments);
+      /*setKeyAssignments(newKeyAssignments);
     }
-  }, [drumSounds]);
+  }, [drumSounds]);*/
+    setKeyAssignments(prevAssignments => ({
+        ...defaultKeyAssignments,
+        ...customKeyAssignments
+      }));
+    }
+  }, [drumSounds, customKeyAssignments]);
+
 
   const handleTouchStart = (event, soundUrl) => {
     const now = Date.now();
@@ -197,8 +207,19 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
       document.removeEventListener('touchend', handleMultiTouchEnd);
     };
   }, []);
+  const handleMouseDown = (soundUrl) => {
+    handleSoundClick(soundUrl);
+    setPressedKeys(prevKeys => new Set(prevKeys).add(soundUrl));
+  };
 
-  useEffect(() => {
+  const handleMouseUp = (soundUrl) => {
+    setPressedKeys(prevKeys => {
+      const newKeys = new Set(prevKeys);
+      newKeys.delete(soundUrl);
+      return newKeys;
+    });
+  };
+  /*useEffect(() => {
     const handleKeyDown = event => {
       if (drumSounds) {
         const soundUrl = Object.keys(keyAssignments).find(
@@ -210,9 +231,36 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
           setPressedKeys(prevKeys => new Set(prevKeys).add(soundUrl));
         }
       }
-    };
+    };*/
+    useEffect(() => {
+      const handleKeyDown = (event) => {
+        if (drumSounds) {
+          const soundUrl = Object.keys(keyAssignments).find(
+            url => keyAssignments[url] === event.key.toLowerCase()
+          );
+  
+          if (soundUrl) {
+            handleSoundClick(soundUrl);
+            setPressedKeys(prevKeys => new Set(prevKeys).add(soundUrl));
+          }
+        }
+      };
+    /*const handleKeyUp = event => {
+      if (drumSounds) {
+        const soundUrl = Object.keys(keyAssignments).find(
+          url => keyAssignments[url] === event.key.toLowerCase()
+        );
 
-    const handleKeyUp = event => {
+        if (soundUrl) {
+          setPressedKeys(prevKeys => {
+            const newKeys = new Set(prevKeys);
+            newKeys.delete(soundUrl);
+            return newKeys;
+          });
+        }
+      }
+    };*/
+    const handleKeyUp = (event) => {
       if (drumSounds) {
         const soundUrl = Object.keys(keyAssignments).find(
           url => keyAssignments[url] === event.key.toLowerCase()
@@ -236,7 +284,20 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, [keyAssignments, drumSounds, handleSoundClick]);
-
+  const getButtonStyle = (soundUrl) => {
+    return {
+      backgroundColor: colors[soundUrl] || '#7F8C8D', 
+      transform: pressedKeys.has(soundUrl) ? 'scale(0.95)' : 'scale(1)', 
+      opacity: pressedKeys.has(soundUrl) ? 0.7 : 1 
+    };
+  };
+  const getButtonStyle2 = (soundUrl) => {
+    return {
+      backgroundColor: colors[soundUrl] || 'rgba(59, 188, 128, 0.643)', 
+      transform: pressedKeys.has(soundUrl) ? 'scale(0.95)' : 'scale(1)', 
+      opacity: pressedKeys.has(soundUrl) ? 0.7 : 1 
+    };
+  };
   return (
     <div className="drum-kit-sounds" id="drumKitSounds">
       {drumSounds &&
@@ -245,11 +306,16 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
             className={`drum-sound-btn ${pressedKeys.has(drumSound.soundUrl) ? 'pressed' : ''}`}
             key={drumSound?.soundUrl}
             data-sound-url={drumSound.soundUrl}
+            style={getButtonStyle(drumSound.soundUrl)} 
+
           >
             <button
+            style={getButtonStyle2(drumSound.soundUrl)} 
+
               className={pressedKeys.has(drumSound.soundUrl) ? 'pressed' : ''}
-              onMouseDown={() => handleSoundClick(drumSound.soundUrl)}
-              onTouchStart={(event) => handleTouchStart(event, drumSound.soundUrl)}
+              onMouseDown={() => handleMouseDown(drumSound.soundUrl)}   
+              onMouseUp={() => handleMouseUp(drumSound.soundUrl)}
+                                       onTouchStart={(event) => handleTouchStart(event, drumSound.soundUrl)}
               onTouchEnd={() => handleTouchEnd(drumSound.soundUrl)}
             >
               <span>{drumSound?.name}</span>
@@ -262,3 +328,4 @@ function DrumKitSounds({ drumSounds, handleSoundClick }) {
 }
 
 export default DrumKitSounds;
+

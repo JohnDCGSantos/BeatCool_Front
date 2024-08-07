@@ -4,6 +4,7 @@ import DrumKitTutorial from '../components/DrumKitTutorial';
 import DrumKit from '../components/DrumKit'
 const DrumKitPage = () => {
   const [showTutorial, setShowTutorial] = useState(true);
+  
   const handleTutorialClose = () => {
     setShowTutorial(false);
   };

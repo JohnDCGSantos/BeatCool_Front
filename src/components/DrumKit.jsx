@@ -374,6 +374,9 @@ import { BsRecord2 } from "react-icons/bs";
 import { BsStopFill } from 'react-icons/bs';
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { IoDownload } from "react-icons/io5";
+import { FiSettings } from 'react-icons/fi';
+import Settings from './Settings';
+
 
 const DrumKit = ({ id, enableRecording }) => {
   const [drumKit, setDrumKit] = useState(null);
@@ -386,6 +389,10 @@ const DrumKit = ({ id, enableRecording }) => {
   const [recordedSequence, setRecordedSequence] = useState([]);
   const [isPlayingSequence, setIsPlayingSequence] = useState(false);
   const timeoutIdsRef = useRef({});
+  const [showSettings, setShowSettings] = useState(false);
+  const [colors, setColors] = useState({});
+  const [customKeyAssignments, setCustomKeyAssignments] = useState({});
+
 
   const addTimeoutIdForSound = (key, timeoutId) => {
     timeoutIdsRef.current[key] = timeoutIdsRef.current[key] || [];
@@ -614,15 +621,34 @@ useEffect(()=>{
     }
   };
 
+  
+
   return isLoading ? (
     <div className="playDr">
       <p>Loading your sounds....</p>
     </div>
   ) : (
     <div className="playDr">
-      <DrumKitSounds drumSounds={drumSounds} handleSoundClick={handleSoundClick} />
+      <DrumKitSounds drumSounds={drumSounds} handleSoundClick={handleSoundClick}  colors={colors}                 customKeyAssignments={customKeyAssignments} // Pass this to DrumKitSounds
+
+      
+   />
+      
       {!enableRecording && (
       <div className='recordingD-controls'>
+         <button className="settings-button" onClick={() => setShowSettings(true)}>
+        <FiSettings />
+      </button>
+      {showSettings && (
+        <Settings
+          drumSounds={drumSounds}
+          colors={colors}
+          setColors={setColors}
+          customKeyAssignments={customKeyAssignments}
+              setCustomKeyAssignments={setCustomKeyAssignments}
+          onClose={() => setShowSettings(false)}
+        />
+      )}
  <button className='recB' onClick={toggleRecording} disabled={isPlayingSequence}>
           {recording ? <BsStopFill style={{fill:'red', fontSize: '20px'}}  /> : <BsRecord2 style={{fill:'red', fontSize: '20px'}}  />}
           </button>
