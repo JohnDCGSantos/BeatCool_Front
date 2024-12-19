@@ -299,6 +299,7 @@ const audioContextRef = useRef(null);
                         selectedSounds={selectedSounds}
                         playSound={playSound}
                         preloadSounds={preloadSounds}
+                        keyAssignments={keyAssignments} // Pass keyAssignments here
 
                       />
                       <CreateBeat selectedSounds={selectedSounds} />
