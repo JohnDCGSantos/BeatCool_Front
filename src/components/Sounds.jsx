@@ -72,9 +72,13 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
           <ul className="dropdown-menu" aria-labelledby="genreDropdownButton">
             {Object.keys(groupedSounds).map(genre => (
               <li key={genre}>
-                <button className="dropdown-item" onClick={() => { handleGenreChange({ target: { value: genre } }); setSelectedGenre(genre); }}>
-                  {genre}
-                </button>
+               <button className="dropdown-item" onClick={(e) => { 
+  e.preventDefault(); // Previne ações padrão
+  handleGenreChange({ target: { value: genre } }); 
+  setSelectedGenre(genre); 
+}}>
+  {genre}
+</button>
               </li>
             ))}
           </ul>
@@ -89,7 +93,7 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
               <ul className="dropdown-menu " aria-labelledby="categoryDropdownButton">
                 {Object.keys(groupedSounds[selectedGenre]).map(category => (
                   <li key={category}>
-                    <button className="dropdown-item" onClick={() => { handleCategoryChange({ target: { value: category } }); setSelectedCategory(category); }}>
+                    <button className="dropdown-item" onClick={(e) => {e.preventDefault(); handleCategoryChange({ target: { value: category } }); setSelectedCategory(category); }}>
                       {category}
                     </button>
                   </li>
@@ -162,6 +166,9 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
                     >
                       <div className='selectedSoundsSpan'>
                      <span style={{fontSize:'12px'}}> {sound.name}</span>
+                     <span style={{fontSize:'12px'}} className='span2'>
+  {keyAssignments && keyAssignments[sound.soundUrl] ? keyAssignments[sound.soundUrl] : ''}
+</span>
 </div>
                     </button>
                     <div className='form-check form-switch'>
