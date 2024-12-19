@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import UpdateCreatorForm from '../components/UpdateCreatorForm'
 import { apiBaseUrl } from '../config'
 
-const UpdateCreator = () => {
+const UpdateCreator = ({keyAssignments}) => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [beatMaker, setBeatMaker] = useState(null)
@@ -172,7 +172,8 @@ const UpdateCreator = () => {
     <div className='create'>
       <h3>Edit Beat Maker</h3>
       {!isLoading && beatMaker && sounds && (
-        <UpdateCreatorForm onSubmit={handleSubmit} defaultValues={beatMaker} sounds={sounds}  preloadSounds={preloadSounds}
+        <UpdateCreatorForm onSubmit={handleSubmit}                         keyAssignments={keyAssignments} // Pass keyAssignments here
+        defaultValues={beatMaker} sounds={sounds}  preloadSounds={preloadSounds}
         playSound={playSound}/>
       )}
     </div> </div></div></div>

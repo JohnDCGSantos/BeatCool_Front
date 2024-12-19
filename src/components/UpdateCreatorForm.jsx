@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Sounds from './Sounds'
 import '../styles/create.css'
-const UpdateCreatorForm = ({ onSubmit, defaultValues, sounds, playSound, preloadSounds }) => {
+const UpdateCreatorForm = ({ onSubmit, defaultValues, sounds, playSound, preloadSounds, keyAssignments }) => {
   const [name, setName] = useState(defaultValues.name || '')
   const [drumPads, setDrumPads] = useState(defaultValues.drumPads || [])
 
@@ -42,7 +42,7 @@ const UpdateCreatorForm = ({ onSubmit, defaultValues, sounds, playSound, preload
           handleSoundSelect={handleSoundSelect}
           preloadSounds={preloadSounds}
           playSound={playSound}
-
+          keyAssignments={keyAssignments}
 
         />
       )}

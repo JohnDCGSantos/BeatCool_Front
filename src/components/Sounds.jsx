@@ -162,7 +162,6 @@ function Sounds({ sounds,  handleSoundSelect, selectedSounds, playSound, preload
                     >
                       <div className='selectedSoundsSpan'>
                      <span style={{fontSize:'12px'}}> {sound.name}</span>
-                     <span style={{fontSize:'12px'}}className='span2'>  {keyAssignments[sound.soundUrl]}</span> {/* Display assigned key */}
 </div>
                     </button>
                     <div className='form-check form-switch'>
