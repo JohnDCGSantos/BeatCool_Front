@@ -92,11 +92,11 @@ const DrumKitList = ({ showCheckboxes, onSelect }) => {
         {drumKits.length === 0 ? (
         <p>No drum kits available.</p>
       ) : (
-        <ul>
+<ul>
           {drumKits.map(drumKit => (
-            <div className='di' key={drumKit._id}>                <button className='selected-sound-item' onClick={() => nav(`/drumKits/${drumKit._id}/update`)}>Update</button>
+          <div className='di' key={drumKit._id}>               
 
-              <li onClick={() => handleDrumKitClick(drumKit._id)}>{drumKit.name}</li>
+                   <li onClick={() => handleDrumKitClick(drumKit._id)}>{drumKit.name}</li>
               {showCheckboxes && (
                 <li>
                   <input

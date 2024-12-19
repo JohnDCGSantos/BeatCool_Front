@@ -48,6 +48,7 @@ const UpdateDrumKitForm = ({ onSubmit, defaultValues, sounds,  playSound, preloa
           playSound={playSound}
 preloadSounds={preloadSounds}
 
+
           handleSoundSelect={handleSoundSelect}
       />
       )}
